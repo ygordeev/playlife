@@ -1,16 +1,18 @@
 /** @jsxImportSource @emotion/react */
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { LandingBackground } from '@/styles';
+import { DashboardBackground } from '@/styles';
 
 const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>PlayLife</title>
+        <title>Your Dashboard</title>
       </Head>
 
-      <LandingBackground />
+      <DashboardBackground>
+        Dashboard page
+      </DashboardBackground>
     </>
   )
 }

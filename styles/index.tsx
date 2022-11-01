@@ -1,4 +1,6 @@
-export { GlobalStyles } from './global';
+export * from './global';
+export * from './landing';
+export * from './dashboard';
 
 // Roboto font
 import '@fontsource/roboto/300.css';
