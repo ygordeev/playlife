@@ -1,11 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-
-// Roboto font
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
+import { LandingBackground } from '../components/landing';
+import { GlobalStyles } from '../styles';
 
 const Home: NextPage = () => {
   return (
@@ -15,10 +11,8 @@ const Home: NextPage = () => {
         <meta name="description" content="Task management system designed to gamify your daily routine" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <main>
-        <p>Hello world</p>
-      </main>
+      <GlobalStyles />
+      <LandingBackground />
     </div>
   )
 }
