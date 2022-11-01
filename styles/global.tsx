@@ -6,6 +6,10 @@ const globalStyle = css`
     padding: 0;
     box-sizing: border-box;
   }
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
 `
 
 export const GlobalStyles = () => <Global styles={globalStyle} />
