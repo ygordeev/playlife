@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { LandingBackground } from '../components/landing';
-import { GlobalStyles } from '../styles';
+import { LandingBackground } from '@/components/landing';
+import { GlobalStyles } from '@/styles';
 
 const Home: NextPage = () => {
   return (
