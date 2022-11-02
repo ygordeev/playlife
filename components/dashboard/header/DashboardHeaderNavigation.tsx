@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import { FC } from 'react';
-import styled from '@emotion/styled';
+import { styled } from '@mui/material/styles';
 import { navigationOptions } from '@/constants';
 
-const NavigationList = styled.ul`
+const NavigationList = styled('ul')`
   display: flex;
   align-items: center;
   gap: 30px;

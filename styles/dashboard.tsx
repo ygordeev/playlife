@@ -1,6 +1,6 @@
-import styled from '@emotion/styled';
+import { styled } from '@mui/material/styles';
 
-export const DashboardBackground = styled.div`
+export const DashboardBackground = styled('div')`
   height: 100vh;
   color: white;
   background-color: #111;

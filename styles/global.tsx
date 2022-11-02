@@ -1,6 +1,6 @@
-import { Global, css } from '@emotion/react';
+import { GlobalStyles as MuiGlobalStyles } from '@mui/material';
 
-const globalStyle = css`
+const globalStyle = `
   * {
     margin: 0;
     padding: 0;
@@ -12,4 +12,4 @@ const globalStyle = css`
   }
 `
 
-export const GlobalStyles = () => <Global styles={globalStyle} />
+export const GlobalStyles = () => <MuiGlobalStyles styles={globalStyle} />
