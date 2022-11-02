@@ -9,7 +9,7 @@ const NavigationList = styled('ul')`
   gap: 30px;
   color: white;
   list-style: none;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-family: Roboto;
   
   & > li {
