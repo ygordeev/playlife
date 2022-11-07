@@ -1,9 +1,9 @@
-import { FC } from 'react';
+import { FC, useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import ManageSearchIcon from '@mui/icons-material/ManageSearch';
 import TuneIcon from '@mui/icons-material/Tune';
-import Divider from '@mui/material/Divider';
+import { LightDivider } from '@/plugins';
 
 const SearchInputWrapper = styled('div')`
   display: flex;
@@ -20,21 +20,26 @@ const SearchInputWrapper = styled('div')`
   }
 `
 
-const LightDivider = styled(Divider)`
-  border-color: rgb(255, 255, 255, 0.1);
-`
-
 const SearchFilterIcon = styled(TuneIcon)`
   cursor: pointer;
 `
 
 const SearchInput: FC = () => {
+  const [searchQuery, setSearchQuery] = useState('');
+
+  useEffect(() => {
+    // To-do: Display the list of all the tasks matching the query
+    console.log('Search query has changed to', searchQuery);
+  }, [searchQuery]);
+
   return (
     <SearchInputWrapper>
       <ManageSearchIcon color="primary" />
       <InputBase
+        value={searchQuery}
         placeholder="Active tasks"
         fullWidth
+        onChange={e => setSearchQuery(e.target.value)}
       />
       <LightDivider
         orientation="vertical"
