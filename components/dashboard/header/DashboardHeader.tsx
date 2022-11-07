@@ -1,7 +1,9 @@
 import { FC } from 'react';
-import { SearchInput } from '@/components/inputs';
-import DashboardHeaderNavigation from './DashboardHeaderNavigation';
+import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
+import { SearchInput } from '@/components/inputs';
+import { ProfileButton } from '@/components/controls';
+import DashboardHeaderNavigation from './DashboardHeaderNavigation';
 
 const DashboardHeader: FC = () => {
   return (
@@ -15,6 +17,10 @@ const DashboardHeader: FC = () => {
     >
       <DashboardHeaderNavigation />
       <SearchInput />
+      <Button variant="contained">
+        + Add Task
+      </Button>
+      <ProfileButton />
     </Stack>
   )
 }

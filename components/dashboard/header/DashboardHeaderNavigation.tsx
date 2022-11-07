@@ -15,7 +15,6 @@ const DashboardHeaderNavigation: FC = () => {
       component="ul"
       direction="row"
       spacing={4}
-      my={0}
     >
       {navigationOptions.map(option => (
         <Link
