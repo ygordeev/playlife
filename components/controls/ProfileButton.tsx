@@ -10,6 +10,13 @@ const user = {
   lastName: 'Gordeev'
 }
 
+const profileButtonStyle = {
+  cursor: 'pointer',
+  '&:hover': {
+    bgcolor: 'grey.700',
+  }
+}
+
 const ProfileButton: FC = () => {
   return (
     <Stack
@@ -18,6 +25,7 @@ const ProfileButton: FC = () => {
       spacing={1.2}
       bgcolor="grey.800"
       borderRadius={10}
+      sx={profileButtonStyle}
       p={0.5}
     >
       <Avatar src="/images/avatar.jpg" alt="Yan Gordeev" />

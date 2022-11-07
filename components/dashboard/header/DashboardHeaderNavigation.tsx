@@ -3,7 +3,7 @@ import { navigationOptions } from '@/constants';
 import Stack from '@mui/material/Stack';
 import Link from '@mui/material/Link';
 
-const LinkStyle = {
+const linkStyle = {
   '&:hover': {
     color: 'primary.main'
   }
@@ -22,7 +22,7 @@ const DashboardHeaderNavigation: FC = () => {
           href={option.href}
           color="inherit"
           underline="none"
-          sx={LinkStyle}
+          sx={linkStyle}
         >
           {option.label}
         </Link>
