@@ -1,13 +1,18 @@
-/** @jsxImportSource @emotion/react */
 import type { NextPage } from 'next'
 import { DashboardHeader } from '@/components/dashboard';
-import { DashboardBackground } from '@/styles';
+import Box from '@mui/material/Box';
+
+const DashboardBackgroundStyle = {
+  height: '100vh',
+  color: 'white',
+  backgroundColor: 'grey.900',
+}
 
 const TasksPage: NextPage = () => {
   return (
-    <DashboardBackground>
+    <Box sx={DashboardBackgroundStyle}>
       <DashboardHeader />
-    </DashboardBackground>
+    </Box>
   )
 }
 

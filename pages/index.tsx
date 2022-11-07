@@ -1,7 +1,12 @@
-/** @jsxImportSource @emotion/react */
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { LandingBackground } from '@/styles';
+import Box from '@mui/material/Box';
+
+const LandingBackgroundStyle = {
+  width: '100vw',
+  height: '100vh',
+  backgroundColor: 'cyan',
+}
 
 const Home: NextPage = () => {
   return (
@@ -10,7 +15,7 @@ const Home: NextPage = () => {
         <title>PlayLife</title>
       </Head>
 
-      <LandingBackground />
+      <Box sx={LandingBackgroundStyle} />
     </>
   )
 }

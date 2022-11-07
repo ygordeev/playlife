@@ -1,28 +1,9 @@
 import { FC, useState, useEffect } from 'react';
-import { styled } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
-import ManageSearchIcon from '@mui/icons-material/ManageSearch';
+import IconButton from '@mui/material/IconButton';
+import SearchIcon from '@mui/icons-material/Search';
 import TuneIcon from '@mui/icons-material/Tune';
-import { LightDivider } from '@/plugins';
-
-const SearchInputWrapper = styled('div')`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
-  max-width: 300px;
-  padding: 5px 15px;
-  background-color: #1E1F25;
-  border-radius: 21px;
-
-  input {
-    color: #e8e8e8;
-  }
-`
-
-const SearchFilterIcon = styled(TuneIcon)`
-  cursor: pointer;
-`
+import Stack from '@mui/material/Stack';
 
 const SearchInput: FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -33,20 +14,29 @@ const SearchInput: FC = () => {
   }, [searchQuery]);
 
   return (
-    <SearchInputWrapper>
-      <ManageSearchIcon color="primary" />
+    <Stack
+      direction="row"
+      alignItems="center"
+      bgcolor="grey.800"
+      borderRadius={2.5}
+      gap={1.25}
+      px={1.25}
+      py={0.25}
+    >
+      <IconButton>
+        <SearchIcon color="primary" />
+      </IconButton>
       <InputBase
         value={searchQuery}
         placeholder="Active tasks"
+        sx={{ color: 'common.white' }}
         fullWidth
         onChange={e => setSearchQuery(e.target.value)}
       />
-      <LightDivider
-        orientation="vertical"
-        variant="middle"
-      />
-      <SearchFilterIcon color="primary" />
-    </SearchInputWrapper>
+      <IconButton>
+        <TuneIcon color="primary" />
+      </IconButton>
+    </Stack>
   )
 }
 

@@ -1,20 +1,21 @@
 import { FC } from 'react';
-import { styled } from '@mui/material/styles';
 import { SearchInput } from '@/components/inputs';
 import DashboardHeaderNavigation from './DashboardHeaderNavigation';
-
-const Header = styled('header')`
-  display: flex;
-  gap: 50px;
-  padding: 20px 40px;
-`
+import Stack from '@mui/material/Stack';
 
 const DashboardHeader: FC = () => {
   return (
-    <Header>
+    <Stack
+      component="header"
+      direction="row"
+      alignItems="center"
+      spacing={6}
+      px={5}
+      py={2.5}
+    >
       <DashboardHeaderNavigation />
       <SearchInput />
-    </Header>
+    </Stack>
   )
 }
 
