@@ -10,6 +10,7 @@ const DashboardHeader: FC = () => {
     <HorizontalCenteredStack
       component="header"
       justifyContent="space-between"
+      color="common.white"
       px={5}
       py={2.5}
     >
@@ -17,6 +18,7 @@ const DashboardHeader: FC = () => {
         <DashboardHeaderNavigation />
         <SearchInput />
       </HorizontalCenteredStack>
+
       <HorizontalCenteredStack spacing={6}>
         <Button variant="contained">
           + Add Task

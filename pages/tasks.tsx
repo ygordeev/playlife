@@ -3,12 +3,6 @@ import Head from 'next/head'
 import { DashboardHeader } from '@/components/dashboard';
 import Box from '@mui/material/Box';
 
-const dashboardBackgroundStyle = {
-  height: '100vh',
-  color: 'white',
-  backgroundColor: 'grey.900',
-}
-
 const TasksPage: NextPage = () => {
   return (
     <>
@@ -16,7 +10,10 @@ const TasksPage: NextPage = () => {
         <title>My Tasks</title>
       </Head>
 
-      <Box sx={dashboardBackgroundStyle}>
+      <Box
+        bgcolor="grey.900"
+        height="100vh"
+      >
         <DashboardHeader />
       </Box>
     </>
