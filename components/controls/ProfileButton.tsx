@@ -1,4 +1,3 @@
-import { FC } from 'react'
 import Stack from '@mui/material/Stack'
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
@@ -17,7 +16,7 @@ const profileButtonStyle = {
   }
 }
 
-const ProfileButton: FC = () => {
+const ProfileButton = () => {
   return (
     <Stack
       direction="row"

@@ -1,7 +1,6 @@
-import { FC } from 'react'
 import { GradientCard } from '@/components/layout'
 
-const SummaryWeeklyProgress: FC = () => {
+const SummaryWeeklyProgress = () => {
   return (
     <GradientCard>
       Weekly Progress

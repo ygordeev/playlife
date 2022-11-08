@@ -1,11 +1,10 @@
-import { FC } from 'react';
 import Button from '@mui/material/Button';
 import { SearchInput } from '@/components/inputs';
 import { ProfileButton } from '@/components/controls';
 import { HorizontalCenteredStack } from '@/components/layout';
 import DashboardHeaderNavigation from './DashboardHeaderNavigation';
 
-const DashboardHeader: FC = () => {
+const DashboardHeader = () => {
   return (
     <HorizontalCenteredStack
       component="header"

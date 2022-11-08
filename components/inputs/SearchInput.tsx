@@ -1,11 +1,11 @@
-import { FC, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import TuneIcon from '@mui/icons-material/Tune';
 import Stack from '@mui/material/Stack';
 
-const SearchInput: FC = () => {
+const SearchInput = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {

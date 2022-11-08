@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import { navigationOptions } from '@/constants';
 import Stack from '@mui/material/Stack';
 import Link from '@mui/material/Link';
@@ -9,7 +8,7 @@ const linkStyle = {
   }
 }
 
-const DashboardHeaderNavigation: FC = () => {
+const DashboardHeaderNavigation = () => {
   return (
     <Stack
       component="ul"

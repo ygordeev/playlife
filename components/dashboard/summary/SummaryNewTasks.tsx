@@ -1,7 +1,6 @@
-import { FC } from 'react'
 import { GradientCard } from '@/components/layout'
 
-const SummaryNewTasks: FC = () => {
+const SummaryNewTasks = () => {
   return (
     <GradientCard>
       New Tasks

@@ -1,11 +1,10 @@
-import { FC } from 'react'
 import { HorizontalCenteredStack } from '@/components/layout';
 import SummaryNewTasks from './SummaryNewTasks'
 import SummaryCompletedTasks from './SummaryCompletedTasks'
 import SummaryRecentAchievements from './SummaryRecentAchievements'
 import SummaryWeeklyProgress from './SummaryWeeklyProgress'
 
-const DashboardSummary: FC = () => {
+const DashboardSummary = () => {
   return (
     <HorizontalCenteredStack
       component="section"
