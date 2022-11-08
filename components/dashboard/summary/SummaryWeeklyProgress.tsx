@@ -1,6 +1,11 @@
 import Typography from '@mui/material/Typography'
 import BoltIcon from '@mui/icons-material/Bolt';
 import { GradientCard, IconCard, HorizontalCenteredStack } from '@/components/layout'
+import { AnimatedProgressBar } from '@/components/charts';
+
+// To-do: Progress should be extracted from the store
+const finishedTasks = 18
+const plannedTasks = 25
 
 const SummaryWeeklyProgress = () => {
   return (
@@ -13,9 +18,10 @@ const SummaryWeeklyProgress = () => {
         <Typography>Weekly Progress</Typography>
       </HorizontalCenteredStack>
 
-      <HorizontalCenteredStack mt={1}>
-        <Typography>68%</Typography>
-      </HorizontalCenteredStack>
+      <AnimatedProgressBar
+        currentCount={finishedTasks}
+        totalCount={plannedTasks}
+      />
     </GradientCard>
   )
 }
