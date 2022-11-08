@@ -26,6 +26,7 @@ const SearchInput: FC = () => {
       <IconButton>
         <SearchIcon color="primary" />
       </IconButton>
+
       <InputBase
         value={searchQuery}
         placeholder="Active tasks"
@@ -33,6 +34,7 @@ const SearchInput: FC = () => {
         fullWidth
         onChange={e => setSearchQuery(e.target.value)}
       />
+
       <IconButton>
         <TuneIcon color="primary" />
       </IconButton>

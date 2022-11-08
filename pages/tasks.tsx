@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { DashboardHeader } from '@/components/dashboard';
-import Box from '@mui/material/Box';
+import { DashboardHeader, DashboardSummary } from '@/components/dashboard';
+import Stack from '@mui/material/Stack';
 
 const TasksPage: NextPage = () => {
   return (
@@ -10,12 +10,14 @@ const TasksPage: NextPage = () => {
         <title>My Tasks</title>
       </Head>
 
-      <Box
+      <Stack
         bgcolor="grey.900"
         height="100vh"
+        spacing={2}
       >
         <DashboardHeader />
-      </Box>
+        <DashboardSummary />
+      </Stack>
     </>
   )
 }
