@@ -12,7 +12,7 @@ const user = {
 const profileButtonStyle = {
   cursor: 'pointer',
   '&:hover': {
-    bgcolor: 'grey.700',
+    bgcolor: 'grey.800',
   }
 }
 
@@ -22,7 +22,7 @@ const ProfileButton = () => {
       direction="row"
       alignItems="center"
       spacing={1.2}
-      bgcolor="grey.800"
+      bgcolor="grey.dark"
       borderRadius={10}
       sx={profileButtonStyle}
       p={0.5}

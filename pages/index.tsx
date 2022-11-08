@@ -15,7 +15,7 @@ const Home: NextPage = () => {
         justifyContent="center"
         alignItems="center"
         height="100vh"
-        bgcolor="grey.900"
+        bgcolor="grey.extradark"
       >
         <Typography variant="h2" color="common.white">
           Landing Page

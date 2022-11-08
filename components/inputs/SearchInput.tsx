@@ -17,7 +17,7 @@ const SearchInput = () => {
     <Stack
       direction="row"
       alignItems="center"
-      bgcolor="grey.800"
+      bgcolor="grey.dark"
       borderRadius={2.5}
       gap={1.25}
       px={1.25}

@@ -1,6 +1,8 @@
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
+import { ThemeProvider } from '@mui/material/styles'
 import { GlobalStyles } from '@/styles'
+import { customMuiTheme } from '@/context'
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -10,7 +12,9 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
       <GlobalStyles />
 
-      <Component {...pageProps} />
+      <ThemeProvider theme={customMuiTheme}>
+        <Component {...pageProps} />
+      </ThemeProvider>
     </>
   )
 }
