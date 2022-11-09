@@ -16,6 +16,5 @@
 2. Next.js
 3. Typescript
 4. Material UI
-5. Emotion
-
-*...To be continued*
+5. Redux Toolkit
+6. Framer Motion
