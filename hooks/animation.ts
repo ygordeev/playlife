@@ -7,6 +7,7 @@ export const useCountUp = (targetCount: number, duration: number) => {
   useEffect(() => {
     const animation = animate(0, targetCount, {
       duration,
+      ease: 'linear',
       onUpdate(value) {
         setCount(Math.round(value))
       }

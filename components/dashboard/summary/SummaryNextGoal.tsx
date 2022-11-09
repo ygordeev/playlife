@@ -1,10 +1,10 @@
-import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import {
   GradientCard,
   HorizontalCenteredStack,
   ComplexityIndicator,
 } from '@/components/layout'
+import { CircularProgress } from '@/components/gauges'
 import { formatDate } from '@/utils'
 import { Goal, Complexity } from '@/types'
 
@@ -12,7 +12,8 @@ import { Goal, Complexity } from '@/types'
 const nextGoal: Goal = {
   name: 'Finish reading "Japanese from Zero" (Book 1)',
   complexity: Complexity.Medium,
-  progressInPercent: 60,
+  finishedTasks: 18,
+  plannedTasks: 25,
   dueDate: '2023-06-19',
 }
 
@@ -34,7 +35,11 @@ const SummaryNewTasks = () => {
       <HorizontalCenteredStack justifyContent="space-between" mt={1}>
         <Typography variant="subtitle2">{nextGoal.name}</Typography>
 
-        <Box width={50} height={50} bgcolor="grey.500" flexShrink={0} />
+        <CircularProgress
+          currentCount={nextGoal.finishedTasks}
+          totalCount={nextGoal.plannedTasks}
+          size={50}
+        />
       </HorizontalCenteredStack>
     </GradientCard>
   )

@@ -15,8 +15,4 @@ export const navigationOptions = [
     label: 'Achievements',
     href: '/achievements',
   },
-  {
-    label: 'Support',
-    href: '/support',
-  },
 ]

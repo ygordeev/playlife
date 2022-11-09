@@ -16,14 +16,12 @@ const DashboardHeader = () => {
       <HorizontalCenteredStack spacing={6}>
         <DashboardHeaderNavigation />
         <SearchInput />
-      </HorizontalCenteredStack>
-
-      <HorizontalCenteredStack spacing={6}>
         <Button variant="contained">
           + Add Task
         </Button>
-        <ProfileButton />
       </HorizontalCenteredStack>
+
+      <ProfileButton />
     </HorizontalCenteredStack>
   )
 }

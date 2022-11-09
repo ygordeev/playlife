@@ -1,21 +1,21 @@
-import LinearProgress from '@mui/material/LinearProgress';
+import LinearGauge from '@mui/material/LinearProgress';
 import Typography from '@mui/material/Typography'
 import { HorizontalCenteredStack } from '@/components/layout'
 import { useCountUp } from '@/hooks'
 
-interface AnimatedProgressBarProps {
+interface LinearProgressProps {
   currentCount: number,
   totalCount: number,
 }
 
-const AnimatedProgressBar = ({ currentCount, totalCount }: AnimatedProgressBarProps) => {
+const LinearProgress = ({ currentCount, totalCount }: LinearProgressProps) => {
   const count = useCountUp(currentCount, 1)
   const progress = Math.round(count / totalCount * 100)
 
   return (
     <HorizontalCenteredStack spacing={1} mt={1}>
       <Typography>{progress}%</Typography>
-      <LinearProgress
+      <LinearGauge
         value={progress}
         variant="determinate"
         sx={{ width: '100%' }}
@@ -29,4 +29,4 @@ const AnimatedProgressBar = ({ currentCount, totalCount }: AnimatedProgressBarPr
   )
 }
 
-export default AnimatedProgressBar
+export default LinearProgress
