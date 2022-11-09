@@ -16,7 +16,7 @@ export const navigationOptions = [
     href: '/achievements',
   },
   {
-    label: 'Friends',
-    href: '/friends',
+    label: 'Support',
+    href: '/support',
   },
 ]

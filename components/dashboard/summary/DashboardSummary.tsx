@@ -1,5 +1,5 @@
 import Stack from '@mui/material/Stack'
-import SummaryNewTasks from './SummaryNewTasks'
+import SummaryNewTasks from './SummaryNextGoal'
 import SummaryCompletedTasks from './SummaryCompletedTasks'
 import SummaryRecentAchievements from './SummaryRecentAchievements'
 import SummaryWeeklyProgress from './SummaryWeeklyProgress'
@@ -9,7 +9,7 @@ const DashboardSummary = () => {
     <Stack
       component="section"
       direction="row"
-      justifyContent="space-around"
+      justifyContent="space-evenly"
       color="common.white"
       spacing={6}
     >
