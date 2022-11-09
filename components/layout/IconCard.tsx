@@ -5,11 +5,12 @@ const iconCardStyle = {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
+  width: 40,
+  height: 40,
   border: 1,
   borderColor: 'grey.800',
   borderRadius: 2,
   color: 'primary.light',
-  p: 1,
 }
 
 const IconCard = ({ children }: { children: ReactNode }) => {
