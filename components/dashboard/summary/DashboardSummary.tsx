@@ -15,8 +15,8 @@ const DashboardSummary = () => {
     >
       <SummaryNewTasks />
       <SummaryCompletedTasks />
-      <SummaryRecentAchievements />
       <SummaryWeeklyProgress />
+      <SummaryRecentAchievements />
     </Stack>
   )
 }

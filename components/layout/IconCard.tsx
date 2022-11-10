@@ -5,6 +5,7 @@ const iconCardStyle = {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
+  flexShrink: 0,
   width: 40,
   height: 40,
   border: 1,
