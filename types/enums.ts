@@ -3,3 +3,9 @@ export enum Complexity {
   Medium = 'medium',
   Hard = 'hard',
 }
+
+export enum TaskStatus {
+  Todo = 'ToDo',
+  InProgress = 'InProgress',
+  Done = 'Done',
+}

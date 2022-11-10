@@ -1,4 +1,4 @@
-import { Complexity } from '@/types'
+import { Complexity, TaskStatus } from '@/types'
 
 export const user = {
   firstName: 'Yan',
@@ -46,4 +46,22 @@ export const achievementIcons = [
     description: 'Took 5 surfing lessons',
     emoji: '🏄🏻‍♂️',
   },
+]
+
+export const learningPaths = [
+  {
+    id: 1,
+    name: 'Japanese language',
+  }
+]
+
+export const tasks = [
+  {
+    id: 1,
+    status: TaskStatus.Todo,
+    name: 'Read chapter 1 of "Japanese From Zero"',
+    description: 'Chapter 1 contains information on the basic Japanese greetings and is an excellent starting point',
+    dueDate: '2023-01-12',
+    learningPathId: 1,
+  }
 ]

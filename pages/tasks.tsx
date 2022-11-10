@@ -14,7 +14,7 @@ const TasksPage: NextPage = () => {
         bgcolor="grey.extradark"
         height="100vh"
       >
-        <DashboardHeader mt={2} />
+        <DashboardHeader />
         <DashboardSummary mt={2} />
         <DashboardTasks mt={5} />
       </Stack>
