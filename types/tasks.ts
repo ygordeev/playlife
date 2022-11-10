@@ -7,4 +7,5 @@ export interface Task {
   learningPathId: number,
   description?: string,
   dueDate?: string,
+  imageUrl?: string,
 }

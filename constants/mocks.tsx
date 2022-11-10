@@ -63,5 +63,6 @@ export const tasks = [
     description: 'Chapter 1 contains information on the basic Japanese greetings and is an excellent starting point',
     dueDate: '2023-01-12',
     learningPathId: 1,
+    imageUrl: 'https://images.unsplash.com/photo-1528164344705-47542687000d?auto=format&fit=crop&w=512&q=80',
   }
 ]
