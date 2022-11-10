@@ -1,4 +1,6 @@
 import Typography from '@mui/material/Typography'
+import Link from '@mui/material/Link';
+import Tooltip from '@mui/material/Tooltip';
 import { GradientCard, HorizontalCenteredStack } from '@/components/layout'
 import { AchievementIcon } from '@/components/icons'
 
@@ -12,18 +14,25 @@ const SummaryRecentAchievements = () => {
         <Typography variant="subtitle2" color="primary.light">
           Recent Achievements
         </Typography>
-        <Typography variant="subtitle2" color="grey.500">
+        <Link
+          href="/achievements"
+          variant="subtitle2"
+          color="grey.500"
+        >
           See All (24)
-        </Typography>
+        </Link>
       </HorizontalCenteredStack>
 
       <HorizontalCenteredStack justifyContent="space-between" mt={1}>
-        {achievementIcons.map(iconDetails => (
-          <AchievementIcon
-            key={iconDetails.id}
-            size={50}
-            {...iconDetails}
-          />
+        {achievementIcons.map(icon => (
+          <Tooltip key={icon.id} title={icon.description}>
+            <div>
+              <AchievementIcon
+                size={50}
+                {...icon}
+              />
+            </div>
+          </Tooltip>
         ))}
       </HorizontalCenteredStack>
     </GradientCard>

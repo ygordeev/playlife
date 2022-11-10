@@ -19,6 +19,7 @@ export const achievementIcons = [
     backgroundColor: '#0d2038',
     borderColor: '#fffff5',
     ribbonColor: '#d34e32',
+    description: 'Traveled to Paris and saw the Eiffel Tower with my own eyes',
     emoji: '🛩️',
   },
   {
@@ -26,6 +27,7 @@ export const achievementIcons = [
     backgroundColor: '#d2bb21',
     borderColor: '#fffff5',
     ribbonColor: '#8331C2',
+    description: 'Passed N5 Japanese exam',
     emoji: '🇯🇵',
   },
   {
@@ -33,6 +35,7 @@ export const achievementIcons = [
     backgroundColor: '#33ae57',
     borderColor: '#d34e32',
     ribbonColor: '#ddcbeb',
+    description: 'Woke up at 8 AM three weeks in a row',
     emoji: '⏰',
   },
   {
@@ -40,6 +43,7 @@ export const achievementIcons = [
     backgroundColor: '#0d2038',
     borderColor: '#33ae57',
     ribbonColor: '#325dd3',
+    description: 'Took 5 surfing lessons',
     emoji: '🏄🏻‍♂️',
   },
 ]

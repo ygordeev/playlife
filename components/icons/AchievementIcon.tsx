@@ -1,6 +1,5 @@
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
-import { isAbsolute } from 'path'
 
 interface AchievementIconProps {
   size: number,
@@ -8,6 +7,14 @@ interface AchievementIconProps {
   borderColor: string,
   ribbonColor: string,
   emoji: string,
+}
+
+const iconContainerStyle = {
+  cursor: 'pointer',
+  transition: 'scale 0.3s',
+  '&:hover': {
+    scale: '1.1',
+  }
 }
 
 const emojiStyle = {
@@ -23,6 +30,7 @@ const AchievementIcon = (props: AchievementIconProps) => {
       position="relative"
       width={props.size}
       flexShrink={0}
+      sx={iconContainerStyle}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
