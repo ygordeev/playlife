@@ -6,16 +6,9 @@ import {
 } from '@/components/layout'
 import { CircularProgress } from '@/components/gauges'
 import { formatDate } from '@/utils'
-import { Goal, Complexity } from '@/types'
 
 // To-do: Next goal should be extracted from the store
-const nextGoal: Goal = {
-  name: 'Finish reading "Japanese from Zero" (Book 1)',
-  complexity: Complexity.Medium,
-  finishedTasks: 18,
-  plannedTasks: 25,
-  dueDate: '2023-06-19',
-}
+import { nextGoal } from '@/constants'
 
 const SummaryNewTasks = () => {
   return (

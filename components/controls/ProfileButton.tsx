@@ -4,10 +4,7 @@ import Typography from '@mui/material/Typography';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 // To-do: We should extract the actual user from the store
-const user = {
-  firstName: 'Yan',
-  lastName: 'Gordeev'
-}
+import { user } from '@/constants';
 
 const profileButtonStyle = {
   cursor: 'pointer',

@@ -1,3 +1,18 @@
+import { Complexity } from '@/types'
+
+export const user = {
+  firstName: 'Yan',
+  lastName: 'Gordeev'
+}
+
+export const nextGoal = {
+  name: 'Finish reading "Japanese from Zero" (Book 1)',
+  complexity: Complexity.Medium,
+  finishedTasks: 18,
+  plannedTasks: 25,
+  dueDate: '2023-06-19',
+}
+
 export const achievementIcons = [
   {
     id: 1,
