@@ -1,10 +1,10 @@
-import Stack from '@mui/material/Stack'
+import Stack, { StackProps } from '@mui/material/Stack'
 import SummaryNewTasks from './SummaryNextGoal'
 import SummaryCompletedTasks from './SummaryCompletedTasks'
 import SummaryRecentAchievements from './SummaryRecentAchievements'
 import SummaryWeeklyProgress from './SummaryWeeklyProgress'
 
-const DashboardSummary = () => {
+const DashboardSummary = (props: StackProps) => {
   return (
     <Stack
       component="section"
@@ -12,6 +12,7 @@ const DashboardSummary = () => {
       justifyContent="space-evenly"
       color="common.white"
       spacing={6}
+      {...props}
     >
       <SummaryNewTasks />
       <SummaryCompletedTasks />
