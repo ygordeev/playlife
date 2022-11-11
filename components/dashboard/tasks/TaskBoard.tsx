@@ -15,6 +15,7 @@ const TaskBoard = () => {
       <Stack
         direction="row"
         justifyContent="space-between"
+        flex={1}
         spacing={2}
       >
         {taskBoardColumns.map(column => (

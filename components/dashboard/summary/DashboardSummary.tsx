@@ -9,9 +9,9 @@ const DashboardSummary = (props: StackProps) => {
     <Stack
       component="section"
       direction="row"
-      justifyContent="space-evenly"
+      justifyContent="space-between"
       color="common.white"
-      spacing={6}
+      spacing={2}
       {...props}
     >
       <SummaryNewTasks />

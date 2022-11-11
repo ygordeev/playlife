@@ -7,7 +7,6 @@ const DashboardTasks = (props: StackProps) => {
     <Stack
       color="common.white"
       spacing={2}
-      px={5}
       {...props}
     >
       <Typography component="h1" variant="h4">

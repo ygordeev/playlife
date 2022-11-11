@@ -13,10 +13,13 @@ const TasksPage: NextPage = () => {
       <Stack
         bgcolor="grey.extradark"
         height="100vh"
+        spacing={5}
+        px={5}
+        py={2}
       >
         <DashboardHeader />
-        <DashboardSummary mt={2} />
-        <DashboardTasks mt={5} />
+        <DashboardSummary />
+        <DashboardTasks flex={1} />
       </Stack>
     </>
   )
