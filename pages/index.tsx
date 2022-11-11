@@ -14,12 +14,11 @@ const Home: NextPage = () => {
         display="flex"
         justifyContent="center"
         alignItems="center"
+        color="common.white"
         height="100vh"
         bgcolor="grey.extradark"
       >
-        <Typography variant="h2" color="common.white">
-          Landing Page
-        </Typography>
+        <Typography variant="h2">Landing Page</Typography>
       </Box>
     </>
   )

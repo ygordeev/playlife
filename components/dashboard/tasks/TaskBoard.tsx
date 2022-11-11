@@ -15,6 +15,7 @@ const TaskBoard = () => {
       <Stack
         direction="row"
         justifyContent="space-between"
+        overflow="hidden"
         flex={1}
         spacing={2}
       >

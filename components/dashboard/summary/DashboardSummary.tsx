@@ -10,7 +10,6 @@ const DashboardSummary = (props: StackProps) => {
       component="section"
       direction="row"
       justifyContent="space-between"
-      color="common.white"
       spacing={2}
       {...props}
     >

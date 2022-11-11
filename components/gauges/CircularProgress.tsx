@@ -12,7 +12,6 @@ const percentageTextStyle = {
   display: 'grid',
   placeItems: 'center',
   position: 'absolute',
-  color: 'white',
   top: 0,
   right: 0,
   bottom: 0,

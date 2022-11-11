@@ -57,7 +57,7 @@ const DashboardTaskCard = ({ task }: { task: Task }) => {
         {task.learningPathId > 0 && (
           <Typography
             variant="subtitle2"
-            color="primary.main"
+            color="primary.light"
             sx={{ textTransform: 'uppercase' }}
           >
             Japanese

@@ -22,7 +22,7 @@ const AnimatedComparisonCounter = (props: AnimatedComparisonCounterProps) => {
 
   return (
     <HorizontalCenteredStack mt={1}>
-      <Typography color="white" variant="h4" mr={2}>
+      <Typography variant="h4" mr={2}>
         {count}
       </Typography>
       <Typography component="span" color={timeFrameTextColor} mr={0.5}>

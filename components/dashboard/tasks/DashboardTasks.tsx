@@ -5,7 +5,7 @@ import TaskBoard from './TaskBoard'
 const DashboardTasks = (props: StackProps) => {
   return (
     <Stack
-      color="common.white"
+      overflow="hidden"
       spacing={2}
       {...props}
     >

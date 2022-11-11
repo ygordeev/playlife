@@ -4,7 +4,7 @@ import Link from '@mui/material/Link';
 
 const linkStyle = {
   '&:hover': {
-    color: 'primary.main'
+    color: 'primary.light'
   }
 }
 

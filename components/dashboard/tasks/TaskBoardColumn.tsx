@@ -12,11 +12,11 @@ interface TasksColumnProps {
 
 const columnStyle = {
   width: 400,
-  height: 400,
   backgroundColor: '#1E1F25',
   border: 1,
   borderColor: 'grey.800',
   borderRadius: 2,
+  // overflowY: 'auto',
   p: 1,
 }
 
@@ -43,9 +43,11 @@ const DashboardTasksColumn = ({ column, tasks }: TasksColumnProps) => {
         </Typography>
       </HorizontalCenteredStack>
 
-      {tasks.map(task => (
-        <TaskBoardCard key={task.id} task={task} />
-      ))}
+      <Stack spacing={1}>
+        {tasks.map(task => (
+          <TaskBoardCard key={task.id} task={task} />
+        ))}
+      </Stack>
     </Stack>
   )
 }

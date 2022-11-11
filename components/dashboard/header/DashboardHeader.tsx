@@ -10,7 +10,6 @@ const DashboardHeader = (props: StackProps) => {
     <HorizontalCenteredStack
       component="header"
       justifyContent="space-between"
-      color="common.white"
       {...props}
     >
       <HorizontalCenteredStack spacing={6}>

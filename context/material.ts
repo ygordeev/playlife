@@ -1,4 +1,5 @@
 import { createTheme } from '@mui/material/styles';
+import darkScrollbar from '@mui/material/darkScrollbar'
 
 declare module '@mui/material' {
   interface Color {
@@ -12,6 +13,13 @@ const customMuiTheme = createTheme({
     grey: {
       dark: '#1E1F25',
       extradark: '#15161A',
+    },
+  },
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        div: darkScrollbar(),
+      },
     },
   },
 });
