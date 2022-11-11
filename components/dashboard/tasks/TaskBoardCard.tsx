@@ -53,7 +53,7 @@ const DashboardTaskCard = ({ task }: { task: Task }) => {
         )}
       </Stack>
 
-      <HorizontalCenteredStack justifyContent="space-between">
+      <HorizontalCenteredStack justifyContent="space-between" mt={1}>
         {task.learningPathId > 0 && (
           <Typography
             variant="subtitle2"

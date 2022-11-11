@@ -1,6 +1,14 @@
 import Stack from '@mui/material/Stack'
-import { Task } from '@/types'
+import Typography from '@mui/material/Typography'
+import Box from '@mui/material/Box'
+import { HorizontalCenteredStack } from '@/components/layout'
+import { Task, TaskColumn } from '@/types'
 import TaskBoardCard from './TaskBoardCard'
+
+interface TasksColumnProps {
+  column: TaskColumn,
+  tasks: Task[],
+}
 
 const columnStyle = {
   width: 400,
@@ -12,13 +20,29 @@ const columnStyle = {
   p: 1,
 }
 
-const DashboardTasksColumn = ({ tasks }: { tasks: Task[] }) => {
+const DashboardTasksColumn = ({ column, tasks }: TasksColumnProps) => {
   return (
     <Stack
       component="section"
       spacing={1}
       sx={columnStyle}
     >
+      <HorizontalCenteredStack spacing={1} pl={1}>
+        <Box
+          width={10}
+          height={10}
+          borderRadius="50%"
+          bgcolor={column.color}
+        />
+        <Typography
+          fontWeight="bold"
+          color="grey.500"
+          variant="subtitle2"
+        >
+          {column.name}
+        </Typography>
+      </HorizontalCenteredStack>
+
       {tasks.map(task => (
         <TaskBoardCard key={task.id} task={task} />
       ))}

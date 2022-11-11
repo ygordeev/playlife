@@ -10,3 +10,10 @@ export interface Task {
   dueDate?: string,
   imageUrl?: string,
 }
+
+export interface TaskColumn {
+  id: number,
+  name: string,
+  status: TaskStatus,
+  color: string,
+}

@@ -8,10 +8,6 @@ export const navigationOptions = [
     href: '/paths',
   },
   {
-    label: 'Calendar',
-    href: '/calendar',
-  },
-  {
     label: 'Achievements',
     href: '/achievements',
   },

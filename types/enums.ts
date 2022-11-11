@@ -5,7 +5,8 @@ export enum Complexity {
 }
 
 export enum TaskStatus {
-  Todo = 'ToDo',
+  Backlog = 'Backlog',
   InProgress = 'InProgress',
-  Done = 'Done',
+  Blocked = 'Blocked',
+  Completed = 'Completed',
 }

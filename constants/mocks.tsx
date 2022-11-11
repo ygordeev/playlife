@@ -58,7 +58,7 @@ export const learningPaths = [
 export const tasks = [
   {
     id: 1,
-    status: TaskStatus.Todo,
+    status: TaskStatus.Backlog,
     name: 'Read chapter 1 of "Japanese From Zero"',
     description: 'Chapter 1 contains information on the basic Japanese greetings and is an excellent starting point',
     dueDate: '2023-01-12',
@@ -68,7 +68,7 @@ export const tasks = [
   },
   {
     id: 2,
-    status: TaskStatus.Todo,
+    status: TaskStatus.Backlog,
     name: 'Start waking up at 7:30am everyday',
     description: 'This is the first step towards achieving the great goal of waking up at 5am',
     dueDate: '2023-04-09',
