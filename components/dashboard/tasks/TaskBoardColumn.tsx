@@ -1,4 +1,4 @@
-import Box from '@mui/material/Box'
+import Stack from '@mui/material/Stack'
 import { Task } from '@/types'
 import TaskBoardCard from './TaskBoardCard'
 
@@ -14,14 +14,15 @@ const columnStyle = {
 
 const DashboardTasksColumn = ({ tasks }: { tasks: Task[] }) => {
   return (
-    <Box
+    <Stack
       component="section"
+      spacing={1}
       sx={columnStyle}
     >
       {tasks.map(task => (
         <TaskBoardCard key={task.id} task={task} />
       ))}
-    </Box>
+    </Stack>
   )
 }
 
