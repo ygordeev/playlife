@@ -18,7 +18,7 @@ const customMuiTheme = createTheme({
   components: {
     MuiCssBaseline: {
       styleOverrides: {
-        div: darkScrollbar(),
+        body: darkScrollbar(),
       },
     },
   },

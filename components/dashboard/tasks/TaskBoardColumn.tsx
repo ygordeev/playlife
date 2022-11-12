@@ -16,7 +16,7 @@ const columnStyle = {
   border: 1,
   borderColor: 'grey.800',
   borderRadius: 2,
-  // overflowY: 'auto',
+  overflowY: 'auto',
   p: 1,
 }
 
