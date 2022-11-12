@@ -8,6 +8,7 @@ import TaskBoardCard from './TaskBoardCard'
 interface TasksColumnProps {
   column: TaskColumn,
   tasks: Task[],
+  onTaskSelect: (task: Task) => void,
 }
 
 const columnStyle = {
@@ -20,7 +21,7 @@ const columnStyle = {
   p: 1,
 }
 
-const DashboardTasksColumn = ({ column, tasks }: TasksColumnProps) => {
+const DashboardTasksColumn = ({ column, tasks, onTaskSelect }: TasksColumnProps) => {
   return (
     <Stack
       component="section"
@@ -45,7 +46,11 @@ const DashboardTasksColumn = ({ column, tasks }: TasksColumnProps) => {
 
       <Stack spacing={1}>
         {tasks.map(task => (
-          <TaskBoardCard key={task.id} task={task} />
+          <TaskBoardCard
+            key={task.id}
+            task={task}
+            onClick={() => onTaskSelect(task)}
+          />
         ))}
       </Stack>
     </Stack>

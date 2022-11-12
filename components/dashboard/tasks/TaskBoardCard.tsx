@@ -1,3 +1,4 @@
+import { MouseEventHandler } from 'react'
 import Image from 'next/image'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
@@ -16,11 +17,12 @@ const cardStyle = {
   }
 }
 
-const DashboardTaskCard = ({ task }: { task: Task }) => {
+const DashboardTaskCard = ({ task, onClick }: { task: Task, onClick: MouseEventHandler }) => {
   return (
     <Box
       component="article"
       sx={cardStyle}
+      onClick={onClick}
     >
       <Stack direction="row" spacing={1}>
         <div>

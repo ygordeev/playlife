@@ -15,11 +15,17 @@ const globalStyles = {
   }
 }
 
+// Style components are extracted to avoid re-rendering "style" tag
+const GlobalStyleComponents = {
+  Baseline: <CssBaseline />,
+  GlobalStyles: <MuiGlobalStyles styles={globalStyles} />,
+}
+
 export const GlobalStyles = () => {
   return (
     <>
-      <CssBaseline />
-      <MuiGlobalStyles styles={globalStyles} />
+      {GlobalStyleComponents.Baseline}
+      {GlobalStyleComponents.GlobalStyles}
     </>
   )
 }
