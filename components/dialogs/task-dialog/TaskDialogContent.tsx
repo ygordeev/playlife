@@ -9,6 +9,10 @@ import { HorizontalCenteredStack } from '@/components/layout'
 import { capitalize, formatDate } from '@/utils'
 import { TaskDialogProps } from '@/types'
 
+type TaskDialogContentProps = TaskDialogProps & {
+  onEnableEditing: () => void,
+}
+
 const dialogIconStyle = {
   marginLeft: 1,
   color: 'grey.500',
@@ -18,7 +22,7 @@ const dialogIconStyle = {
   }
 }
 
-const TaskDialogContent = ({ task, onClose }: TaskDialogProps) => {
+const TaskDialogContent = ({ task, onEnableEditing, onClose }: TaskDialogContentProps) => {
   const dueDate = useMemo(() => {
     return task?.dueDate ? formatDate(task.dueDate) : 'Not Specified'
   }, [task?.dueDate])
@@ -35,7 +39,7 @@ const TaskDialogContent = ({ task, onClose }: TaskDialogProps) => {
         >
           {task.name}
         </Typography>
-        <EditIcon sx={dialogIconStyle} />
+        <EditIcon sx={dialogIconStyle} onClick={onEnableEditing} />
         <CloseIcon sx={dialogIconStyle} onClick={onClose} />
       </HorizontalCenteredStack>
 

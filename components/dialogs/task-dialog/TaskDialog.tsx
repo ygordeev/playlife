@@ -1,9 +1,16 @@
+import { useEffect, useState } from 'react'
 import Dialog from '@mui/material/Dialog';
 import { TaskDialogProps } from '@/types'
 import TaskDialogContent from './TaskDialogContent'
+import TaskDialogForm from './TaskDialogForm'
 
 const TaskDialog = ({ task, onClose }: TaskDialogProps) => {
   const isDialogOpen = Boolean(task)
+  const [isEditing, setIsEditing] = useState(false)
+
+  useEffect(() => {
+    if (!isDialogOpen) setIsEditing(false)
+  }, [isDialogOpen])
 
   return (
     <Dialog
@@ -12,7 +19,15 @@ const TaskDialog = ({ task, onClose }: TaskDialogProps) => {
       maxWidth="sm"
       fullWidth
     >
-      <TaskDialogContent task={task} onClose={onClose} />
+      {isEditing ?
+        <TaskDialogForm /> :
+        <TaskDialogContent
+          task={task}
+          onClose={onClose}
+          onEnableEditing={() => setIsEditing(true)}
+        />
+      }
+      
     </Dialog>
   )
 }

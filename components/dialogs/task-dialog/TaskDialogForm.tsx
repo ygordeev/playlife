@@ -1,6 +1,10 @@
+import DialogContent from '@mui/material/DialogContent';
+
 const TaskDialogForm = () => {
   return (
-    <div>TaskDialogForm</div>
+    <DialogContent>
+      TaskDialogForm
+    </DialogContent>
   )
 }
 
