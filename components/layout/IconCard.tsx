@@ -11,7 +11,7 @@ const iconCardStyle = {
   border: 1,
   borderColor: 'grey.800',
   borderRadius: 2,
-  color: 'primary.light',
+  color: 'primary.main',
 }
 
 const IconCard = ({ children }: { children: ReactNode }) => {

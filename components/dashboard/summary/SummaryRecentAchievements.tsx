@@ -11,7 +11,7 @@ const SummaryRecentAchievements = () => {
   return (
     <GradientCard>
       <HorizontalCenteredStack justifyContent="space-between" spacing={1}>
-        <Typography variant="subtitle2" color="primary.light">
+        <Typography variant="subtitle2" color="primary.main">
           Recent Achievements
         </Typography>
         <Link

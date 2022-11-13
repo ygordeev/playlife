@@ -59,7 +59,7 @@ const DashboardTaskCard = ({ task, onClick }: { task: Task, onClick: MouseEventH
         {task.learningPathId > 0 && (
           <Typography
             variant="subtitle2"
-            color="primary.light"
+            color="primary.main"
             sx={{ textTransform: 'uppercase' }}
           >
             Japanese

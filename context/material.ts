@@ -1,6 +1,6 @@
-import { createTheme, Theme } from '@mui/material/styles';
+import { createTheme } from '@mui/material/styles';
 import darkScrollbar from '@mui/material/darkScrollbar'
-import { green, purple } from '@mui/material/colors';
+import common from '@mui/material/colors/common';
 
 declare module '@mui/material' {
   interface Color {
@@ -11,10 +11,14 @@ declare module '@mui/material' {
 
 const customTheme = createTheme({
   palette: {
+    mode: 'dark',
     grey: {
       dark: '#1E1F25',
       extradark: '#15161A',
     },
+    primary: {
+      main: '#42A5F5',
+    }
   },
 });
 
@@ -28,8 +32,7 @@ const overridenTheme = createTheme(customTheme, {
     MuiDialog: {
       styleOverrides: {
         paper: {
-          backgroundColor: customTheme.palette.grey.dark,
-          color: customTheme.palette.common.white,
+          backgroundColor: common.black,
         }
       },
     }

@@ -11,7 +11,7 @@ export const taskBoardColumns = [
     id: 2,
     name: 'In Progress',
     status: TaskStatus.InProgress,
-    color: 'primary.light',
+    color: 'primary.main',
   },
   {
     id: 3,

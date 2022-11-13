@@ -14,7 +14,6 @@ const Home: NextPage = () => {
         display="flex"
         justifyContent="center"
         alignItems="center"
-        color="common.white"
         height="100vh"
         bgcolor="grey.extradark"
       >

@@ -12,7 +12,6 @@ const TasksPage: NextPage = () => {
 
       <Stack
         bgcolor="grey.extradark"
-        color="common.white"
         height="100vh"
         overflow="hidden"
         spacing={5}

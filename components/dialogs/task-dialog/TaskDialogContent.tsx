@@ -1,25 +1,14 @@
-import { useMemo } from 'react'
+import { useMemo, MouseEventHandler } from 'react'
 import Image from 'next/image'
 import DialogContent from '@mui/material/DialogContent';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import EditIcon from '@mui/icons-material/Edit';
-import CloseIcon from '@mui/icons-material/Close';
-import { HorizontalCenteredStack } from '@/components/layout'
+import { HorizontalCenteredStack, DialogHeader } from '@/components/layout'
 import { capitalize, formatDate } from '@/utils'
 import { TaskDialogProps } from '@/types'
 
 type TaskDialogContentProps = TaskDialogProps & {
-  onEnableEditing: () => void,
-}
-
-const dialogIconStyle = {
-  marginLeft: 1,
-  color: 'grey.500',
-  cursor: 'pointer',
-  '&:hover': {
-    color: 'primary.light',
-  }
+  onEnableEditing: MouseEventHandler,
 }
 
 const TaskDialogContent = ({ task, onEnableEditing, onClose }: TaskDialogContentProps) => {
@@ -31,17 +20,11 @@ const TaskDialogContent = ({ task, onEnableEditing, onClose }: TaskDialogContent
 
   return (
     <DialogContent>
-      <HorizontalCenteredStack justifyContent="space-between">
-        <Typography
-          color="primary.light"
-          variant="h6"
-          flexGrow={1}
-        >
-          {task.name}
-        </Typography>
-        <EditIcon sx={dialogIconStyle} onClick={onEnableEditing} />
-        <CloseIcon sx={dialogIconStyle} onClick={onClose} />
-      </HorizontalCenteredStack>
+      <DialogHeader
+        title={task.name}
+        onEnableEditing={onEnableEditing}
+        onClose={onClose}
+      />
 
       <Typography color="grey.500" mt={3}>
         Description

@@ -19,8 +19,8 @@ const TaskDialog = ({ task, onClose }: TaskDialogProps) => {
       maxWidth="sm"
       fullWidth
     >
-      {isEditing ?
-        <TaskDialogForm /> :
+      {isEditing && task ?
+        <TaskDialogForm task={task} onClose={onClose} /> :
         <TaskDialogContent
           task={task}
           onClose={onClose}
