@@ -1,5 +1,6 @@
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
+import { capitalize } from '@/utils'
 
 interface ComplexityIndicatorProps {
   complexity: 'hard' | 'medium' | 'easy'
@@ -10,8 +11,6 @@ const complexityColors = {
   medium: 'warning.light',
   easy: 'success.light',
 }
-
-const capitalize = (str: string) => str ? str[0].toUpperCase() + str.slice(1) : ''
 
 const ComplexityIndicator = ({ complexity }: ComplexityIndicatorProps) => {
   const indicatorColor = complexityColors[complexity]
