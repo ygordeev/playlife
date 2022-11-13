@@ -1,4 +1,4 @@
-import { TaskStatus } from '@/types'
+import { TaskStatus, Complexity } from '@/types'
 
 export const taskBoardColumns = [
   {
@@ -24,5 +24,20 @@ export const taskBoardColumns = [
     name: 'Completed',
     status: TaskStatus.Completed,
     color: 'success.light',
+  },
+]
+
+export const taskComplexityOptions = [
+  {
+    label: 'Easy',
+    value: Complexity.Easy,
+  },
+  {
+    label: 'Medium',
+    value: Complexity.Medium,
+  },
+  {
+    label: 'Hard',
+    value: Complexity.Hard,
   },
 ]
