@@ -1,3 +1,4 @@
+import { MouseEventHandler } from 'react'
 import { TaskStatus, Complexity } from '@/types'
 
 export interface Task {
@@ -16,4 +17,9 @@ export interface TaskColumn {
   name: string,
   status: TaskStatus,
   color: string,
+}
+
+export interface TaskDialogProps {
+  onClose: MouseEventHandler,
+  task?: Task,
 }
