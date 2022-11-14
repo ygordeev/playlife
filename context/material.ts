@@ -1,6 +1,7 @@
 import { createTheme } from '@mui/material/styles';
 import darkScrollbar from '@mui/material/darkScrollbar'
 import common from '@mui/material/colors/common';
+import type {} from '@mui/x-date-pickers/themeAugmentation';
 
 declare module '@mui/material' {
   interface Color {
@@ -35,7 +36,14 @@ const overridenTheme = createTheme(customTheme, {
           backgroundColor: common.black,
         }
       },
-    }
+    },
+    MuiDatePicker: {
+      styleOverrides: {
+        root: {
+          backgroundColor: 'red',
+        },
+      },
+    },
   },
 })
 

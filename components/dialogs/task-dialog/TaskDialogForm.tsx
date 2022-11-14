@@ -4,7 +4,7 @@ import DialogContent from '@mui/material/DialogContent';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import { DialogHeader } from '@/components/layout'
-import { Dropdown } from '@/components/inputs'
+import { Dropdown, DatePicker } from '@/components/inputs'
 import { taskComplexityOptions } from '@/constants'
 import { Task, Complexity } from '@/types'
 
@@ -17,6 +17,7 @@ const TaskDialogForm = ({ task, onClose }: TaskDialogFormProps) => {
   const [taskName, setTaskName] = useState(task.name)
   const [description, setDescription] = useState(task.description)
   const [complexity, setComplexity] = useState(task.complexity)
+  const [dueDate, setDueDate] = useState<string | null | undefined>(task.dueDate)
 
   const { handleSubmit } = useForm()
 
@@ -51,6 +52,12 @@ const TaskDialogForm = ({ task, onClose }: TaskDialogFormProps) => {
             onChange={value => setComplexity(value as Complexity)}
             label="Task Complexity"
             options={taskComplexityOptions}
+          />
+
+          <DatePicker
+            label="Due Date"
+            value={dueDate}
+            onChange={date => setDueDate(date)}
           />
         </Stack>
       </DialogContent>
