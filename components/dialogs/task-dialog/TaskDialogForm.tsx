@@ -4,7 +4,7 @@ import DialogContent from '@mui/material/DialogContent';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import { DialogHeader } from '@/components/layout'
-import { Dropdown, DatePicker } from '@/components/inputs'
+import { Dropdown, DatePicker, ImagePicker } from '@/components/inputs'
 import { taskComplexityOptions } from '@/constants'
 import { Task, Complexity } from '@/types'
 
@@ -58,6 +58,11 @@ const TaskDialogForm = ({ task, onClose }: TaskDialogFormProps) => {
             label="Due Date"
             value={dueDate}
             onChange={date => setDueDate(date)}
+          />
+
+          <ImagePicker
+            currentImageUrl={task.imageUrl}
+            imageAlt="Task Image"
           />
         </Stack>
       </DialogContent>
