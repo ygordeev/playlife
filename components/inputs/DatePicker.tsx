@@ -18,7 +18,11 @@ const DatePicker = ({ label, value, onChange }: DatePickerProps) => {
       label={label}
       value={value}
       onChange={handleChange}
-      renderInput={params => <TextField {...params} />}
+      renderInput={params => {
+        const inputProps = { ...params.inputProps, readOnly: true }
+        const inputParams = { ...params, inputProps }
+        return <TextField {...inputParams} />
+      }}
     />
   )
 }
