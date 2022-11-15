@@ -11,13 +11,14 @@ import { UnsplashImage } from '@/types'
 interface ImagePickerProps {
   currentImageUrl?: string,
   imageAlt: string,
+  onChange: (image: UnsplashImage | null) => void,
 }
 
-const ImagePicker = ({ currentImageUrl, imageAlt }: ImagePickerProps) => {
+const ImagePicker = ({ currentImageUrl, imageAlt, onChange }: ImagePickerProps) => {
   const [searchQuery, setSearchQuery] = useState('')
   const [suggestions, setSuggestions] = useState<UnsplashImage[]>([])
   const [isLoadingSuggestions, setIsLoadingSuggestions] = useState(false)
-  const [previewUrl, setPreviewUrl] = useState('')
+  const [previewImage, setPreviewImage] = useState<UnsplashImage | null>(null)
 
   const handleSearchDebounced = useMemo(() => debounce(async (query: string) => {
     if (!query) return
@@ -37,6 +38,11 @@ const ImagePicker = ({ currentImageUrl, imageAlt }: ImagePickerProps) => {
     handleSearchDebounced(query)
   }
 
+  const handleSelectImage = (image: UnsplashImage | null) => {
+    setPreviewImage(image)
+    onChange(image)
+  }
+
   return (
     <Stack component="article" spacing={2}>
       <Stack spacing={0.5}>
@@ -45,7 +51,7 @@ const ImagePicker = ({ currentImageUrl, imageAlt }: ImagePickerProps) => {
         </Typography>
 
         <ImageContainer
-          src={previewUrl || currentImageUrl}
+          src={previewImage?.url || currentImageUrl}
           alt={imageAlt}
           width={240}
           height={200}
@@ -65,7 +71,7 @@ const ImagePicker = ({ currentImageUrl, imageAlt }: ImagePickerProps) => {
           width={300}
           height={300}
           images={suggestions}
-          onImageSelect={image => setPreviewUrl(image?.url || '')}
+          onImageSelect={handleSelectImage}
         />
       )}
     </Stack>

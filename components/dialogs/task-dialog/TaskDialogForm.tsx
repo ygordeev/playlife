@@ -19,6 +19,7 @@ const TaskDialogForm = ({ task, onClose }: TaskDialogFormProps) => {
   const [status, setStatus] = useState(task.status)
   const [complexity, setComplexity] = useState(task.complexity)
   const [dueDate, setDueDate] = useState<string | null | undefined>(task.dueDate)
+  const [imageUrl, setImageUrl] = useState('')
 
   const { handleSubmit } = useForm()
 
@@ -71,6 +72,7 @@ const TaskDialogForm = ({ task, onClose }: TaskDialogFormProps) => {
           <ImagePicker
             currentImageUrl={task.imageUrl}
             imageAlt="Task Image"
+            onChange={image => setImageUrl(image?.url || '')}
           />
         </Stack>
       </DialogContent>
