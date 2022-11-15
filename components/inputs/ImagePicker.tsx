@@ -4,27 +4,31 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import { fetchUnsplashImages } from '@/api/actions'
-import { ImageContainer, ImageList } from '@/components/layout'
+import { ImageContainer, ImageList, Spinner } from '@/components/layout'
 import { debounceInterval } from '@/constants'
+import { UnsplashImage } from '@/types'
 
 interface ImagePickerProps {
   currentImageUrl?: string,
   imageAlt: string,
 }
 
-interface UnsplashImage {
-  id: string,
-  url: string,
-  alt: string,
-}
-
-const DatePicker = ({ currentImageUrl, imageAlt }: ImagePickerProps) => {
+const ImagePicker = ({ currentImageUrl, imageAlt }: ImagePickerProps) => {
   const [searchQuery, setSearchQuery] = useState('')
   const [suggestions, setSuggestions] = useState<UnsplashImage[]>([])
+  const [isLoadingSuggestions, setIsLoadingSuggestions] = useState(false)
 
   const handleSearchDebounced = useMemo(() => debounce(async (query: string) => {
-    const images = await fetchUnsplashImages(query)
-    setSuggestions(images)
+    if (!query) return
+    try {
+      setIsLoadingSuggestions(true)
+      const images = await fetchUnsplashImages(query)
+      setSuggestions(images)
+    } catch (e) {
+      console.error(e)
+    } finally {
+      setIsLoadingSuggestions(false)
+    }
   }, debounceInterval), [])
 
   const handleSearch = (query: string) => {
@@ -55,13 +59,15 @@ const DatePicker = ({ currentImageUrl, imageAlt }: ImagePickerProps) => {
         onChange={e => handleSearch(e.target.value)}
       />
 
-      <ImageList
-        width={300}
-        height={300}
-        images={suggestions}
-      />
+      {isLoadingSuggestions ? <Spinner /> : (
+        <ImageList
+          width={300}
+          height={300}
+          images={suggestions}
+        />
+      )}
     </Stack>
   )
 }
 
-export default DatePicker
+export default ImagePicker

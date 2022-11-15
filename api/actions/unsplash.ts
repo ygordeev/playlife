@@ -1,13 +1,15 @@
 import { unsplashApi, paths } from '@/api'
 
+interface UnsplashResponseResult {
+  id: string,
+  alt_description: string,
+  urls: {
+    small: string,
+  }
+}
+
 interface UnsplashResponse {
-  results: Array<{
-    id: string,
-    alt_description: string,
-    urls: {
-      small: string,
-    }
-  }>
+  results: UnsplashResponseResult[]
 }
 
 export const fetchUnsplashImages = async (query: string) => {
