@@ -16,6 +16,8 @@ const TaskBoard = () => {
 
   const tasksByStatus = useMemo(() => groupBy(tasks, 'status'), [])
 
+  const updateTask = () => console.log('Updating task')
+
   return (
     <>
       <DragDropContext onDragEnd={onDragEnd}>
@@ -37,10 +39,13 @@ const TaskBoard = () => {
         </Stack>
       </DragDropContext>
 
-      <TaskDialog
-        task={selectedTask}
-        onClose={() => setSelectedTask(undefined)}
-      />
+      {selectedTask && (
+        <TaskDialog
+          task={selectedTask}
+          onClose={() => setSelectedTask(undefined)}
+          onSubmit={updateTask}
+        />
+      )}
     </>
   )
 }

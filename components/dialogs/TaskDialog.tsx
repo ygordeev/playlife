@@ -1,5 +1,6 @@
 import { useState, MouseEventHandler } from 'react'
 import { useForm } from 'react-hook-form'
+import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle'
 import DialogContent from '@mui/material/DialogContent'
 import DialogActions from '@mui/material/DialogActions'
@@ -10,12 +11,13 @@ import { Dropdown, DatePicker, ImagePicker } from '@/components/inputs'
 import { taskComplexityOptions, taskStatusOptions } from '@/constants'
 import { Task, Complexity, TaskStatus } from '@/types'
 
-interface TaskDialogFormProps {
+interface TaskDialogProps {
   task: Task,
   onClose: MouseEventHandler,
+  onSubmit: () => void,
 }
 
-const TaskDialogForm = ({ task, onClose }: TaskDialogFormProps) => {
+const TaskDialog = ({ task, onClose, onSubmit }: TaskDialogProps) => {
   const [name, setName] = useState(task.name)
   const [description, setDescription] = useState(task.description)
   const [status, setStatus] = useState(task.status)
@@ -25,11 +27,13 @@ const TaskDialogForm = ({ task, onClose }: TaskDialogFormProps) => {
 
   const { handleSubmit } = useForm()
 
-  const onSubmit = () => console.log('submitting')
-
   return (
-    // <form onSubmit={handleSubmit(onSubmit)}>
-    <>
+    <Dialog
+      open={true}
+      onClose={onClose}
+      maxWidth="sm"
+      fullWidth
+    >
       <DialogTitle color="primary.main">Edit Task</DialogTitle>
       <DialogContent>
 
@@ -79,10 +83,12 @@ const TaskDialogForm = ({ task, onClose }: TaskDialogFormProps) => {
 
       <DialogActions>
         <Button onClick={onClose}>Close</Button>
-        <Button>Update Task</Button>
+        <Button onClick={handleSubmit(onSubmit)}>
+          Update Task
+        </Button>
       </DialogActions>
-    </>
+    </Dialog>
   )
 }
 
-export default TaskDialogForm
+export default TaskDialog
