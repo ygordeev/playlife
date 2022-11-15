@@ -1,29 +1,44 @@
-import { useState } from 'react';
-import Box from '@mui/material/Box';
+import { useState, useMemo } from 'react';
+import debounce from 'lodash/debounce'
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
-import { ImageContainer } from '@/components/layout' 
+import { fetchUnsplashImages } from '@/api/actions'
+import { ImageContainer, ImageList } from '@/components/layout'
+import { debounceInterval } from '@/constants'
 
 interface ImagePickerProps {
   currentImageUrl?: string,
   imageAlt: string,
 }
 
-const UnsplashImagePicker = ({ currentImageUrl, imageAlt }: ImagePickerProps) => {
+interface UnsplashImage {
+  id: string,
+  url: string,
+  alt: string,
+}
+
+const DatePicker = ({ currentImageUrl, imageAlt }: ImagePickerProps) => {
   const [searchQuery, setSearchQuery] = useState('')
+  const [suggestions, setSuggestions] = useState<UnsplashImage[]>([])
+
+  const handleSearchDebounced = useMemo(() => debounce(async (query: string) => {
+    const images = await fetchUnsplashImages(query)
+    setSuggestions(images)
+  }, debounceInterval), [])
+
+  const handleSearch = (query: string) => {
+    setSearchQuery(query)
+    handleSearchDebounced(query)
+  }
 
   return (
-    <Box component="article">
-      <Typography
-        variant="subtitle2"
-        color="grey.400"
-        mb={0.5}
-      >
-        Task image
-      </Typography>
+    <Stack component="article" spacing={2}>
+      <Stack spacing={0.5}>
+        <Typography variant="subtitle2" color="grey.400">
+          Task image (preview)
+        </Typography>
 
-      <Stack direction="row" spacing={2}>
         <ImageContainer
           src={currentImageUrl}
           alt={imageAlt}
@@ -31,16 +46,22 @@ const UnsplashImagePicker = ({ currentImageUrl, imageAlt }: ImagePickerProps) =>
           height={200}
           flexShrink={0}
         />
-  
-        <TextField
-          value={searchQuery}
-          label="Enter image description"
-          fullWidth
-          onChange={e => setSearchQuery(e.target.value)}
-        />
       </Stack>
-    </Box>
+
+      <TextField
+        value={searchQuery}
+        label="Search for image on Unsplash"
+        fullWidth
+        onChange={e => handleSearch(e.target.value)}
+      />
+
+      <ImageList
+        width={300}
+        height={300}
+        images={suggestions}
+      />
+    </Stack>
   )
 }
 
-export default UnsplashImagePicker
+export default DatePicker
