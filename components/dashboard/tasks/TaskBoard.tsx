@@ -10,11 +10,10 @@ import TaskBoardColumn from './TaskBoardColumn'
 import { taskBoardColumns, tasks } from '@/constants'
 
 const TaskBoard = () => {
-  const [selectedTask, setSelectedTask] = useState<Task>()
+  const [selectedTask, setSelectedTask] = useState<Task | null>(null)
+  const tasksByStatus = useMemo(() => groupBy(tasks, 'status'), [])
 
   const onDragEnd = () => console.log('dragged')
-
-  const tasksByStatus = useMemo(() => groupBy(tasks, 'status'), [])
 
   const updateTask = () => console.log('Updating task')
 
@@ -42,7 +41,7 @@ const TaskBoard = () => {
       {selectedTask && (
         <TaskDialog
           task={selectedTask}
-          onClose={() => setSelectedTask(undefined)}
+          onClose={() => setSelectedTask(null)}
           onSubmit={updateTask}
         />
       )}

@@ -6,6 +6,8 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { GlobalStyles } from '@/styles'
 import { customMuiTheme } from '@/context'
 
+// To-do: Replace all MouseEvent types with correct event types
+
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>

@@ -12,20 +12,22 @@ import { taskComplexityOptions, taskStatusOptions } from '@/constants'
 import { Task, Complexity, TaskStatus } from '@/types'
 
 interface TaskDialogProps {
-  task: Task,
+  task?: Task,
   onClose: MouseEventHandler,
   onSubmit: () => void,
 }
 
 const TaskDialog = ({ task, onClose, onSubmit }: TaskDialogProps) => {
-  const [name, setName] = useState(task.name)
-  const [description, setDescription] = useState(task.description)
-  const [status, setStatus] = useState(task.status)
-  const [complexity, setComplexity] = useState(task.complexity)
-  const [dueDate, setDueDate] = useState<string | null | undefined>(task.dueDate)
+  const [name, setName] = useState(task?.name || '')
+  const [description, setDescription] = useState(task?.description || '')
+  const [status, setStatus] = useState(task?.status || TaskStatus.Backlog)
+  const [complexity, setComplexity] = useState(task?.complexity || Complexity.Easy)
+  const [dueDate, setDueDate] = useState(task?.dueDate || null)
   const [imageUrl, setImageUrl] = useState('')
 
   const { handleSubmit } = useForm()
+
+  const dialogTitle = task ? 'Edit task' : 'Create Task'
 
   return (
     <Dialog
@@ -34,7 +36,7 @@ const TaskDialog = ({ task, onClose, onSubmit }: TaskDialogProps) => {
       maxWidth="sm"
       fullWidth
     >
-      <DialogTitle color="primary.main">Edit Task</DialogTitle>
+      <DialogTitle color="primary.main">{dialogTitle}</DialogTitle>
       <DialogContent>
 
         <Stack spacing={3} mt={3}>
@@ -74,7 +76,7 @@ const TaskDialog = ({ task, onClose, onSubmit }: TaskDialogProps) => {
           />
 
           <ImagePicker
-            currentImageUrl={task.imageUrl}
+            currentImageUrl={task?.imageUrl}
             imageAlt="Task Image"
             onChange={image => setImageUrl(image?.url || '')}
           />
