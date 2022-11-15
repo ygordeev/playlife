@@ -1,9 +1,11 @@
 import { useState, MouseEventHandler } from 'react'
-import { useForm } from 'react-hook-form';
-import DialogContent from '@mui/material/DialogContent';
-import TextField from '@mui/material/TextField';
+import { useForm } from 'react-hook-form'
+import DialogTitle from '@mui/material/DialogTitle'
+import DialogContent from '@mui/material/DialogContent'
+import DialogActions from '@mui/material/DialogActions'
+import Button from '@mui/material/Button'
+import TextField from '@mui/material/TextField'
 import Stack from '@mui/material/Stack';
-import { DialogHeader } from '@/components/layout'
 import { Dropdown, DatePicker, ImagePicker } from '@/components/inputs'
 import { taskComplexityOptions, taskStatusOptions } from '@/constants'
 import { Task, Complexity, TaskStatus } from '@/types'
@@ -26,12 +28,10 @@ const TaskDialogForm = ({ task, onClose }: TaskDialogFormProps) => {
   const onSubmit = () => console.log('submitting')
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    // <form onSubmit={handleSubmit(onSubmit)}>
+    <>
+      <DialogTitle color="primary.main">Edit Task</DialogTitle>
       <DialogContent>
-        <DialogHeader
-          title="Edit Task"
-          onClose={onClose}
-        />
 
         <Stack spacing={3} mt={3}>
           <TextField
@@ -76,7 +76,12 @@ const TaskDialogForm = ({ task, onClose }: TaskDialogFormProps) => {
           />
         </Stack>
       </DialogContent>
-    </form>
+
+      <DialogActions>
+        <Button onClick={onClose}>Close</Button>
+        <Button>Update Task</Button>
+      </DialogActions>
+    </>
   )
 }
 
