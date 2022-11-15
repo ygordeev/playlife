@@ -22,6 +22,8 @@ const columnStyle = {
 }
 
 const DashboardTasksColumn = ({ column, tasks, onTaskSelect }: TasksColumnProps) => {
+  const hasTasks = tasks.length > 0
+
   return (
     <Stack
       component="section"
@@ -44,14 +46,26 @@ const DashboardTasksColumn = ({ column, tasks, onTaskSelect }: TasksColumnProps)
         </Typography>
       </HorizontalCenteredStack>
 
-      <Stack spacing={1}>
-        {tasks.map(task => (
+      <Stack
+        justifyContent={hasTasks ? 'flex-start' : 'center'}
+        flexGrow={1}
+        spacing={1}
+      >
+        {hasTasks ? tasks.map(task => (
           <TaskBoardCard
             key={task.id}
             task={task}
             onClick={() => onTaskSelect(task)}
           />
-        ))}
+        )) : (
+          <Typography
+            variant="h5"
+            color="grey.500"
+            align="center"
+          >
+            No Tasks
+          </Typography>
+        )}
       </Stack>
     </Stack>
   )

@@ -17,6 +17,7 @@ const ImagePicker = ({ currentImageUrl, imageAlt }: ImagePickerProps) => {
   const [searchQuery, setSearchQuery] = useState('')
   const [suggestions, setSuggestions] = useState<UnsplashImage[]>([])
   const [isLoadingSuggestions, setIsLoadingSuggestions] = useState(false)
+  const [previewUrl, setPreviewUrl] = useState('')
 
   const handleSearchDebounced = useMemo(() => debounce(async (query: string) => {
     if (!query) return
@@ -44,7 +45,7 @@ const ImagePicker = ({ currentImageUrl, imageAlt }: ImagePickerProps) => {
         </Typography>
 
         <ImageContainer
-          src={currentImageUrl}
+          src={previewUrl || currentImageUrl}
           alt={imageAlt}
           width={240}
           height={200}
@@ -64,6 +65,7 @@ const ImagePicker = ({ currentImageUrl, imageAlt }: ImagePickerProps) => {
           width={300}
           height={300}
           images={suggestions}
+          onImageSelect={image => setPreviewUrl(image?.url || '')}
         />
       )}
     </Stack>

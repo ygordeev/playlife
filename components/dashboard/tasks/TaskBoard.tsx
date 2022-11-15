@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { DragDropContext } from 'react-beautiful-dnd'
+import groupBy from 'lodash/groupBy';
 import Stack from '@mui/material/Stack'
 import { TaskDialog } from '@/components/dialogs';
 import { Task } from '@/types';
@@ -13,7 +14,7 @@ const TaskBoard = () => {
 
   const onDragEnd = () => console.log('dragged')
 
-  const todoTasks = tasks.filter(t => t.status === 'Backlog')
+  const tasksByStatus = useMemo(() => groupBy(tasks, 'status'), [])
 
   return (
     <>
@@ -29,7 +30,7 @@ const TaskBoard = () => {
             <TaskBoardColumn
               key={column.id}
               column={column}
-              tasks={todoTasks}
+              tasks={tasksByStatus[column.status] || []}
               onTaskSelect={setSelectedTask}
             />
           ))}

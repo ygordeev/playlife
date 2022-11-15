@@ -5,8 +5,8 @@ import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import { DialogHeader } from '@/components/layout'
 import { Dropdown, DatePicker, ImagePicker } from '@/components/inputs'
-import { taskComplexityOptions } from '@/constants'
-import { Task, Complexity } from '@/types'
+import { taskComplexityOptions, taskStatusOptions } from '@/constants'
+import { Task, Complexity, TaskStatus } from '@/types'
 
 interface TaskDialogFormProps {
   task: Task,
@@ -14,8 +14,9 @@ interface TaskDialogFormProps {
 }
 
 const TaskDialogForm = ({ task, onClose }: TaskDialogFormProps) => {
-  const [taskName, setTaskName] = useState(task.name)
+  const [name, setName] = useState(task.name)
   const [description, setDescription] = useState(task.description)
+  const [status, setStatus] = useState(task.status)
   const [complexity, setComplexity] = useState(task.complexity)
   const [dueDate, setDueDate] = useState<string | null | undefined>(task.dueDate)
 
@@ -33,10 +34,10 @@ const TaskDialogForm = ({ task, onClose }: TaskDialogFormProps) => {
 
         <Stack spacing={3} mt={3}>
           <TextField
-            value={taskName}
+            value={name}
             label="Task Name"
             fullWidth
-            onChange={e => setTaskName(e.target.value)}
+            onChange={e => setName(e.target.value)}
           />
 
           <TextField
@@ -45,6 +46,13 @@ const TaskDialogForm = ({ task, onClose }: TaskDialogFormProps) => {
             multiline
             fullWidth
             onChange={e => setDescription(e.target.value)}
+          />
+
+          <Dropdown
+            value={status}
+            onChange={value => setStatus(value as TaskStatus)}
+            label="Task Status"
+            options={taskStatusOptions}
           />
 
           <Dropdown

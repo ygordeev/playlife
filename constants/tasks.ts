@@ -27,6 +27,11 @@ export const taskBoardColumns = [
   },
 ]
 
+export const taskStatusOptions = taskBoardColumns.map(column => ({
+  label: column.name,
+  value: column.status,
+}))
+
 export const taskComplexityOptions = [
   {
     label: 'Easy',
