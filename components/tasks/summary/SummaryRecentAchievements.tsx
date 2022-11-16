@@ -24,7 +24,7 @@ const SummaryRecentAchievements = () => {
       </HorizontalCenteredStack>
 
       <HorizontalCenteredStack justifyContent="space-between" mt={1}>
-        {achievementIcons.map(icon => (
+        {achievementIcons.slice(0, 4).map(icon => (
           <Tooltip key={icon.id} title={icon.description}>
             <div>
               <AchievementIcon

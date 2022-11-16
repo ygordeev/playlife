@@ -23,3 +23,13 @@ export interface TaskDialogProps {
   onClose: MouseEventHandler,
   task?: Task,
 }
+
+export interface Achievement {
+  id: number,
+  backgroundColor: string,
+  borderColor: string,
+  ribbonColor: string,
+  description: string,
+  emoji: string,
+  dateAchieved: string,
+}

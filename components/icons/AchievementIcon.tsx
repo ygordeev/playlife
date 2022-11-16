@@ -1,5 +1,6 @@
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
+import { achievementEmojiToIconRatio } from '@/constants'
 
 interface AchievementIconProps {
   size: number,
@@ -17,12 +18,13 @@ const iconContainerStyle = {
   }
 }
 
-const emojiStyle = {
+const getEmojiStyle = (size: number) => ({
   position: 'absolute',
   top: '15%',
   left: '50%',
   translate: '-50%',
-}
+  fontSize: size * achievementEmojiToIconRatio
+})
 
 const AchievementIcon = (props: AchievementIconProps) => {
   return (
@@ -44,7 +46,7 @@ const AchievementIcon = (props: AchievementIconProps) => {
         <path fill={props.backgroundColor} d="M285.4 362.2a8.4 8.4 0 0 1-12.3 2.2l-12.8-9.8a9.7 9.7 0 0 0-11 0l-12.9 9.8a8.4 8.4 0 0 1-12.3-2.2l-8.7-13.5a9.6 9.6 0 0 0-10.4-3.8l-15.4 4.8a8.4 8.4 0 0 1-10.8-6.3l-3.5-15.7c-.8-3.8-4.6-7-8.5-7.1l-16-.8c-5.2-.2-8.8-4.5-8.1-9.6l2-16c.5-3.8-2-8-5.5-9.5l-14.9-6.2a8.3 8.3 0 0 1-4.3-11.7l7.4-14.4a9.6 9.6 0 0 0-1.9-10.8l-11.8-11a8.4 8.4 0 0 1 0-12.5l11.8-11a9.6 9.6 0 0 0 2-10.8l-7.5-14.4a8.3 8.3 0 0 1 4.3-11.7l14.9-6.2c3.5-1.5 6-5.8 5.5-9.5l-2-16c-.7-5 3-9.4 8-9.6l16.1-.8a9.7 9.7 0 0 0 8.5-7l3.5-15.8c1.1-5 6-7.8 10.8-6.3l15.5 4.8a9.6 9.6 0 0 0 10.3-3.8l8.7-13.5a8.4 8.4 0 0 1 12.3-2.2l12.9 9.8a9.7 9.7 0 0 0 11 0l12.8-9.8c4-3 9.6-2 12.3 2.2l8.8 13.5a9.6 9.6 0 0 0 10.3 3.8L320 99a8.4 8.4 0 0 1 10.8 6.3l3.6 15.7c.8 3.7 4.6 7 8.4 7.1l16.1.8c5.1.3 8.7 4.5 8 9.5l-2 16c-.4 3.8 2 8.1 5.6 9.6l14.8 6.2a8.4 8.4 0 0 1 4.3 11.7l-7.4 14.4a9.7 9.7 0 0 0 2 10.8l11.8 11a8.4 8.4 0 0 1 0 12.5l-11.9 11a9.6 9.6 0 0 0-1.9 10.8l7.4 14.4a8.3 8.3 0 0 1-4.3 11.7l-14.8 6.2a9.7 9.7 0 0 0-5.6 9.5l2 16a8.4 8.4 0 0 1-8 9.6l-16.1.8a9.6 9.6 0 0 0-8.5 7l-3.5 15.8a8.4 8.4 0 0 1-10.8 6.3l-15.4-4.8a9.6 9.6 0 0 0-10.3 3.8l-8.8 13.5z" />
         <path fill={props.backgroundColor} d="M366.4 225.6a112.8 112.8 0 1 1-225.6 0 112.8 112.8 0 0 1 225.6 0z" />
       </svg>
-      <Typography variant="h5" sx={emojiStyle}>
+      <Typography sx={getEmojiStyle(props.size)}>
         {props.emoji}
       </Typography>
     </Box>

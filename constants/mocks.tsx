@@ -21,6 +21,7 @@ export const achievementIcons = [
     ribbonColor: '#d34e32',
     description: 'Traveled to Paris and saw the Eiffel Tower with my own eyes',
     emoji: '🛩️',
+    dateAchieved: '2022-11-16',
   },
   {
     id: 2,
@@ -29,6 +30,7 @@ export const achievementIcons = [
     ribbonColor: '#8331C2',
     description: 'Passed N5 Japanese exam',
     emoji: '🇯🇵',
+    dateAchieved: '2022-11-16',
   },
   {
     id: 3,
@@ -37,6 +39,7 @@ export const achievementIcons = [
     ribbonColor: '#ddcbeb',
     description: 'Woke up at 8 AM three weeks in a row',
     emoji: '⏰',
+    dateAchieved: '2022-11-16',
   },
   {
     id: 4,
@@ -45,6 +48,34 @@ export const achievementIcons = [
     ribbonColor: '#325dd3',
     description: 'Took 5 surfing lessons',
     emoji: '🏄🏻‍♂️',
+    dateAchieved: '2022-11-16',
+  },
+  {
+    id: 5,
+    backgroundColor: '#0d2038',
+    borderColor: '#33ae57',
+    ribbonColor: '#325dd3',
+    description: 'Took 5 surfing lessons',
+    emoji: '🏄🏻‍♂️',
+    dateAchieved: '2022-11-16',
+  },
+  {
+    id: 6,
+    backgroundColor: '#0d2038',
+    borderColor: '#33ae57',
+    ribbonColor: '#325dd3',
+    description: 'Took 5 surfing lessons',
+    emoji: '🏄🏻‍♂️',
+    dateAchieved: '2022-11-16',
+  },
+  {
+    id: 7,
+    backgroundColor: '#0d2038',
+    borderColor: '#33ae57',
+    ribbonColor: '#325dd3',
+    description: 'Took 5 surfing lessons',
+    emoji: '🏄🏻‍♂️',
+    dateAchieved: '2022-11-16',
   },
 ]
 
