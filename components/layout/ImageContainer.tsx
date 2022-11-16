@@ -10,7 +10,7 @@ type ImageContainerProps = BoxProps & {
   rounded?: boolean,
 }
 
-const imageContainerStyle = (width: number, height: number, isFilled: boolean) => ({
+const getImageContainerStyle = (width: number, height: number, isFilled: boolean) => ({
   width,
   height,
   display: 'grid',
@@ -24,7 +24,7 @@ const imageContainerStyle = (width: number, height: number, isFilled: boolean) =
 const ImagePlaceholder = (props: ImageContainerProps) => {
   const { width, height, src, alt, ...boxProps } = props
   const isFilled = Boolean(src)
-  const containerStyle = imageContainerStyle(width, height, isFilled)
+  const containerStyle = getImageContainerStyle(width, height, isFilled)
 
   return (
     <Box sx={containerStyle} {...boxProps}>

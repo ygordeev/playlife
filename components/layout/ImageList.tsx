@@ -12,7 +12,7 @@ interface ImageListProps {
   onImageSelect: (image: UnsplashImage | null) => void,
 }
 
-const listItemStyle = (highlighted: boolean) => ({
+const getListItemStyle = (highlighted: boolean) => ({
   border: highlighted ? 3 : 0,
   borderColor: 'success.dark',
   cursor: 'pointer',
@@ -38,7 +38,7 @@ const ImageList = ({ width, height, images, onImageSelect }: ImageListProps) => 
       {images.map((image, index) => (
         <ImageListItem
           key={image.id}
-          sx={listItemStyle(index === selectedIndex)}
+          sx={getListItemStyle(index === selectedIndex)}
         >
           <Image
             src={image.url}

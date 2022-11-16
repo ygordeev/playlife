@@ -28,6 +28,7 @@ const TaskDialog = ({ task, onClose, onSubmit }: TaskDialogProps) => {
   const { handleSubmit } = useForm()
 
   const dialogTitle = task ? 'Edit task' : 'Create Task'
+  const updateButtonText = task ? 'Update Task' : 'Create Task'
 
   return (
     <Dialog
@@ -86,7 +87,7 @@ const TaskDialog = ({ task, onClose, onSubmit }: TaskDialogProps) => {
       <DialogActions>
         <Button onClick={onClose}>Close</Button>
         <Button onClick={handleSubmit(onSubmit)}>
-          Update Task
+          {updateButtonText}
         </Button>
       </DialogActions>
     </Dialog>
