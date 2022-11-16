@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Grid from '@mui/material/Grid'
 import { AchievementDialog } from '@/components/dialogs'
 import { Achievement } from '@/types'
+import NewAchievementButton from './NewAchievementButton'
 import AchievementCard from './AchievementCard'
 
 // To-do: The achievement icons should be extracted from the store
@@ -26,6 +27,10 @@ const AchievementGrid = () => {
   return (
     <>
       <Grid container spacing={2}>
+        <Grid item>
+          <NewAchievementButton onClick={() => setIsAchievementDialogOpen(true)} />
+        </Grid>
+
         {achievementIcons.map(achievement => (
           <Grid key={achievement.id} item>
             <AchievementCard

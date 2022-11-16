@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import Button from '@mui/material/Button';
 import { StackProps } from '@mui/material/Stack';
-import { SearchInput } from '@/components/inputs';
 import { ProfileButton } from '@/components/controls';
 import { HorizontalCenteredStack } from '@/components/layout';
 import { TaskDialog } from '@/components/dialogs';
@@ -21,7 +20,6 @@ const HeaderSection = (props: StackProps) => {
       >
         <HorizontalCenteredStack spacing={6}>
           <HeaderSectionNavigation />
-          <SearchInput />
           <Button
             variant="contained"
             onClick={() => setIsNewTaskDialogOpen(true)}
