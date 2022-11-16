@@ -1,14 +1,19 @@
+import { useRouter } from 'next/router'
 import Stack from '@mui/material/Stack';
 import { navigationOptions } from '@/constants';
 import { Link } from '@/components/controls'
 
-const linkStyle = {
+const getLinkStyle = (isSelected: boolean) => ({
+  borderBottom: isSelected ? 2 : 0,
+  borderColor: 'primary.main',
   '&:hover': {
     color: 'primary.main'
   }
-}
+})
 
 const HeaderSectionNavigation = () => {
+  const { asPath } = useRouter()
+
   return (
     <Stack
       component="ul"
@@ -22,7 +27,7 @@ const HeaderSectionNavigation = () => {
           label={option.label}
           color="inherit"
           underline="none"
-          sx={linkStyle}
+          sx={getLinkStyle(option.href === asPath)}
         />
       ))}
     </Stack>
