@@ -26,6 +26,7 @@ const TaskBoard = () => {
           overflow="hidden"
           flex={1}
           spacing={2}
+          py={0.5}
         >
           {taskBoardColumns.map(column => (
             <TaskBoardColumn

@@ -12,30 +12,28 @@ interface TasksColumnProps {
   onTaskSelect: (task: Task) => void,
 }
 
-const columnStyle = {
+const getColumnStyle = (isDraggingOver: boolean) => ({
   width: 400,
-  backgroundColor: '#1E1F25',
+  backgroundColor: isDraggingOver ? 'rgba(0, 120, 200, 0.3)' : '#1E1F25',
   border: 1,
   borderColor: 'grey.800',
   borderRadius: 2,
   overflowY: 'auto',
   p: 1,
-}
+})
 
 const DashboardTasksColumn = ({ column, tasks, onTaskSelect }: TasksColumnProps) => {
   const hasTasks = tasks.length > 0
 
   return (
-    <Droppable
-      droppableId={column.id.toString()}
-      type={column.status}
-    >
+    <Droppable droppableId={column.id.toString()}>
       {(provided: DroppableProvided, snapshot: DroppableStateSnapshot) => (
         <Stack
           component="section"
           spacing={1}
           ref={provided.innerRef}
-          sx={columnStyle}
+          sx={getColumnStyle(snapshot.isDraggingOver)}
+          {...provided.droppableProps}
         >
           <HorizontalCenteredStack spacing={1} pl={1}>
             <Box
@@ -65,7 +63,7 @@ const DashboardTasksColumn = ({ column, tasks, onTaskSelect }: TasksColumnProps)
                 index={taskIndex}
                 onClick={() => onTaskSelect(task)}
               />
-            )) : (
+            )) : !snapshot.isDraggingOver && (
               <Typography
                 variant="h5"
                 color="grey.500"
