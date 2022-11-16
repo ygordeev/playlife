@@ -9,7 +9,6 @@ const SearchInput = () => {
 
   useEffect(() => {
     // To-do: Display the list of all the tasks matching the query
-    console.log('Search query has changed to', searchQuery);
   }, [searchQuery]);
 
   return (

@@ -1,6 +1,6 @@
-import { navigationOptions } from '@/constants';
 import Stack from '@mui/material/Stack';
-import Link from '@mui/material/Link';
+import { navigationOptions } from '@/constants';
+import { Link } from '@/components/controls'
 
 const linkStyle = {
   '&:hover': {
@@ -19,12 +19,11 @@ const DashboardHeaderNavigation = () => {
         <Link
           key={option.label}
           href={option.href}
+          label={option.label}
           color="inherit"
           underline="none"
           sx={linkStyle}
-        >
-          {option.label}
-        </Link>
+        />
       ))}
     </Stack>
   )

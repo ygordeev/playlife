@@ -1,7 +1,7 @@
-import type { NextPage } from 'next'
 import Head from 'next/head'
-import Stack from '@mui/material/Stack';
-import { DashboardHeader, DashboardSummary, DashboardTasks } from '@/components/dashboard';
+import type { NextPage } from 'next'
+import { PrimaryLayout } from '@/layouts'
+import { DashboardSummary, DashboardTasks } from '@/components/dashboard';
 
 const TasksPage: NextPage = () => {
   return (
@@ -10,18 +10,10 @@ const TasksPage: NextPage = () => {
         <title>My Tasks</title>
       </Head>
 
-      <Stack
-        bgcolor="grey.extradark"
-        height="100vh"
-        overflow="hidden"
-        spacing={5}
-        px={5}
-        py={2}
-      >
-        <DashboardHeader />
+      <PrimaryLayout>
         <DashboardSummary />
         <DashboardTasks flex={1} />
-      </Stack>
+      </PrimaryLayout>
     </>
   )
 }
