@@ -29,6 +29,7 @@ const SummaryRecentAchievements = () => {
             <div>
               <AchievementIcon
                 size={50}
+                hoverable
                 {...icon}
               />
             </div>

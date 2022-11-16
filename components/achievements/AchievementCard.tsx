@@ -1,4 +1,4 @@
-import Paper from '@mui/material/Paper';
+import Paper, { PaperProps } from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import { AchievementIcon } from '@/components/icons'
@@ -6,9 +6,21 @@ import { HorizontalCenteredStack } from '@/components/layout';
 import { formatDate, getLineClampStyle } from '@/utils';
 import { Achievement } from '@/types'
 
-const AchievementCard = ({ achievement }: { achievement: Achievement }) => {
+type AchievementCardProps = PaperProps & {
+  achievement: Achievement,
+}
+
+const achievementCardStyle = {
+  cursor: 'pointer',
+  p: 2,
+  '&:hover': {
+    backgroundColor: 'grey.800'
+  }
+}
+
+const AchievementCard = ({ achievement, ...paperProps }: AchievementCardProps) => {
   return (
-    <Paper sx={{ p: 2 }}>
+    <Paper sx={achievementCardStyle} {...paperProps}>
       <HorizontalCenteredStack spacing={2.5}>
         <AchievementIcon
           size={75}

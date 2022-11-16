@@ -8,15 +8,16 @@ interface AchievementIconProps {
   borderColor: string,
   ribbonColor: string,
   emoji: string,
+  hoverable?: boolean,
 }
 
-const iconContainerStyle = {
+const getIconContainerStyle = (hoverable?: boolean) => ({
   cursor: 'pointer',
   transition: 'scale 0.3s',
   '&:hover': {
-    scale: '1.1',
+    scale: hoverable ? '1.1' : '1',
   }
-}
+})
 
 const getEmojiStyle = (size: number) => ({
   position: 'absolute',
@@ -32,7 +33,7 @@ const AchievementIcon = (props: AchievementIconProps) => {
       position="relative"
       width={props.size}
       flexShrink={0}
-      sx={iconContainerStyle}
+      sx={getIconContainerStyle(props.hoverable)}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
