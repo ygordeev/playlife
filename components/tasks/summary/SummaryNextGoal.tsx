@@ -10,7 +10,7 @@ import { formatDate } from '@/utils'
 // To-do: Next goal should be extracted from the store
 import { nextGoal } from '@/constants'
 
-const SummaryNewTasks = () => {
+const SummaryNextGoal = () => {
   return (
     <GradientCard>
       <HorizontalCenteredStack justifyContent="space-between" spacing={1}>
@@ -38,4 +38,4 @@ const SummaryNewTasks = () => {
   )
 }
 
-export default SummaryNewTasks
+export default SummaryNextGoal

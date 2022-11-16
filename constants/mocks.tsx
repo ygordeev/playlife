@@ -79,13 +79,6 @@ export const achievementIcons = [
   },
 ]
 
-export const learningPaths = [
-  {
-    id: 1,
-    name: 'Japanese language',
-  }
-]
-
 export const tasks = [
   {
     id: 1,
@@ -93,7 +86,6 @@ export const tasks = [
     name: 'Read chapter 1 of "Japanese From Zero"',
     description: 'Chapter 1 contains information on the basic Japanese greetings and is an excellent starting point',
     dueDate: '2023-01-12',
-    learningPathId: 1,
     imageUrl: 'https://images.unsplash.com/photo-1528164344705-47542687000d?auto=format&fit=crop&w=512&q=80',
     complexity: Complexity.Easy,
   },
@@ -103,7 +95,6 @@ export const tasks = [
     name: 'Start waking up at 7:30am everyday',
     description: 'This is the first step towards achieving the great goal of waking up at 5am',
     dueDate: '2023-04-09',
-    learningPathId: 2,
     complexity: Complexity.Hard,
   },
   {
@@ -112,7 +103,6 @@ export const tasks = [
     name: 'Read chapter 1 of "Japanese From Zero"',
     description: 'Chapter 1 contains information on the basic Japanese greetings and is an excellent starting point',
     dueDate: '2023-01-12',
-    learningPathId: 1,
     imageUrl: 'https://images.unsplash.com/photo-1528164344705-47542687000d?auto=format&fit=crop&w=512&q=80',
     complexity: Complexity.Easy,
   },

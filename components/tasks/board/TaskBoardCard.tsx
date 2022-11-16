@@ -72,16 +72,6 @@ const DashboardTaskCard = ({ task, index, onClick }: TaskBoardCardProps) => {
           </Stack>
 
           <HorizontalCenteredStack justifyContent="space-between" mt={1}>
-            {task.learningPathId > 0 && (
-              <Typography
-                variant="subtitle2"
-                color="primary.main"
-                sx={{ textTransform: 'uppercase' }}
-              >
-                Japanese
-              </Typography>
-            )}
-
             <ComplexityIndicator complexity={task.complexity} />
 
             {task.dueDate && (
