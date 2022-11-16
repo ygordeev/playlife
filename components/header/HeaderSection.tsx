@@ -5,9 +5,9 @@ import { SearchInput } from '@/components/inputs';
 import { ProfileButton } from '@/components/controls';
 import { HorizontalCenteredStack } from '@/components/layout';
 import { TaskDialog } from '@/components/dialogs';
-import DashboardHeaderNavigation from './DashboardHeaderNavigation';
+import HeaderSectionNavigation from './HeaderSectionNavigation';
 
-const DashboardHeader = (props: StackProps) => {
+const HeaderSection = (props: StackProps) => {
   const [isNewTaskDialogOpen, setIsNewTaskDialogOpen] = useState(false)
 
   const handleCreateTask = () => console.log('Creating new task')
@@ -20,7 +20,7 @@ const DashboardHeader = (props: StackProps) => {
         {...props}
       >
         <HorizontalCenteredStack spacing={6}>
-          <DashboardHeaderNavigation />
+          <HeaderSectionNavigation />
           <SearchInput />
           <Button
             variant="contained"
@@ -43,4 +43,4 @@ const DashboardHeader = (props: StackProps) => {
   )
 }
 
-export default DashboardHeader;
+export default HeaderSection;

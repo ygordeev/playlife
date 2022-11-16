@@ -8,7 +8,7 @@ const linkStyle = {
   }
 }
 
-const DashboardHeaderNavigation = () => {
+const HeaderSectionNavigation = () => {
   return (
     <Stack
       component="ul"
@@ -29,4 +29,4 @@ const DashboardHeaderNavigation = () => {
   )
 }
 
-export default DashboardHeaderNavigation;
+export default HeaderSectionNavigation;

@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 import Stack from '@mui/material/Stack';
-import { DashboardHeader } from '@/components/dashboard';
+import { HeaderSection } from '@/components/header';
 
 const PrimaryLayout = ({ children }: { children: ReactNode }) => {
   return (
@@ -12,7 +12,7 @@ const PrimaryLayout = ({ children }: { children: ReactNode }) => {
       px={5}
       py={2}
     >
-      <DashboardHeader />
+      <HeaderSection />
       {children}
     </Stack>
   )

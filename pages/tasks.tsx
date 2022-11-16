@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import type { NextPage } from 'next'
 import { PrimaryLayout } from '@/layouts'
-import { DashboardSummary, DashboardTasks } from '@/components/dashboard';
+import { TaskSummary, TaskBoard } from '@/components/tasks';
 
 const TasksPage: NextPage = () => {
   return (
@@ -11,8 +11,8 @@ const TasksPage: NextPage = () => {
       </Head>
 
       <PrimaryLayout>
-        <DashboardSummary />
-        <DashboardTasks flex={1} />
+        <TaskSummary />
+        <TaskBoard flex={1} />
       </PrimaryLayout>
     </>
   )

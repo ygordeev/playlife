@@ -4,7 +4,7 @@ import SummaryCompletedTasks from './SummaryCompletedTasks'
 import SummaryRecentAchievements from './SummaryRecentAchievements'
 import SummaryWeeklyProgress from './SummaryWeeklyProgress'
 
-const DashboardSummary = (props: StackProps) => {
+const TaskSummary = (props: StackProps) => {
   return (
     <Stack
       component="section"
@@ -21,4 +21,4 @@ const DashboardSummary = (props: StackProps) => {
   )
 }
 
-export default DashboardSummary
+export default TaskSummary

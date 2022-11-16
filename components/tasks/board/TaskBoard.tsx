@@ -1,7 +1,8 @@
 import { useState, useMemo } from 'react'
 import { DragDropContext } from 'react-beautiful-dnd'
 import groupBy from 'lodash/groupBy';
-import Stack from '@mui/material/Stack'
+import Stack, { StackProps } from '@mui/material/Stack'
+import Typography from '@mui/material/Typography'
 import { TaskDialog } from '@/components/dialogs';
 import { Task } from '@/types';
 import TaskBoardColumn from './TaskBoardColumn'
@@ -9,7 +10,7 @@ import TaskBoardColumn from './TaskBoardColumn'
 // To-do: Tasks should be extracted from the store
 import { taskBoardColumns, tasks } from '@/constants'
 
-const TaskBoard = () => {
+const TaskBoard = (stackProps: StackProps) => {
   const [selectedTask, setSelectedTask] = useState<Task | null>(null)
   const tasksByStatus = useMemo(() => groupBy(tasks, 'status'), [])
 
@@ -18,7 +19,14 @@ const TaskBoard = () => {
   const updateTask = () => console.log('Updating task')
 
   return (
-    <>
+    <Stack
+      overflow="hidden"
+      spacing={2}
+      {...stackProps}
+    >
+      <Typography component="h1" variant="h4">
+        Your Tasks for Today
+      </Typography>
       <DragDropContext onDragEnd={onDragEnd}>
         <Stack
           direction="row"
@@ -46,7 +54,7 @@ const TaskBoard = () => {
           onSubmit={updateTask}
         />
       )}
-    </>
+    </Stack>
   )
 }
 
