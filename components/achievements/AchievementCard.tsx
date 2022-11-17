@@ -30,9 +30,11 @@ const AchievementCard = ({ achievement, ...paperProps }: AchievementCardProps) =
           <Typography sx={getLineClampStyle(3)}>
             {achievement.description}
           </Typography>
-          <Typography variant="subtitle2" color="grey.500">
-            Achieved on: {formatDate(achievement.dateAchieved)}
-          </Typography>
+          {achievement.dateAchieved && (
+            <Typography variant="subtitle2" color="grey.500">
+              Achieved on: {formatDate(achievement.dateAchieved)}
+            </Typography>
+          )}
         </Stack>
       </HorizontalCenteredStack>
     </Paper>

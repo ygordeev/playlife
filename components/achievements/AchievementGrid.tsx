@@ -9,7 +9,7 @@ import AchievementCard from './AchievementCard'
 import { achievementIcons } from '@/constants'
 
 const AchievementGrid = () => {
-  const [selectedAchievement, setSelectedAchievement] = useState<Achievement | null>(null)
+  const [selectedAchievement, setSelectedAchievement] = useState<Achievement>()
   const [isAchievementDialogOpen, setIsAchievementDialogOpen] = useState(false)
 
   const selectAchievement = (achievement: Achievement) => {
@@ -19,7 +19,7 @@ const AchievementGrid = () => {
 
   const closeAchievementDialog = () => {
     setIsAchievementDialogOpen(false)
-    setSelectedAchievement(null)
+    setSelectedAchievement(undefined)
   }
 
   const updateAchievement = () => console.log('Achievement created/updated')

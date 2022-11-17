@@ -7,16 +7,28 @@ import DialogActions from '@mui/material/DialogActions'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import Stack from '@mui/material/Stack';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import { AchievementColorPicker } from '@/components/controls';
+import { AchievementIcon } from '@/components/icons'
 import { Achievement } from '@/types'
 
 interface AchievementDialogProps {
-  achievement: Achievement | null,
+  achievement?: Achievement,
   onClose: MouseEventHandler,
   onSubmit: () => void,
 }
 
-const AchievementDialog = ({ achievement, onClose, onSubmit }: AchievementDialogProps) => {
-  const [description, setDescription] = useState(achievement?.description || '')
+const defaultAchievement: Achievement = {
+  backgroundColor: 'black',
+  borderColor: 'white',
+  ribbonColor: 'black',
+  description: '',
+  emoji: '',
+}
+
+const AchievementDialog = ({ achievement = defaultAchievement, onClose, onSubmit }: AchievementDialogProps) => {
+  const [description, setDescription] = useState(achievement.description || '')
 
   const { handleSubmit } = useForm()
 
@@ -34,12 +46,28 @@ const AchievementDialog = ({ achievement, onClose, onSubmit }: AchievementDialog
       <DialogContent>
 
         <Stack spacing={3} mt={3}>
+          <Box display="flex" justifyContent="center">
+            <AchievementIcon
+              size={150}
+              {...achievement}
+            />
+          </Box>
+
           <TextField
             value={description}
             label="Achievement Description"
             fullWidth
             onChange={e => setDescription(e.target.value)}
           />
+
+          <Stack spacing={1}>
+            <Typography color="grey.500">Icon Colors</Typography>
+            <AchievementColorPicker
+              backgroundColor={achievement.backgroundColor}
+              borderColor={achievement.borderColor}
+              ribbonColor={achievement.ribbonColor}
+            />
+          </Stack>
         </Stack>
       </DialogContent>
 

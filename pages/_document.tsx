@@ -1,9 +1,8 @@
 import Document, { Html, Head, Main, NextScript, DocumentContext, DocumentInitialProps } from 'next/document'
-import React from 'react'
 import { resetServerContext } from "react-beautiful-dnd"
 
 class MyDocument extends Document<{}> {
-  // Fixing the clinet/server error in react-beautiful-dnd using resetServerContext()
+  // Fixing the client/server error in react-beautiful-dnd using resetServerContext()
   static async getInitialProps(ctx: DocumentContext): Promise<DocumentInitialProps> {
     const initialProps = await Document.getInitialProps(ctx)
     resetServerContext()
@@ -12,7 +11,7 @@ class MyDocument extends Document<{}> {
 
   render() {
     return (
-      <Html lang='en'>
+      <Html lang="en">
         <Head></Head>
         <body>
           <Main />
