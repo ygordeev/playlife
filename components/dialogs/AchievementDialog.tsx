@@ -1,5 +1,6 @@
 import { useState, MouseEventHandler } from 'react'
 import { useForm } from 'react-hook-form'
+import EmojiPicker, { Theme as EmojiPickerTheme } from 'emoji-picker-react';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle'
 import DialogContent from '@mui/material/DialogContent'
@@ -11,7 +12,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { AchievementColorPicker } from '@/components/controls';
 import { AchievementIcon } from '@/components/icons'
-import { Achievement, AchievementColorType } from '@/types'
+import { Achievement } from '@/types'
 
 interface AchievementDialogProps {
   achievement?: Achievement,
@@ -70,6 +71,16 @@ const AchievementDialog = ({ achievement = defaultAchievement, onClose, onSubmit
               borderColor={achievementState.borderColor}
               ribbonColor={achievementState.ribbonColor}
               onChange={updateAchievementState}
+            />
+          </Stack>
+
+          <Stack spacing={1}>
+            <Typography color="grey.500">Icon Emoji</Typography>
+            <EmojiPicker
+              width="100%"
+              lazyLoadEmojis
+              theme={EmojiPickerTheme.DARK}
+              onEmojiClick={e => updateAchievementState('emoji', e.emoji)}
             />
           </Stack>
         </Stack>
