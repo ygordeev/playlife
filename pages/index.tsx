@@ -1,7 +1,13 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import { LandingDisclaimer } from '@/components/landing';
+
+const landingContainerStyle = {
+  backgroundImage: `url(./images/landing-background.jpg)`,
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+}
 
 const Home: NextPage = () => {
   return (
@@ -15,9 +21,9 @@ const Home: NextPage = () => {
         justifyContent="center"
         alignItems="center"
         height="100vh"
-        bgcolor="grey.extradark"
+        sx={landingContainerStyle}
       >
-        <Typography variant="h2">Landing Page</Typography>
+        <LandingDisclaimer />
       </Box>
     </>
   )

@@ -5,3 +5,9 @@ export const getLineClampStyle = (linesToShow: number) => ({
   WebkitLineClamp: linesToShow.toString(),
   WebkitBoxOrient: 'vertical',
 })
+
+export const getTextGradientStyle = (linearGradient: string) => ({
+  background: `linear-gradient(${linearGradient})`,
+  backgroundClip: 'text',
+  textFillColor: 'transparent',
+})
