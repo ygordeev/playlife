@@ -11,7 +11,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { AchievementColorPicker } from '@/components/controls';
 import { AchievementIcon } from '@/components/icons'
-import { Achievement } from '@/types'
+import { Achievement, AchievementColorType } from '@/types'
 
 interface AchievementDialogProps {
   achievement?: Achievement,
@@ -28,7 +28,10 @@ const defaultAchievement: Achievement = {
 }
 
 const AchievementDialog = ({ achievement = defaultAchievement, onClose, onSubmit }: AchievementDialogProps) => {
-  const [description, setDescription] = useState(achievement.description || '')
+  const [achievementState, setAchievementState] = useState(achievement)
+  const updateAchievementState = (fieldName: keyof Achievement, fieldValue: string) => {
+    setAchievementState(s => ({ ...s, [fieldName]: fieldValue }))
+  }
 
   const { handleSubmit } = useForm()
 
@@ -49,23 +52,24 @@ const AchievementDialog = ({ achievement = defaultAchievement, onClose, onSubmit
           <Box display="flex" justifyContent="center">
             <AchievementIcon
               size={150}
-              {...achievement}
+              {...achievementState}
             />
           </Box>
 
           <TextField
-            value={description}
+            value={achievementState.description}
             label="Achievement Description"
             fullWidth
-            onChange={e => setDescription(e.target.value)}
+            onChange={e => updateAchievementState('description', e.target.value)}
           />
 
           <Stack spacing={1}>
             <Typography color="grey.500">Icon Colors</Typography>
             <AchievementColorPicker
-              backgroundColor={achievement.backgroundColor}
-              borderColor={achievement.borderColor}
-              ribbonColor={achievement.ribbonColor}
+              backgroundColor={achievementState.backgroundColor}
+              borderColor={achievementState.borderColor}
+              ribbonColor={achievementState.ribbonColor}
+              onChange={updateAchievementState}
             />
           </Stack>
         </Stack>

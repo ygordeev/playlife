@@ -1,11 +1,16 @@
-import { useState } from 'react';
-import { SketchPicker } from 'react-color';
+import { useState, useId } from 'react';
+import { ChromePicker, ColorChangeHandler } from 'react-color';
 import Stack from '@mui/material/Stack'
 import Box, { BoxProps } from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Popover from '@mui/material/Popover';
-import { AchievementColorPickerProps } from '@/types'
+import { convertRgbToHex } from '@/utils'
+import { AchievementColorPickerProps, AchievementColorType } from '@/types'
 import { achievementColorPickerOptions } from './constants'
+
+interface ColorPickerOnChangeType {
+  onChange: (colorType: AchievementColorType, color: string) => void,
+}
 
 const ColorPickerIcon = ({ color, ...boxProps }: { color: string } & BoxProps) => (
   <Box
@@ -18,11 +23,26 @@ const ColorPickerIcon = ({ color, ...boxProps }: { color: string } & BoxProps) =
   />
 )
 
-const AchievementColorPicker = (props: AchievementColorPickerProps) => {
+const AchievementColorPicker = (props: AchievementColorPickerProps & ColorPickerOnChangeType) => {
   const [popoverAnchor, setPopoverAnchor] = useState<HTMLButtonElement | null>(null)
-
+  const [selectedColorType, setSelectedColorType] = useState<AchievementColorType>()
+  const generatedPopoverId = useId()
+  
   const isPopoverOpen = Boolean(popoverAnchor)
-  const popoverId = isPopoverOpen ? 'color-picker-popover' : undefined
+  const popoverId = isPopoverOpen ? generatedPopoverId : undefined
+
+  const switchColorPicker = (anchor: HTMLButtonElement, colorType: AchievementColorType) => {
+    setSelectedColorType(colorType)
+    setPopoverAnchor(anchor)
+  }
+  
+  const handleColorChange: ColorChangeHandler = color => {
+    if (!selectedColorType) return
+
+    const { r, g, b } = color.rgb
+    const hexString = convertRgbToHex(r, g, b)
+    props.onChange(selectedColorType, hexString)
+  }
 
   return (
     <>
@@ -33,7 +53,7 @@ const AchievementColorPicker = (props: AchievementColorPickerProps) => {
             variant="contained"
             aria-describedby={popoverId}
             endIcon={<ColorPickerIcon color={props[option.name]} />}
-            onClick={e => setPopoverAnchor(e.currentTarget)}
+            onClick={e => switchColorPicker(e.currentTarget, option.name)}
             sx={{ flexGrow: 1 }}
           >
             {option.label}
@@ -55,7 +75,11 @@ const AchievementColorPicker = (props: AchievementColorPickerProps) => {
           horizontal: 'center',
         }}
       >
-        <SketchPicker />
+        <ChromePicker
+          color={props.backgroundColor}
+          disableAlpha
+          onChange={handleColorChange}
+        />
       </Popover>
     </>
   )
