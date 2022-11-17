@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
 import ReportIcon from '@mui/icons-material/Report';
 import Paper from '@mui/material/Paper'
@@ -52,7 +53,9 @@ const LandingDisclaimer = () => {
           </Typography>
         </HorizontalCenteredStack>
 
-        <Button variant="contained">Explore</Button>
+        <Link href="/tasks">
+          <Button variant="contained">Explore</Button>
+        </Link>
       </Stack>
     </Paper>
   )
