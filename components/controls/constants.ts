@@ -1,7 +1,7 @@
-import { AchievementColorPickerProps } from '@/types'
+import { AchievementColorOptions } from '@/types'
 
 export const achievementColorPickerOptions: Array<{
-  name: keyof AchievementColorPickerProps,
+  name: keyof AchievementColorOptions,
   label: string,
 }> = [
   {

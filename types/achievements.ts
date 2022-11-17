@@ -1,7 +1,7 @@
-export interface AchievementColorPickerProps {
+export interface AchievementColorOptions {
   backgroundColor: string,
   borderColor: string,
   ribbonColor: string,
 }
 
-export type AchievementColorType = keyof AchievementColorPickerProps
+export type AchievementColorType = keyof AchievementColorOptions

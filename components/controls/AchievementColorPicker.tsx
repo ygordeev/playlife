@@ -5,10 +5,10 @@ import Box, { BoxProps } from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Popover from '@mui/material/Popover';
 import { convertRgbToHex } from '@/utils'
-import { AchievementColorPickerProps, AchievementColorType } from '@/types'
+import { AchievementColorOptions, AchievementColorType } from '@/types'
 import { achievementColorPickerOptions } from './constants'
 
-interface ColorPickerOnChangeType {
+type AchievementColorPickerProps = AchievementColorOptions & {
   onChange: (colorType: AchievementColorType, color: string) => void,
 }
 
@@ -23,7 +23,7 @@ const ColorPickerIcon = ({ color, ...boxProps }: { color: string } & BoxProps) =
   />
 )
 
-const AchievementColorPicker = (props: AchievementColorPickerProps & ColorPickerOnChangeType) => {
+const AchievementColorPicker = (props: AchievementColorPickerProps) => {
   const [popoverAnchor, setPopoverAnchor] = useState<HTMLButtonElement | null>(null)
   const [selectedColorType, setSelectedColorType] = useState<AchievementColorType>()
   const generatedPopoverId = useId()
@@ -31,7 +31,7 @@ const AchievementColorPicker = (props: AchievementColorPickerProps & ColorPicker
   const isPopoverOpen = Boolean(popoverAnchor)
   const popoverId = isPopoverOpen ? generatedPopoverId : undefined
 
-  const switchColorPicker = (anchor: HTMLButtonElement, colorType: AchievementColorType) => {
+  const switchColorPicker = (anchor: typeof popoverAnchor, colorType: typeof selectedColorType) => {
     setSelectedColorType(colorType)
     setPopoverAnchor(anchor)
   }
@@ -65,7 +65,7 @@ const AchievementColorPicker = (props: AchievementColorPickerProps & ColorPicker
         id={popoverId}
         open={isPopoverOpen}
         anchorEl={popoverAnchor}
-        onClose={() => setPopoverAnchor(null)}
+        onClose={() => switchColorPicker(null, undefined)}
         anchorOrigin={{
           vertical: -4,
           horizontal: 'center',
@@ -76,7 +76,7 @@ const AchievementColorPicker = (props: AchievementColorPickerProps & ColorPicker
         }}
       >
         <ChromePicker
-          color={props.backgroundColor}
+          color={selectedColorType && props[selectedColorType]}
           disableAlpha
           onChange={handleColorChange}
         />
