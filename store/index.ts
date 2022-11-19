@@ -1,18 +1,13 @@
-import { configureStore, createSlice } from '@reduxjs/toolkit'
-import { tasks } from '@/constants'
-
-const tasksSlice = createSlice({
-  name: 'tasks',
-  initialState: tasks,
-  reducers: {}
-})
+import { configureStore } from '@reduxjs/toolkit'
+import tasksReducer from './tasks'
 
 const store = configureStore({
   reducer: {
-    tasks: tasksSlice.reducer,
+    tasks: tasksReducer,
   }
 })
 
-export const tasksActions = tasksSlice.actions
-
 export default store
+
+export type RootState = ReturnType<typeof store.getState>
+export type RootDispatch = typeof store.dispatch

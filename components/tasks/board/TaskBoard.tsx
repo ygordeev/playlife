@@ -1,18 +1,18 @@
-import { useState, useMemo } from 'react'
+import { useState } from 'react'
+import { useSelector } from 'react-redux'
 import { DragDropContext } from 'react-beautiful-dnd'
-import groupBy from 'lodash/groupBy';
 import Stack, { StackProps } from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
-import { TaskDialog } from '@/components/dialogs';
-import { Task } from '@/types';
+import { TaskDialog } from '@/components/dialogs'
+import { selectTasksByStatus } from '@/store/tasks'
+import { taskBoardColumns } from '@/constants'
+import { Task } from '@/types'
 import TaskBoardColumn from './TaskBoardColumn'
 
-// To-do: Tasks should be extracted from the store
-import { taskBoardColumns, tasks } from '@/constants'
-
 const TaskBoard = (stackProps: StackProps) => {
+  const tasksByStatus = useSelector(selectTasksByStatus)
+
   const [selectedTask, setSelectedTask] = useState<Task | null>(null)
-  const tasksByStatus = useMemo(() => groupBy(tasks, 'status'), [])
 
   const onDragEnd = () => console.log('dragged')
 

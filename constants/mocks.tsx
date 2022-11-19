@@ -1,4 +1,4 @@
-import { Complexity, TaskStatus } from '@/types'
+import { Complexity, TaskStatus, Task } from '@/types'
 
 export const user = {
   firstName: 'Yan',
@@ -79,7 +79,7 @@ export const achievementIcons = [
   },
 ]
 
-export const tasks = [
+export const tasks: Task[] = [
   {
     id: 1,
     status: TaskStatus.Backlog,
