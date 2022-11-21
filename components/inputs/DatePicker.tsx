@@ -1,35 +1,43 @@
-import { forwardRef } from 'react'
+import { Controller, FieldValues } from 'react-hook-form'
 import { DatePicker as XDatePicker } from '@mui/x-date-pickers/DatePicker';
+import { TextFieldProps } from '@mui/material/TextField'
 import TextField from '@mui/material/TextField';
+import { useValidationRules } from '@/hooks'
+import { ControllerFieldProps } from '@/types'
 
-interface DatePickerProps {
-  label: string,
-  value?: string | null,
-  onChange: (value: string | null) => void,
-}
+const DatePicker = <T extends FieldValues>(props: ControllerFieldProps<T> & TextFieldProps) => {
+  const { control, name, validators, errorMessage, ...textFieldProps } = props
 
-const DatePicker = forwardRef<HTMLElement, DatePickerProps>((props, ref) => {
-  const { label, value, onChange } = props
+  const { rules } = useValidationRules(validators)
 
   const handleChange = (date: Date | null) => {
-    const isoString = date ? date.toISOString().substring(0, 10) : null
-    onChange(isoString)
+    // const isoString = date ? date.toISOString().substring(0, 10) : null
+    // onChange(isoString)
   }
 
   return (
-    <XDatePicker
-      label={label}
-      value={value}
-      onChange={handleChange}
-      renderInput={params => {
-        const inputProps = { ...params.inputProps, readOnly: true }
-        const inputParams = { ...params, inputProps }
-        return <TextField inputRef={ref} {...inputParams} />
-      }}
+    <Controller
+      name={name}
+      control={control}
+      rules={rules}
+      render={({ field }) => (
+        <XDatePicker
+          {...field}
+          renderInput={params => {
+            const inputProps = { ...params.inputProps, readOnly: true }
+            const inputParams = { ...params, ...textFieldProps, inputProps }
+            return (
+              <TextField
+                {...inputParams}
+                error={Boolean(errorMessage)}
+                helperText={errorMessage}
+              />
+            )
+          }}
+        />
+      )}
     />
   )
-})
-
-DatePicker.displayName = 'DatePicker'
+}
 
 export default DatePicker

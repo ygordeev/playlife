@@ -1,43 +1,45 @@
-import { forwardRef, ChangeEvent } from 'react';
-import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
+import { Controller, FieldValues } from 'react-hook-form'
+import TextField, { TextFieldProps } from '@mui/material/TextField'
+import MenuItem from '@mui/material/MenuItem'
+import { useValidationRules } from '@/hooks'
+import { ControllerFieldProps } from '@/types'
 
 interface DropdownOption {
   value: string,
   label: string,
 }
 
-interface DropdownProps {
-  value: string | null,
-  label: string,
-  onChange: (value: string) => void,
+type DropdownProps = TextFieldProps & {
   options: DropdownOption[],
 }
 
-const Dropdown = forwardRef<HTMLInputElement, DropdownProps>((props, ref) => {
-  const { value, onChange, options, label } = props
+const Dropdown = <T extends FieldValues>(props: ControllerFieldProps<T> & DropdownProps) => {
+  const { control, name, validators, errorMessage, ...inputProps } = props
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    onChange(e.target.value)
-  }
+  const { rules } = useValidationRules(validators)
 
   return (
-    <TextField
-      value={value}
-      inputRef={ref}
-      onChange={handleChange}
-      label={label}
-      select
-    >
-      {options.map(option => (
-        <MenuItem key={option.value} value={option.value}>
-          {option.label}
-        </MenuItem>
-      ))}
-    </TextField>
+    <Controller
+      name={name}
+      control={control}
+      rules={rules}
+      render={({ field }) => (
+        <TextField
+          {...field}
+          {...inputProps}
+          error={Boolean(errorMessage)}
+          helperText={errorMessage}
+          select
+        >
+          {inputProps.options.map(option => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </TextField>
+      )}
+    />
   )
-})
-
-Dropdown.displayName = 'Dropdown'
+}
 
 export default Dropdown

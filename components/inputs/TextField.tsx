@@ -1,5 +1,5 @@
 import { Controller, FieldValues } from 'react-hook-form'
-import MuiTextField, { TextFieldProps as MuiTextFieldProps} from '@mui/material/TextField'
+import MuiTextField, { TextFieldProps as MuiTextFieldProps } from '@mui/material/TextField'
 import { useValidationRules } from '@/hooks'
 import { ControllerFieldProps } from '@/types'
 

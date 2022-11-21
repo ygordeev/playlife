@@ -48,7 +48,7 @@ const TaskDialog = ({ task, onClose, onSubmit }: TaskDialogProps) => {
             label="Task Name"
             validators={['required']}
             control={control}
-            errorMessage={errors.name?.message as string}
+            errorMessage={errors.name?.message}
             fullWidth
           />
 
@@ -57,35 +57,35 @@ const TaskDialog = ({ task, onClose, onSubmit }: TaskDialogProps) => {
             label="Task Description"
             validators={['required']}
             control={control}
-            errorMessage={errors.description?.message as string}
+            errorMessage={errors.description?.message}
             multiline
             fullWidth
           />
 
-          <Controller
+          <Dropdown
             name="status"
+            label="Task Status"
+            validators={['required']}
             control={control}
-            render={({ field }) => <Dropdown
-              {...field}
-              label="Task Status"
-              options={taskStatusOptions}
-            />}
+            errorMessage={errors.status?.message}
+            options={taskStatusOptions}
           />
 
-          <Controller
+          <Dropdown
             name="complexity"
+            label="Task Complexity"
+            validators={['required']}
             control={control}
-            render={({ field }) => <Dropdown
-              {...field}
-              label="Task Complexity"
-              options={taskComplexityOptions}
-            />}
+            errorMessage={errors.complexity?.message}
+            options={taskComplexityOptions}
           />
 
-          <Controller
+          <DatePicker
             name="dueDate"
+            label="Due Date"
+            validators={['required']}
             control={control}
-            render={({ field }) => <DatePicker {...field} label="Due Date" />}
+            errorMessage={errors.dueDate?.message}
           />
 
           <ImagePicker
