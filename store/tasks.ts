@@ -6,16 +6,18 @@ import { RootState } from './index'
 
 const tasksSlice = createSlice({
   name: 'tasks',
-  initialState: tasks,
+  initialState: {
+    taskList: tasks,
+  },
   reducers: {
     createTask(state, task: PayloadAction<Task>) {
-      console.log('Creating task in Redux', task.payload)
+      state.taskList.push(task.payload)
     }
   }
 })
 
 export const selectTasksByStatus = createSelector(
-  (state: RootState) => state.tasks,
+  (state: RootState) => state.tasks.taskList,
   tasks => groupBy(tasks, 'status'),
 )
 

@@ -1,3 +1,4 @@
+import { forwardRef } from 'react'
 import { DatePicker as XDatePicker } from '@mui/x-date-pickers/DatePicker';
 import TextField from '@mui/material/TextField';
 
@@ -7,7 +8,9 @@ interface DatePickerProps {
   onChange: (value: string | null) => void,
 }
 
-const DatePicker = ({ label, value, onChange }: DatePickerProps) => {
+const DatePicker = forwardRef<HTMLElement, DatePickerProps>((props, ref) => {
+  const { label, value, onChange } = props
+
   const handleChange = (date: Date | null) => {
     const isoString = date ? date.toISOString().substring(0, 10) : null
     onChange(isoString)
@@ -21,10 +24,12 @@ const DatePicker = ({ label, value, onChange }: DatePickerProps) => {
       renderInput={params => {
         const inputProps = { ...params.inputProps, readOnly: true }
         const inputParams = { ...params, inputProps }
-        return <TextField {...inputParams} />
+        return <TextField inputRef={ref} {...inputParams} />
       }}
     />
   )
-}
+})
+
+DatePicker.displayName = 'DatePicker'
 
 export default DatePicker

@@ -7,9 +7,11 @@ export interface Task {
   name: string,
   description: string,
   complexity: Complexity,
-  dueDate?: string,
+  dueDate: string | null,
   imageUrl?: string,
 }
+
+export type NewTask = Omit<Task, 'id'>
 
 export interface TaskColumn {
   id: number,

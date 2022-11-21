@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react';
+import { forwardRef, ChangeEvent } from 'react';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 
@@ -14,7 +14,7 @@ interface DropdownProps {
   options: DropdownOption[],
 }
 
-const Dropdown = (props: DropdownProps) => {
+const Dropdown = forwardRef<HTMLInputElement, DropdownProps>((props, ref) => {
   const { value, onChange, options, label } = props
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -24,6 +24,7 @@ const Dropdown = (props: DropdownProps) => {
   return (
     <TextField
       value={value}
+      inputRef={ref}
       onChange={handleChange}
       label={label}
       select
@@ -35,6 +36,8 @@ const Dropdown = (props: DropdownProps) => {
       ))}
     </TextField>
   )
-}
+})
+
+Dropdown.displayName = 'Dropdown'
 
 export default Dropdown
