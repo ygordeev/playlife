@@ -5,3 +5,7 @@ export const formatDate = (dateString: string) => {
   const options: Intl.DateTimeFormatOptions = { dateStyle: 'medium' }
   return new Intl.DateTimeFormat(USLocale, options).format(date)
 }
+
+export const getISODate = (date: Date | null) => {
+  return date?.toISOString().substring(0, 10)
+}
