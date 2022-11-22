@@ -6,6 +6,6 @@ export type ValidatorType = keyof typeof errorMessages
 export interface ControllerFieldProps<T extends FieldValues> extends UseControllerProps<T> {
   name: FieldPath<T>,
   control: Control<T>,
-  validators: ValidatorType[],
+  validators?: ValidatorType[],
   errorMessage?: string,
 }

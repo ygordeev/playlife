@@ -1,4 +1,4 @@
-import { useEffect, MouseEventHandler } from 'react'
+import { MouseEventHandler } from 'react'
 import { useForm } from 'react-hook-form'
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle'
@@ -7,37 +7,19 @@ import DialogActions from '@mui/material/DialogActions'
 import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack';
 import { TextField, Dropdown, DatePicker, ImagePicker } from '@/components/inputs'
-import { taskComplexityOptions, taskStatusOptions, errorMessages } from '@/constants'
-import { Task, NewTask, Complexity, TaskStatus } from '@/types'
+import { taskComplexityOptions, taskStatusOptions, defaultTask } from '@/constants'
+import { Task } from '@/types'
 
 interface TaskDialogProps {
   task?: Task,
   onClose: MouseEventHandler,
-  onSubmit: (task: NewTask) => void,
+  onSubmit: (task: Task) => void,
 }
 
-const TaskDialog = ({ task, onClose, onSubmit }: TaskDialogProps) => {
-  const {
-    control,
-    formState: { errors },
-    setValue,
-    getValues,
-    register,
-    handleSubmit,
-  } = useForm<NewTask>({
-    defaultValues: {
-      name: task?.name || '',
-      description: task?.description || '',
-      status: task?.status || TaskStatus.Backlog,
-      complexity: task?.complexity || Complexity.Easy,
-      dueDate: task?.dueDate || null,
-      imageUrl: task?.imageUrl || '',
-    }
+const TaskDialog = ({ task = defaultTask, onClose, onSubmit }: TaskDialogProps) => {
+  const { control, handleSubmit, formState: { errors } } = useForm<Task>({
+    defaultValues: task
   })
-  
-  useEffect(() => {
-    register('imageUrl')
-  }, [register])
 
   const dialogTitle = task ? 'Edit task' : 'Create Task'
   const updateButtonText = task ? 'Update Task' : 'Create Task'
@@ -99,10 +81,10 @@ const TaskDialog = ({ task, onClose, onSubmit }: TaskDialogProps) => {
           />
 
           <ImagePicker
+            name="imageUrl"
             imageAlt="Task Image"
-            imageUrl={getValues('imageUrl')}
+            control={control}
             errorMessage={errors.imageUrl?.message}
-            onChange={value => setValue('imageUrl', value)}
           />
         </Stack>
       </DialogContent>

@@ -1,4 +1,4 @@
-import { Controller, FieldValues, ControllerRenderProps } from 'react-hook-form'
+import { useController, FieldValues } from 'react-hook-form'
 import { DatePicker as XDatePicker } from '@mui/x-date-pickers/DatePicker'
 import { TextFieldProps } from '@mui/material/TextField'
 import TextField from '@mui/material/TextField'
@@ -9,26 +9,20 @@ import { ControllerFieldProps } from '@/types'
 const DatePicker = <T extends FieldValues>(props: ControllerFieldProps<T> & TextFieldProps) => {
   const { control, name, validators, errorMessage, ...textFieldProps } = props
 
-  const { rules } = useValidationRules(validators)
+  const { rules } = useValidationRules(validators || [])
+  const { field } = useController({ name, control, rules })
 
   return (
-    <Controller
-      name={name}
-      control={control}
-      rules={rules}
-      render={({ field }) => (
-        <XDatePicker
-          {...field}
-          onChange={date => field.onChange(getISODate(date))}
-          renderInput={params => (
-            <TextField
-              {...params}
-              {...textFieldProps}
-              helperText={errorMessage}
-              error={Boolean(errorMessage)}
-              inputProps={{ ...params.inputProps, readOnly: true }}
-            />
-          )}
+    <XDatePicker
+      {...field}
+      onChange={date => field.onChange(getISODate(date))}
+      renderInput={params => (
+        <TextField
+          {...params}
+          {...textFieldProps}
+          helperText={errorMessage}
+          error={Boolean(errorMessage)}
+          inputProps={{ ...params.inputProps, readOnly: true }}
         />
       )}
     />

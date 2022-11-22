@@ -4,12 +4,15 @@ import { StackProps } from '@mui/material/Stack';
 import { ProfileButton } from '@/components/controls';
 import { HorizontalCenteredStack } from '@/components/layout';
 import { TaskDialog } from '@/components/dialogs';
+import { Task } from '@/types'
 import HeaderSectionNavigation from './HeaderSectionNavigation';
 
 const HeaderSection = (props: StackProps) => {
   const [isNewTaskDialogOpen, setIsNewTaskDialogOpen] = useState(false)
 
-  const handleCreateTask = () => console.log('Creating new task')
+  const handleCreateTask = (task: Task) => {
+    console.log('Creating task', task)
+  }
 
   return (
     <>

@@ -2,7 +2,7 @@ import { MouseEventHandler } from 'react'
 import { TaskStatus, Complexity } from '@/types'
 
 export interface Task {
-  id: number,
+  id: number | null,
   status: TaskStatus,
   name: string,
   description: string,
@@ -10,8 +10,6 @@ export interface Task {
   dueDate: string | null,
   imageUrl?: string,
 }
-
-export type NewTask = Omit<Task, 'id'>
 
 export interface TaskColumn {
   id: number,
@@ -26,7 +24,7 @@ export interface TaskDialogProps {
 }
 
 export interface Achievement {
-  id?: number,
+  id: number | null,
   dateAchieved?: string,
   backgroundColor: string,
   borderColor: string,

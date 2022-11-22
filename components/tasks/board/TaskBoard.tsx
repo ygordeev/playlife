@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography'
 import { TaskDialog } from '@/components/dialogs'
 import { selectTasksByStatus } from '@/store/tasks'
 import { taskBoardColumns } from '@/constants'
-import { Task, NewTask } from '@/types'
+import { Task } from '@/types'
 import TaskBoardColumn from './TaskBoardColumn'
 
 const TaskBoard = (stackProps: StackProps) => {
@@ -14,10 +14,10 @@ const TaskBoard = (stackProps: StackProps) => {
 
   const [selectedTask, setSelectedTask] = useState<Task | null>(null)
 
-  const onDragEnd = () => console.log('dragged')
+  const onDragEnd = () => console.log('Dragging finished')
 
-  const updateTask = (task: NewTask) => {
-    console.log({ task })
+  const updateTask = (task: Task) => {
+    console.log('Updating task:', task )
   }
 
   return (

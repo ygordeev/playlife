@@ -1,25 +1,29 @@
 import { useState, useMemo } from 'react'
 import debounce from 'lodash/debounce'
+import { useController, FieldValues } from 'react-hook-form'
 import Typography from '@mui/material/Typography'
 import TextField from '@mui/material/TextField'
 import Stack from '@mui/material/Stack';
 import { fetchUnsplashImages } from '@/api/actions'
 import { ImageContainer, ImageList, Spinner } from '@/components/layout'
 import { debounceInterval } from '@/constants'
-import { UnsplashImage } from '@/types'
+import { useValidationRules } from '@/hooks'
+import { UnsplashImage, ControllerFieldProps } from '@/types'
 
 interface ImagePickerProps {
   imageAlt: string,
-  onChange: (url?: string) => void,
-  imageUrl?: string,
-  errorMessage?: string,
 }
 
-const ImagePicker = ({ imageUrl, imageAlt, errorMessage, onChange }: ImagePickerProps) => {
+const ImagePicker = <T extends FieldValues>(props: ControllerFieldProps<T> & ImagePickerProps) => {
+  const { name, control, validators, errorMessage, imageAlt } = props
+  
   const [searchQuery, setSearchQuery] = useState('')
   const [suggestions, setSuggestions] = useState<UnsplashImage[]>([])
   const [isLoadingSuggestions, setIsLoadingSuggestions] = useState(false)
   const [previewImage, setPreviewImage] = useState<UnsplashImage | null>(null)
+
+  const { rules } = useValidationRules(validators || [] || [])
+  const { field } = useController({ name, control, rules })
 
   const handleSearchDebounced = useMemo(() => debounce(async (query: string) => {
     if (!query) return
@@ -41,7 +45,7 @@ const ImagePicker = ({ imageUrl, imageAlt, errorMessage, onChange }: ImagePicker
 
   const handleSelectImage = (image: UnsplashImage | null) => {
     setPreviewImage(image)
-    onChange(image?.url)
+    field.onChange(image?.url)
   }
 
   return (
@@ -52,7 +56,7 @@ const ImagePicker = ({ imageUrl, imageAlt, errorMessage, onChange }: ImagePicker
         </Typography>
 
         <ImageContainer
-          src={previewImage?.url || imageUrl}
+          src={previewImage?.url || field.value}
           alt={imageAlt}
           width={240}
           height={200}

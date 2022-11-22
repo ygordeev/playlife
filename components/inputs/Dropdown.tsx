@@ -1,4 +1,4 @@
-import { Controller, FieldValues } from 'react-hook-form'
+import { useController, FieldValues } from 'react-hook-form'
 import TextField, { TextFieldProps } from '@mui/material/TextField'
 import MenuItem from '@mui/material/MenuItem'
 import { useValidationRules } from '@/hooks'
@@ -16,29 +16,23 @@ type DropdownProps = TextFieldProps & {
 const Dropdown = <T extends FieldValues>(props: ControllerFieldProps<T> & DropdownProps) => {
   const { control, name, validators, errorMessage, ...inputProps } = props
 
-  const { rules } = useValidationRules(validators)
+  const { rules } = useValidationRules(validators || [])
+  const { field } = useController({ name, control, rules })
 
   return (
-    <Controller
-      name={name}
-      control={control}
-      rules={rules}
-      render={({ field }) => (
-        <TextField
-          {...field}
-          {...inputProps}
-          error={Boolean(errorMessage)}
-          helperText={errorMessage}
-          select
-        >
-          {inputProps.options.map(option => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
-      )}
-    />
+    <TextField
+      {...field}
+      {...inputProps}
+      error={Boolean(errorMessage)}
+      helperText={errorMessage}
+      select
+    >
+      {inputProps.options.map(option => (
+        <MenuItem key={option.value} value={option.value}>
+          {option.label}
+        </MenuItem>
+      ))}
+    </TextField>
   )
 }
 

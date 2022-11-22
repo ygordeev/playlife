@@ -22,7 +22,9 @@ const AchievementGrid = () => {
     setSelectedAchievement(undefined)
   }
 
-  const updateAchievement = () => console.log('Achievement created/updated')
+  const updateAchievement = (achievement: Achievement) => {
+    console.log('Creating/updating achievement:', achievement)
+  }
 
   return (
     <>

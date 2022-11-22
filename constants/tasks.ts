@@ -1,4 +1,14 @@
-import { TaskStatus, Complexity } from '@/types'
+import { Task, TaskStatus, Complexity } from '@/types'
+
+export const defaultTask: Task = {
+  id: null,
+  name: '',
+  description: '',
+  status: TaskStatus.Backlog,
+  complexity: Complexity.Easy,
+  dueDate: null,
+  imageUrl: '',
+}
 
 export const taskBoardColumns = [
   {
