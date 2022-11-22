@@ -22,11 +22,11 @@ const DatePicker = <T extends FieldValues>(props: ControllerFieldProps<T> & Text
           onChange={date => field.onChange(getISODate(date))}
           renderInput={params => (
             <TextField
-              error={Boolean(errorMessage)}
-              helperText={errorMessage}
-              inputProps={{ readOnly: true }}
               {...params}
               {...textFieldProps}
+              helperText={errorMessage}
+              error={Boolean(errorMessage)}
+              inputProps={{ ...params.inputProps, readOnly: true }}
             />
           )}
         />
