@@ -1,7 +1,7 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo } from 'react'
 import debounce from 'lodash/debounce'
-import Typography from '@mui/material/Typography';
-import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography'
+import TextField from '@mui/material/TextField'
 import Stack from '@mui/material/Stack';
 import { fetchUnsplashImages } from '@/api/actions'
 import { ImageContainer, ImageList, Spinner } from '@/components/layout'
@@ -9,12 +9,13 @@ import { debounceInterval } from '@/constants'
 import { UnsplashImage } from '@/types'
 
 interface ImagePickerProps {
-  currentImageUrl?: string,
   imageAlt: string,
-  onChange: (image: UnsplashImage | null) => void,
+  onChange: (url?: string) => void,
+  imageUrl?: string,
+  errorMessage?: string,
 }
 
-const ImagePicker = ({ currentImageUrl, imageAlt, onChange }: ImagePickerProps) => {
+const ImagePicker = ({ imageUrl, imageAlt, errorMessage, onChange }: ImagePickerProps) => {
   const [searchQuery, setSearchQuery] = useState('')
   const [suggestions, setSuggestions] = useState<UnsplashImage[]>([])
   const [isLoadingSuggestions, setIsLoadingSuggestions] = useState(false)
@@ -40,7 +41,7 @@ const ImagePicker = ({ currentImageUrl, imageAlt, onChange }: ImagePickerProps) 
 
   const handleSelectImage = (image: UnsplashImage | null) => {
     setPreviewImage(image)
-    onChange(image)
+    onChange(image?.url)
   }
 
   return (
@@ -51,7 +52,7 @@ const ImagePicker = ({ currentImageUrl, imageAlt, onChange }: ImagePickerProps) 
         </Typography>
 
         <ImageContainer
-          src={previewImage?.url || currentImageUrl}
+          src={previewImage?.url || imageUrl}
           alt={imageAlt}
           width={240}
           height={200}
@@ -62,8 +63,10 @@ const ImagePicker = ({ currentImageUrl, imageAlt, onChange }: ImagePickerProps) 
       <TextField
         value={searchQuery}
         label="Search for image on Unsplash"
-        fullWidth
+        error={Boolean(errorMessage)}
+        helperText={errorMessage}
         onChange={e => handleSearch(e.target.value)}
+        fullWidth
       />
 
       {isLoadingSuggestions ? <Spinner /> : (
