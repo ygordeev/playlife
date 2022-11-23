@@ -1,7 +1,6 @@
-import { Task, TaskStatus, Complexity } from '@/types'
+import { Task, NewTask, TaskStatus, Complexity } from '@/types'
 
-export const defaultTask: Task = {
-  id: null,
+export const defaultTask: NewTask = {
   name: '',
   description: '',
   status: TaskStatus.Backlog,

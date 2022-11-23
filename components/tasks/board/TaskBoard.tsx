@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { DragDropContext } from 'react-beautiful-dnd'
+import { DragDropContext, DragDropContextProps } from 'react-beautiful-dnd'
 import { toast } from 'react-toastify'
 import Stack, { StackProps } from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
@@ -17,7 +17,12 @@ const TaskBoard = (stackProps: StackProps) => {
 
   const [selectedTask, setSelectedTask] = useState<Task | null>(null)
 
-  const onDragEnd = () => console.log('Dragging finished')
+  const onDragEnd: DragDropContextProps['onDragEnd'] = result => {
+    const destinationId = result.destination?.droppableId
+    if (!destinationId) return
+    const payload = { taskId: +result.draggableId, columnId: +destinationId }
+    dispatch(tasksActions.updateTaskColumn(payload))
+  }
 
   const updateTask = (task: Task) => {
     dispatch(tasksActions.updateTask(task))

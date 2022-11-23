@@ -1,8 +1,6 @@
 import { MouseEventHandler } from 'react'
 import { TaskStatus, Complexity } from '@/types'
 
-type Optional<T, K extends keyof T> = Pick<Partial<T>, K> & Omit<T, K>;
-
 export interface Task {
   id: number,
   status: TaskStatus,
