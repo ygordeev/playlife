@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { toast, ToastContainer } from 'react-toastify'
+import { toast } from 'react-toastify'
 import Button from '@mui/material/Button'
 import { StackProps } from '@mui/material/Stack'
 import { tasksActions } from '@/store/tasks'
