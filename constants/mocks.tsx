@@ -1,4 +1,4 @@
-import { Complexity, TaskStatus, Task } from '@/types'
+import { Complexity, TaskStatus, Task, Achievement } from '@/types'
 
 export const user = {
   firstName: 'Yan',
@@ -13,7 +13,7 @@ export const nextGoal = {
   dueDate: '2023-06-19',
 }
 
-export const achievementIcons = [
+export const achievements: Achievement[] = [
   {
     id: 1,
     backgroundColor: '#0d2038',
@@ -39,42 +39,6 @@ export const achievementIcons = [
     ribbonColor: '#ddcbeb',
     description: 'Woke up at 8 AM three weeks in a row',
     emoji: '⏰',
-    dateAchieved: '2022-11-16',
-  },
-  {
-    id: 4,
-    backgroundColor: '#0d2038',
-    borderColor: '#33ae57',
-    ribbonColor: '#325dd3',
-    description: 'Took 5 surfing lessons',
-    emoji: '🏄🏻‍♂️',
-    dateAchieved: '2022-11-16',
-  },
-  {
-    id: 5,
-    backgroundColor: '#0d2038',
-    borderColor: '#33ae57',
-    ribbonColor: '#325dd3',
-    description: 'Took 5 surfing lessons',
-    emoji: '🏄🏻‍♂️',
-    dateAchieved: '2022-11-16',
-  },
-  {
-    id: 6,
-    backgroundColor: '#0d2038',
-    borderColor: '#33ae57',
-    ribbonColor: '#325dd3',
-    description: 'Took 5 surfing lessons',
-    emoji: '🏄🏻‍♂️',
-    dateAchieved: '2022-11-16',
-  },
-  {
-    id: 7,
-    backgroundColor: '#0d2038',
-    borderColor: '#33ae57',
-    ribbonColor: '#325dd3',
-    description: 'Took 5 surfing lessons',
-    emoji: '🏄🏻‍♂️',
     dateAchieved: '2022-11-16',
   },
 ]

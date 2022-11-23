@@ -1,6 +1,9 @@
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import { Provider as StoreProvider } from 'react-redux'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
 import store from '@/store'
 import { ThemeProvider } from '@mui/material/styles'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
@@ -22,6 +25,11 @@ export default function App({ Component, pageProps }: AppProps) {
           <ThemeProvider theme={customMuiTheme}>
             <GlobalStyles />
             <Component {...pageProps} />
+
+            <ToastContainer
+              position="bottom-right"
+              theme="dark"
+            />
           </ThemeProvider>
         </LocalizationProvider>
       </StoreProvider>

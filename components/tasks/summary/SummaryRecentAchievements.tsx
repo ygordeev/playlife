@@ -5,7 +5,7 @@ import { GradientCard, HorizontalCenteredStack } from '@/components/layout'
 import { AchievementIcon } from '@/components/icons'
 
 // To-do: The achievement icons should be extracted from the store
-import { achievementIcons } from '@/constants'
+import { achievements } from '@/constants'
 
 const SummaryRecentAchievements = () => {
   return (
@@ -24,13 +24,13 @@ const SummaryRecentAchievements = () => {
       </HorizontalCenteredStack>
 
       <HorizontalCenteredStack justifyContent="space-between" mt={1}>
-        {achievementIcons.slice(0, 4).map(icon => (
-          <Tooltip key={icon.id} title={icon.description}>
+        {achievements.slice(0, 4).map(achievement => (
+          <Tooltip key={achievement.id} title={achievement.description}>
             <div>
               <AchievementIcon
                 size={50}
                 hoverable
-                {...icon}
+                {...achievement}
               />
             </div>
           </Tooltip>

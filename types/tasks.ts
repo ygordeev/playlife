@@ -1,8 +1,10 @@
 import { MouseEventHandler } from 'react'
 import { TaskStatus, Complexity } from '@/types'
 
+type Optional<T, K extends keyof T> = Pick<Partial<T>, K> & Omit<T, K>;
+
 export interface Task {
-  id: number | null,
+  id: number,
   status: TaskStatus,
   name: string,
   description: string,
@@ -10,6 +12,8 @@ export interface Task {
   dueDate: string | null,
   imageUrl?: string,
 }
+
+export type NewTask = Omit<Task, 'id'>
 
 export interface TaskColumn {
   id: number,
@@ -32,3 +36,5 @@ export interface Achievement {
   description: string,
   emoji: string,
 }
+
+export type NewAchievement = Omit<Achievement, 'id'>

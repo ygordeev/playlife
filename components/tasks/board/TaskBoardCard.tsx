@@ -41,7 +41,7 @@ const DashboardTaskCard = ({ task, index, onClick }: TaskBoardCardProps) => {
           {...provided.dragHandleProps}
         >
           <Stack direction="row" spacing={1}>
-            <div>
+            <Box flexGrow={1}>
               <Typography
                 fontWeight="bold"
                 sx={getLineClampStyle(2)}
@@ -56,7 +56,7 @@ const DashboardTaskCard = ({ task, index, onClick }: TaskBoardCardProps) => {
               >
                 {task.description}
               </Typography>
-            </div>
+            </Box>
 
             {task.imageUrl && (
               <Box flexShrink={0}>

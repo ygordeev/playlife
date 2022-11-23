@@ -6,7 +6,7 @@ import NewAchievementButton from './NewAchievementButton'
 import AchievementCard from './AchievementCard'
 
 // To-do: The achievement icons should be extracted from the store
-import { achievementIcons } from '@/constants'
+import { achievements } from '@/constants'
 
 const AchievementGrid = () => {
   const [selectedAchievement, setSelectedAchievement] = useState<Achievement>()
@@ -33,7 +33,7 @@ const AchievementGrid = () => {
           <NewAchievementButton onClick={() => setIsAchievementDialogOpen(true)} />
         </Grid>
 
-        {achievementIcons.map(achievement => (
+        {achievements.map(achievement => (
           <Grid key={achievement.id} item>
             <AchievementCard
               achievement={achievement}
