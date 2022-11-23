@@ -29,6 +29,8 @@ export default function App({ Component, pageProps }: AppProps) {
             <ToastContainer
               position="bottom-right"
               theme="dark"
+              closeButton={false}
+              hideProgressBar
             />
           </ThemeProvider>
         </LocalizationProvider>
