@@ -26,7 +26,7 @@ export interface TaskDialogProps {
 }
 
 export interface Achievement {
-  id: number | null,
+  id: number,
   dateAchieved?: string,
   backgroundColor: string,
   borderColor: string,

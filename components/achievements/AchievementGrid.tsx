@@ -1,8 +1,9 @@
 import { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { toast } from 'react-toastify'
 import Grid from '@mui/material/Grid'
 import { AchievementDialog } from '@/components/dialogs'
-import { selectAchievements } from '@/store/achievements'
+import { selectAchievements, achievementsActions } from '@/store/achievements'
 import { Achievement } from '@/types'
 import NewAchievementButton from './NewAchievementButton'
 import AchievementCard from './AchievementCard'
@@ -12,6 +13,7 @@ const AchievementGrid = () => {
   const [isAchievementDialogOpen, setIsAchievementDialogOpen] = useState(false)
 
   const achievements = useSelector(selectAchievements)
+  const dispatch = useDispatch()
 
   const selectAchievement = (achievement: Achievement) => {
     setIsAchievementDialogOpen(true)
@@ -24,7 +26,11 @@ const AchievementGrid = () => {
   }
 
   const updateAchievement = (achievement: Achievement) => {
-    console.log('Creating/updating achievement:', achievement)
+    if (achievement.id) return
+    else dispatch(achievementsActions.createAchievement(achievement))
+    
+    closeAchievementDialog()
+    toast.success('Achievement was successfully updated')
   }
 
   return (

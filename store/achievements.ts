@@ -1,5 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { achievements } from '@/constants'
+import { NewAchievement } from '@/types'
 import { RootState } from './index'
 
 const achievementsSlice = createSlice({
@@ -8,11 +9,17 @@ const achievementsSlice = createSlice({
     achievementList: achievements,
   },
   reducers: {
+    createAchievement(state, action: PayloadAction<NewAchievement>) {
+      const stateAchievementIds = state.achievementList.map(a => a.id)
+      const id = Math.max(...stateAchievementIds) + 1
+      const achievement = { id, ...action.payload }
+      state.achievementList.push(achievement)
+    },
   }
 })
 
 export const selectAchievements = (state: RootState) => state.achievements.achievementList
 
-export const tasksActions = achievementsSlice.actions
+export const achievementsActions = achievementsSlice.actions
 
 export default achievementsSlice.reducer
