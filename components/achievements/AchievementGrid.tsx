@@ -1,16 +1,17 @@
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
 import Grid from '@mui/material/Grid'
 import { AchievementDialog } from '@/components/dialogs'
+import { selectAchievements } from '@/store/achievements'
 import { Achievement } from '@/types'
 import NewAchievementButton from './NewAchievementButton'
 import AchievementCard from './AchievementCard'
 
-// To-do: The achievement icons should be extracted from the store
-import { achievements } from '@/constants'
-
 const AchievementGrid = () => {
   const [selectedAchievement, setSelectedAchievement] = useState<Achievement>()
   const [isAchievementDialogOpen, setIsAchievementDialogOpen] = useState(false)
+
+  const achievements = useSelector(selectAchievements)
 
   const selectAchievement = (achievement: Achievement) => {
     setIsAchievementDialogOpen(true)

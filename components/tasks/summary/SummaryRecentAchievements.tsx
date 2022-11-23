@@ -7,6 +7,13 @@ import { AchievementIcon } from '@/components/icons'
 // To-do: The achievement icons should be extracted from the store
 import { achievements } from '@/constants'
 
+const MAX_ACHIEVEMENT_COUNT = 4
+
+const getAchievementStackStyle = (achievementCount: number) => ({
+  justifyContent: achievementCount < MAX_ACHIEVEMENT_COUNT ? 'flex-start' : 'center',
+  mt: 1,
+})
+
 const SummaryRecentAchievements = () => {
   return (
     <GradientCard>
@@ -23,7 +30,10 @@ const SummaryRecentAchievements = () => {
         </Link>
       </HorizontalCenteredStack>
 
-      <HorizontalCenteredStack justifyContent="space-between" mt={1}>
+      <HorizontalCenteredStack
+        spacing={2}
+        sx={getAchievementStackStyle(achievements.length)}
+      >
         {achievements.slice(0, 4).map(achievement => (
           <Tooltip key={achievement.id} title={achievement.description}>
             <div>

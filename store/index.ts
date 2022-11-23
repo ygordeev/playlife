@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import tasksReducer from './tasks'
+import achievementsReducer from './achievements'
 
 const store = configureStore({
   reducer: {
     tasks: tasksReducer,
+    achievements: achievementsReducer,
   }
 })
 
