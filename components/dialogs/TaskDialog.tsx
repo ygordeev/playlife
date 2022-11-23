@@ -75,7 +75,6 @@ const TaskDialog = ({ task = defaultTask, onClose, onSubmit }: TaskDialogProps) 
           <DatePicker
             name="dueDate"
             label="Due Date"
-            validators={['required']}
             control={control}
             errorMessage={errors.dueDate?.message}
           />
