@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { useController, FieldValues } from 'react-hook-form'
 import EmojiPicker, {
   Theme as EmojiPickerTheme,
@@ -26,4 +27,8 @@ const CustomEmojiPicker = <T extends FieldValues>(props: ControllerFieldProps<T>
   )
 }
 
-export default CustomEmojiPicker
+const MemoizedEmojiPicker = memo(CustomEmojiPicker, (nextProps, prevProps) => {
+  return nextProps.errorMessage === prevProps.errorMessage
+}) as typeof CustomEmojiPicker
+
+export default MemoizedEmojiPicker
