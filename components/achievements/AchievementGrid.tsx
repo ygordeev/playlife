@@ -26,8 +26,11 @@ const AchievementGrid = () => {
   }
 
   const updateAchievement = (achievement: Achievement) => {
-    if (achievement.id) return
-    else dispatch(achievementsActions.createAchievement(achievement))
+    if (achievement.id) {
+      dispatch(achievementsActions.updateAchievement(achievement))
+    } else {
+      dispatch(achievementsActions.createAchievement(achievement))
+    }
     
     closeAchievementDialog()
     toast.success('Achievement was successfully updated')

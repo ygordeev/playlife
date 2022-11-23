@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { achievements } from '@/constants'
-import { NewAchievement } from '@/types'
+import { NewAchievement, Achievement } from '@/types'
 import { RootState } from './index'
 
 const achievementsSlice = createSlice({
@@ -14,6 +14,13 @@ const achievementsSlice = createSlice({
       const id = Math.max(...stateAchievementIds) + 1
       const achievement = { id, ...action.payload }
       state.achievementList.push(achievement)
+    },
+    updateAchievement(state, action: PayloadAction<Achievement>) {
+      const achievement = action.payload
+      const achievementIndex = state.achievementList.findIndex(t => t.id === achievement.id)
+
+      if (achievementIndex < 0) throw new Error('Failed to update non-existing achievement')
+      state.achievementList.splice(achievementIndex, 1, achievement)
     },
   }
 })
