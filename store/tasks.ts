@@ -1,5 +1,5 @@
-import { createSlice, createSelector, PayloadAction } from '@reduxjs/toolkit'
 import groupBy from 'lodash/groupBy';
+import { createSlice, createSelector, PayloadAction } from '@reduxjs/toolkit'
 import { tasks, taskBoardColumns } from '@/constants'
 import { NewTask, Task } from '@/types'
 import { RootState } from './index'

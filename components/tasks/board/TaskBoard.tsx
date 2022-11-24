@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { DragDropContext, DragDropContextProps } from 'react-beautiful-dnd'
 import { toast } from 'react-toastify'
 import Stack, { StackProps } from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
+import { fakeAxios } from '@/database'
 import { tasksActions } from '@/store/tasks'
 import { selectTasksByStatus } from '@/store/tasks'
 import { TaskDialog } from '@/components/dialogs'
@@ -16,6 +17,15 @@ const TaskBoard = (stackProps: StackProps) => {
   const tasksByStatus = useSelector(selectTasksByStatus)
 
   const [selectedTask, setSelectedTask] = useState<Task | null>(null)
+
+  useEffect(() => {
+    // To-do: This will be moved to Redux store once async actions are set up
+    const asyncGetTasks = async () => {
+      const tasks = await fakeAxios.get('/tasks')
+      console.log({ tasks })
+    }
+    asyncGetTasks()
+  }, [])
 
   const onDragEnd: DragDropContextProps['onDragEnd'] = result => {
     const destinationId = result.destination?.droppableId
