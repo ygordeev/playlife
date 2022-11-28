@@ -1,13 +1,26 @@
 import groupBy from 'lodash/groupBy';
-import { createSlice, createSelector, PayloadAction } from '@reduxjs/toolkit'
-import { tasks, taskBoardColumns } from '@/constants'
+import {
+  createSlice,
+  createSelector,
+  createAsyncThunk,
+  PayloadAction
+} from '@reduxjs/toolkit'
+import { fakeAxios } from '@/database'
+import { taskBoardColumns } from '@/constants'
 import { NewTask, Task } from '@/types'
 import { RootState } from './index'
+
+export const taskThunks = {
+  fetchTasks: createAsyncThunk(
+    'tasks/fetchTasks',
+    async () => await fakeAxios.get('/tasks') as Task[]
+  )
+}
 
 const tasksSlice = createSlice({
   name: 'tasks',
   initialState: {
-    taskList: tasks,
+    taskList: [] as Task[],
   },
   reducers: {
     createTask(state, action: PayloadAction<NewTask>) {
@@ -35,6 +48,11 @@ const tasksSlice = createSlice({
       if (!column) throw new Error('Failed to move a task to non-existing column')
       state.taskList[taskIndex].status = column.status
     },
+  },
+  extraReducers: builder => {
+    builder.addCase(taskThunks.fetchTasks.fulfilled, (state, action) => {
+      state.taskList = action.payload
+    })
   }
 })
 

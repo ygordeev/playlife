@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
 import Button from '@mui/material/Button'
 import { StackProps } from '@mui/material/Stack'
@@ -7,6 +6,7 @@ import { tasksActions } from '@/store/tasks'
 import { ProfileButton } from '@/components/controls'
 import { HorizontalCenteredStack } from '@/components/layout'
 import { TaskDialog } from '@/components/dialogs'
+import { useDispatch } from '@/hooks'
 import { NewTask } from '@/types'
 import HeaderSectionNavigation from './HeaderSectionNavigation'
 
