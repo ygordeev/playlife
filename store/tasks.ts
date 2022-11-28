@@ -10,7 +10,11 @@ import { taskBoardColumns } from '@/constants'
 import { NewTask, Task } from '@/types'
 import { RootState } from './index'
 
-export const taskThunks = {
+type TasksInitialState = {
+  taskList: Task[],
+}
+
+export const tasksThunks = {
   fetchTasks: createAsyncThunk(
     'tasks/fetchTasks',
     async () => await fakeAxios.get('/tasks') as Task[]
@@ -20,8 +24,8 @@ export const taskThunks = {
 const tasksSlice = createSlice({
   name: 'tasks',
   initialState: {
-    taskList: [] as Task[],
-  },
+    taskList: [],
+  } as TasksInitialState,
   reducers: {
     createTask(state, action: PayloadAction<NewTask>) {
       const stateTaskIds = state.taskList.map(t => t.id)
@@ -50,16 +54,18 @@ const tasksSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    builder.addCase(taskThunks.fetchTasks.fulfilled, (state, action) => {
+    builder.addCase(tasksThunks.fetchTasks.fulfilled, (state, action) => {
       state.taskList = action.payload
     })
   }
 })
 
-export const selectTasksByStatus = createSelector(
-  (state: RootState) => state.tasks.taskList,
-  tasks => groupBy(tasks, 'status'),
-)
+export const tasksSelectors = {
+  tasksByStatus: createSelector(
+    (state: RootState) => state.tasks.taskList,
+    tasks => groupBy(tasks, 'status'),
+  )
+}
 
 export const tasksActions = tasksSlice.actions
 

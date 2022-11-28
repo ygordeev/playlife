@@ -1,13 +1,24 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { achievements } from '@/constants'
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
+import { fakeAxios } from '@/database'
 import { NewAchievement, Achievement } from '@/types'
 import { RootState } from './index'
+
+type AchievementsInitialState = {
+  achievementList: Achievement[],
+}
+
+export const achievementsThunks = {
+  fetchAchievements: createAsyncThunk(
+    'achievements/fetchAchievements',
+    async () => await fakeAxios.get('/achievements') as Achievement[]
+  )
+}
 
 const achievementsSlice = createSlice({
   name: 'achievements',
   initialState: {
-    achievementList: achievements,
-  },
+    achievementList: [],
+  } as AchievementsInitialState,
   reducers: {
     createAchievement(state, action: PayloadAction<NewAchievement>) {
       const stateAchievementIds = state.achievementList.map(a => a.id)
@@ -22,10 +33,17 @@ const achievementsSlice = createSlice({
       if (achievementIndex < 0) throw new Error('Failed to update non-existing achievement')
       state.achievementList.splice(achievementIndex, 1, achievement)
     },
+  },
+  extraReducers: builder => {
+    builder.addCase(achievementsThunks.fetchAchievements.fulfilled, (state, action) => {
+      state.achievementList = action.payload
+    })
   }
 })
 
-export const selectAchievements = (state: RootState) => state.achievements.achievementList
+export const achievementsSelectors = {
+  achievements: (state: RootState) => state.achievements.achievementList,
+}
 
 export const achievementsActions = achievementsSlice.actions
 

@@ -4,21 +4,33 @@ import { DragDropContext, DragDropContextProps } from 'react-beautiful-dnd'
 import { toast } from 'react-toastify'
 import Stack, { StackProps } from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
-import { selectTasksByStatus, tasksActions, taskThunks } from '@/store/tasks'
+import { tasksSelectors, tasksActions, tasksThunks } from '@/store/tasks'
 import { TaskDialog } from '@/components/dialogs'
 import { taskBoardColumns } from '@/constants'
 import { useDispatch } from '@/hooks'
-import { Task } from '@/types'
+import { Task, Error } from '@/types'
 import TaskBoardColumn from './TaskBoardColumn'
 
 const TaskBoard = (stackProps: StackProps) => {
   const dispatch = useDispatch()
-  const tasksByStatus = useSelector(selectTasksByStatus)
+  const tasksByStatus = useSelector(tasksSelectors.tasksByStatus)
 
   const [selectedTask, setSelectedTask] = useState<Task | null>(null)
+  const [isLoadingTasks, setIsLoadingTasks] = useState(false)
 
   useEffect(() => {
-    dispatch(taskThunks.fetchTasks())
+    const fetchTasks = async () => {
+      try {
+        setIsLoadingTasks(true)
+        await dispatch(tasksThunks.fetchTasks())
+      } catch (e: unknown) {
+        const error = e as Error
+        toast.error(error.message)
+      } finally {
+        setIsLoadingTasks(false)
+      }
+    }
+    fetchTasks()
   }, [dispatch])
 
   const onDragEnd: DragDropContextProps['onDragEnd'] = result => {
@@ -41,7 +53,7 @@ const TaskBoard = (stackProps: StackProps) => {
       {...stackProps}
     >
       <Typography component="h1" variant="h4">
-        Your Tasks for Today
+        Your Tasks for Today {isLoadingTasks.toString()}
       </Typography>
       <DragDropContext onDragEnd={onDragEnd}>
         <Stack
