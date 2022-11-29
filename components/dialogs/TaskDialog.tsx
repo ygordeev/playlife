@@ -1,28 +1,53 @@
-import { MouseEventHandler } from 'react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle'
 import DialogContent from '@mui/material/DialogContent'
 import DialogActions from '@mui/material/DialogActions'
 import Button from '@mui/material/Button'
-import Stack from '@mui/material/Stack';
+import Stack from '@mui/material/Stack'
+import LoadingButton from '@mui/lab/LoadingButton'
+import { tasksThunks } from '@/store/tasks'
 import { TextField, Dropdown, DatePicker, ImagePicker } from '@/components/inputs'
 import { taskComplexityOptions, taskStatusOptions, defaultTask } from '@/constants'
-import { Task } from '@/types'
+import { useDispatch } from '@/hooks'
+import { NewTask } from '@/types'
 
 interface TaskDialogProps {
-  task?: Task,
-  onClose: MouseEventHandler,
-  onSubmit: (task: Task) => void,
+  task?: NewTask,
+  onClose: () => void,
 }
 
-const TaskDialog = ({ task = defaultTask, onClose, onSubmit }: TaskDialogProps) => {
-  const { control, handleSubmit, formState: { errors } } = useForm<Task>({
+const TaskDialog = ({ task = defaultTask, onClose }: TaskDialogProps) => {
+  const dispatch = useDispatch()
+  const { control, handleSubmit, formState: { errors } } = useForm<NewTask>({
     defaultValues: task
   })
 
-  const dialogTitle = task ? 'Edit task' : 'Create Task'
-  const updateButtonText = task ? 'Update Task' : 'Create Task'
+  const [isUpdatingTask, setIsUpdatingTask] = useState(false)
+
+  const dialogTitle = task.id ? 'Edit task' : 'Create Task'
+  const updateButtonText = task.id ? 'Update Task' : 'Create Task'
+
+  const onSubmit = async (task: NewTask) => {
+    const thunk = task.id ? tasksThunks.updateTask : tasksThunks.createTask
+    const successMessage = task.id
+      ? 'Task was successfully updated'
+      : 'New task was successfully created'
+
+    try {
+      setIsUpdatingTask(true)
+      await dispatch(thunk(task))
+      onClose()
+      toast.success(successMessage)
+    } catch (e: unknown) {
+      const error = e as Error
+      toast.error(error.message)
+    } finally {
+      setIsUpdatingTask(false)
+    }
+  }
 
   return (
     <Dialog
@@ -90,9 +115,9 @@ const TaskDialog = ({ task = defaultTask, onClose, onSubmit }: TaskDialogProps) 
 
       <DialogActions>
         <Button onClick={onClose}>Close</Button>
-        <Button onClick={handleSubmit(onSubmit)}>
+        <LoadingButton loading={isUpdatingTask} onClick={handleSubmit(onSubmit)}>
           {updateButtonText}
-        </Button>
+        </LoadingButton>
       </DialogActions>
     </Dialog>
   )

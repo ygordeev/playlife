@@ -1,4 +1,4 @@
-import { Task, NewTask, TaskStatus, Complexity } from '@/types'
+import { NewTask, TaskStatus, Complexity } from '@/types'
 
 export const defaultTask: NewTask = {
   name: '',

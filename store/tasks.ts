@@ -20,9 +20,13 @@ export const tasksThunks = {
     'tasks/fetchTasks',
     async () => await fakeAxios.get(EndpointPaths.Tasks) as Task[]
   ),
+  createTask: createAsyncThunk(
+    'tasks/createTask',
+    async (task: NewTask) => await fakeAxios.post(EndpointPaths.Task, task) as Task[]
+  ),
   updateTask: createAsyncThunk(
     'tasks/updateTask',
-    async (task: Task) => await fakeAxios.put(EndpointPaths.Task, task) as Task
+    async (task: NewTask) => await fakeAxios.put(EndpointPaths.Task, task) as Task[]
   ),
 }
 
@@ -33,12 +37,6 @@ const tasksSlice = createSlice({
     tasksReceived: false,
   } as TasksInitialState,
   reducers: {
-    createTask(state, action: PayloadAction<NewTask>) {
-      const stateTaskIds = state.taskList.map(t => t.id)
-      const id = Math.max(...stateTaskIds) + 1
-      const task = { id, ...action.payload }
-      state.taskList.push(task)
-    },
     updateTaskColumn(state, action: PayloadAction<{
       taskId: number,
       columnId: number,
@@ -57,10 +55,11 @@ const tasksSlice = createSlice({
       state.taskList = action.payload
       state.tasksReceived = true
     })
+    builder.addCase(tasksThunks.createTask.fulfilled, (state, action) => {
+      state.taskList = action.payload
+    })
     builder.addCase(tasksThunks.updateTask.fulfilled, (state, action) => {
-      const task = action.payload
-      const taskIndex = state.taskList.findIndex(t => t.id === task.id)
-      state.taskList.splice(taskIndex, 1, task)
+      state.taskList = action.payload
     })
   }
 })

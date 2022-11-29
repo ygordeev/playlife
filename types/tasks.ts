@@ -11,7 +11,7 @@ export interface Task {
   imageUrl?: string,
 }
 
-export type NewTask = Omit<Task, 'id'>
+export type NewTask = Omit<Task, 'id'> & { id?: number }
 
 export interface TaskColumn {
   id: number,

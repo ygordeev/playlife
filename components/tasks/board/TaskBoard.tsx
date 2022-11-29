@@ -42,17 +42,6 @@ const TaskBoard = (stackProps: StackProps) => {
     dispatch(tasksActions.updateTaskColumn(payload))
   }
 
-  const updateTask = async (task: Task) => {
-    try {
-      await dispatch(tasksThunks.updateTask(task))
-      setSelectedTask(null)
-      toast.success('Task was successfully updated')
-    } catch (e: unknown) {
-      const error = e as Error
-      toast.error(error.message)
-    }
-  }
-
   return (
     <Stack
       overflow="hidden"
@@ -89,7 +78,6 @@ const TaskBoard = (stackProps: StackProps) => {
         <TaskDialog
           task={selectedTask}
           onClose={() => setSelectedTask(null)}
-          onSubmit={updateTask}
         />
       )}
     </Stack>

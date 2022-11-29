@@ -25,8 +25,12 @@ export class Database {
   getAchievements = async () => {
     return await this.db.table('achievements').toArray() as Achievement[]
   }
+  createTask = async (task: Task) => {
+    await this.db.table('tasks').add(task)
+    return await this.getTasks()
+  }
   updateTask = async (task: Task) => {
     await this.db.table('tasks').put(task)
-    return task
+    return await this.getTasks()
   }
 }
