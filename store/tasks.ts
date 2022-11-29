@@ -7,7 +7,7 @@ import {
 } from '@reduxjs/toolkit'
 import { fakeAxios } from '@/database'
 import { taskBoardColumns } from '@/constants'
-import { NewTask, Task } from '@/types'
+import { NewTask, Task, EndpointPaths } from '@/types'
 import { RootState } from './index'
 
 type TasksInitialState = {
@@ -18,8 +18,12 @@ type TasksInitialState = {
 export const tasksThunks = {
   fetchTasks: createAsyncThunk(
     'tasks/fetchTasks',
-    async () => await fakeAxios.get('/tasks') as Task[]
-  )
+    async () => await fakeAxios.get(EndpointPaths.Tasks) as Task[]
+  ),
+  updateTask: createAsyncThunk(
+    'tasks/updateTask',
+    async (task: Task) => await fakeAxios.put(EndpointPaths.Task, task) as Task
+  ),
 }
 
 const tasksSlice = createSlice({
@@ -34,13 +38,6 @@ const tasksSlice = createSlice({
       const id = Math.max(...stateTaskIds) + 1
       const task = { id, ...action.payload }
       state.taskList.push(task)
-    },
-    updateTask(state, action: PayloadAction<Task>) {
-      const task = action.payload
-      const taskIndex = state.taskList.findIndex(t => t.id === task.id)
-
-      if (taskIndex < 0) throw new Error('Failed to update non-existing task')
-      state.taskList.splice(taskIndex, 1, task)
     },
     updateTaskColumn(state, action: PayloadAction<{
       taskId: number,
@@ -59,6 +56,11 @@ const tasksSlice = createSlice({
     builder.addCase(tasksThunks.fetchTasks.fulfilled, (state, action) => {
       state.taskList = action.payload
       state.tasksReceived = true
+    })
+    builder.addCase(tasksThunks.updateTask.fulfilled, (state, action) => {
+      const task = action.payload
+      const taskIndex = state.taskList.findIndex(t => t.id === task.id)
+      state.taskList.splice(taskIndex, 1, task)
     })
   }
 })

@@ -1,27 +1,32 @@
 import Dexie, { Dexie as DexieType } from 'dexie'
 import { tasks, achievements } from '@/constants'
+import { Task, Achievement } from '@/types'
 
 export class Database {
   db: DexieType
-  isInitialized: boolean = false
 
   constructor(dbName: string) {
     this.db = new Dexie(dbName)
-    this.isInitialized = true
 
-    this.db.version(1).stores({
+    this.db.version(2).stores({
       tasks: '++id,status,name,dueDate,complexity',
       achievements: '++id,description,dateAchieved',
     })
 
-    this.db.table('tasks').bulkPut(tasks)
-    this.db.table('achievements').bulkPut(achievements)
+    this.db.on('populate', trans => {
+      trans.table('tasks').bulkPut(tasks)
+      trans.table('achievements').bulkPut(achievements)
+    })
   }
   
   getTasks = async () => {
-    return await this.db.table('tasks').toArray()
+    return await this.db.table('tasks').toArray() as Task[]
   }
   getAchievements = async () => {
-    return await this.db.table('achievements').toArray()
+    return await this.db.table('achievements').toArray() as Achievement[]
+  }
+  updateTask = async (task: Task) => {
+    await this.db.table('tasks').put(task)
+    return task
   }
 }

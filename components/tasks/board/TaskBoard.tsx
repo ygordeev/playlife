@@ -42,10 +42,15 @@ const TaskBoard = (stackProps: StackProps) => {
     dispatch(tasksActions.updateTaskColumn(payload))
   }
 
-  const updateTask = (task: Task) => {
-    dispatch(tasksActions.updateTask(task))
-    setSelectedTask(null)
-    toast.success('Task was successfully updated')
+  const updateTask = async (task: Task) => {
+    try {
+      await dispatch(tasksThunks.updateTask(task))
+      setSelectedTask(null)
+      toast.success('Task was successfully updated')
+    } catch (e: unknown) {
+      const error = e as Error
+      toast.error(error.message)
+    }
   }
 
   return (

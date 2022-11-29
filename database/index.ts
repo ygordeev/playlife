@@ -1,5 +1,6 @@
 import { delayApiRequest } from '@/utils'
-import { Database } from './database'
+import { EndpointPaths } from '@/types'
+import { endpointsByHttpMethod } from './endpoints'
 import { HttpMethod } from './types'
 
 /**
@@ -19,21 +20,7 @@ import { HttpMethod } from './types'
  * Yan Gordeev, 11/28/2022
  */
 
-const db = new Database('playlife')
-
-const getEndpoints: Record<string, any> = {
-  '/tasks': db.getTasks,
-  '/achievements': db.getAchievements,
-}
-
-const endpointsByHttpMethod = {
-  [HttpMethod.GET]: getEndpoints,
-  [HttpMethod.POST]: null,
-  [HttpMethod.PUT]: null,
-  [HttpMethod.DELETE]: null,
-}
-
-const requestHandler = async (method: HttpMethod, path: string) => {
+const requestHandler = async (method: HttpMethod, path: EndpointPaths, body?: any) => {
   const endpoints = endpointsByHttpMethod[method]
   if (!endpoints) throw new Error('HTTP Method Not Supported')
 
@@ -41,12 +28,10 @@ const requestHandler = async (method: HttpMethod, path: string) => {
   if (!handler) throw new Error('Endpoint Not Found')
 
   await delayApiRequest()
-  return await handler()
+  return await handler(body)
 }
 
 export const fakeAxios = {
-  get: async (path: string) => await requestHandler(HttpMethod.GET, path),
-  post: async (path: string) => await requestHandler(HttpMethod.POST, path),
-  put: async (path: string) => await requestHandler(HttpMethod.PUT, path),
-  delete: async (path: string) => await requestHandler(HttpMethod.DELETE, path),
+  get: async (path: EndpointPaths) => await requestHandler(HttpMethod.GET, path),
+  put: async (path: EndpointPaths, body: any) => await requestHandler(HttpMethod.PUT, path, body),
 }
