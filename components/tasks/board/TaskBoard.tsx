@@ -4,7 +4,7 @@ import { DragDropContext, DragDropContextProps } from 'react-beautiful-dnd'
 import { toast } from 'react-toastify'
 import Stack, { StackProps } from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
-import { tasksSelectors, tasksActions, tasksThunks } from '@/store/tasks'
+import { tasksSelectors, tasksThunks } from '@/store/tasks'
 import { TaskDialog } from '@/components/dialogs'
 import { taskBoardColumns } from '@/constants'
 import { useDispatch } from '@/hooks'
@@ -36,10 +36,15 @@ const TaskBoard = (stackProps: StackProps) => {
   }, [dispatch, tasksReceived])
 
   const onDragEnd: DragDropContextProps['onDragEnd'] = result => {
-    const destinationId = result.destination?.droppableId
-    if (!destinationId) return
-    const payload = { taskId: +result.draggableId, columnId: +destinationId }
-    dispatch(tasksActions.updateTaskColumn(payload))
+    try {
+      const destinationId = result.destination?.droppableId
+      if (!destinationId) return
+      const payload = { taskId: +result.draggableId, columnId: +destinationId }
+      dispatch(tasksThunks.moveTask(payload))
+    } catch (e: unknown) {
+      const error = e as Error
+      toast.error(error.message)
+    }
   }
 
   return (

@@ -28,6 +28,21 @@ export const tasksThunks = {
     'tasks/updateTask',
     async (task: NewTask) => await fakeAxios.put(EndpointPaths.Task, task) as Task[]
   ),
+  moveTask: createAsyncThunk(
+    'tasks/moveTask',
+    async ({ taskId, columnId }: { taskId: number, columnId: number }, thunkAPI) => {
+      const state = thunkAPI.getState() as RootState
+      const taskIndex = state.tasks.taskList.findIndex(t => t.id === taskId)
+      const column = taskBoardColumns.find(c => c.id === columnId)
+      
+      if (taskIndex < 0) throw new Error('Failed to move non-existing task')
+      if (!column) throw new Error('Failed to move a task to non-existing column')
+      
+      const task = { ...state.tasks.taskList[taskIndex], status: column.status }
+      fakeAxios.put(EndpointPaths.Task, task) // No need to wait for API request
+      return { task, taskIndex }
+    }
+  )
 }
 
 const tasksSlice = createSlice({
@@ -36,20 +51,7 @@ const tasksSlice = createSlice({
     taskList: [],
     tasksReceived: false,
   } as TasksInitialState,
-  reducers: {
-    updateTaskColumn(state, action: PayloadAction<{
-      taskId: number,
-      columnId: number,
-    }>) {
-      const { taskId, columnId } = action.payload
-      const taskIndex = state.taskList.findIndex(t => t.id === taskId)
-      const column = taskBoardColumns.find(c => c.id === columnId)
-
-      if (taskIndex < 0) throw new Error('Failed to move non-existing task')
-      if (!column) throw new Error('Failed to move a task to non-existing column')
-      state.taskList[taskIndex].status = column.status
-    },
-  },
+  reducers: {},
   extraReducers: builder => {
     builder.addCase(tasksThunks.fetchTasks.fulfilled, (state, action) => {
       state.taskList = action.payload
@@ -60,6 +62,10 @@ const tasksSlice = createSlice({
     })
     builder.addCase(tasksThunks.updateTask.fulfilled, (state, action) => {
       state.taskList = action.payload
+    })
+    builder.addCase(tasksThunks.moveTask.fulfilled, (state, action) => {
+      const { task, taskIndex } = action.payload
+      state.taskList[taskIndex] = task
     })
   }
 })
