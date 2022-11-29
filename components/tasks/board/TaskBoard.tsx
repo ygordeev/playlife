@@ -10,10 +10,12 @@ import { taskBoardColumns } from '@/constants'
 import { useDispatch } from '@/hooks'
 import { Task, Error } from '@/types'
 import TaskBoardColumn from './TaskBoardColumn'
+import TaskBoardSkeleton from './TaskBoardSkeleton'
 
 const TaskBoard = (stackProps: StackProps) => {
   const dispatch = useDispatch()
   const tasksByStatus = useSelector(tasksSelectors.tasksByStatus)
+  const tasksReceived = useSelector(tasksSelectors.tasksReceived)
 
   const [selectedTask, setSelectedTask] = useState<Task | null>(null)
   const [isLoadingTasks, setIsLoadingTasks] = useState(false)
@@ -30,8 +32,8 @@ const TaskBoard = (stackProps: StackProps) => {
         setIsLoadingTasks(false)
       }
     }
-    fetchTasks()
-  }, [dispatch])
+    if (!tasksReceived) fetchTasks()
+  }, [dispatch, tasksReceived])
 
   const onDragEnd: DragDropContextProps['onDragEnd'] = result => {
     const destinationId = result.destination?.droppableId
@@ -53,27 +55,30 @@ const TaskBoard = (stackProps: StackProps) => {
       {...stackProps}
     >
       <Typography component="h1" variant="h4">
-        Your Tasks for Today {isLoadingTasks.toString()}
+        Your Tasks for Today
       </Typography>
-      <DragDropContext onDragEnd={onDragEnd}>
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          overflow="hidden"
-          flex={1}
-          spacing={2}
-          py={0.5}
-        >
-          {taskBoardColumns.map(column => (
-            <TaskBoardColumn
-              key={column.id}
-              column={column}
-              tasks={tasksByStatus[column.status] || []}
-              onTaskSelect={setSelectedTask}
-            />
-          ))}
-        </Stack>
-      </DragDropContext>
+
+      {isLoadingTasks ? <TaskBoardSkeleton /> : (
+        <DragDropContext onDragEnd={onDragEnd}>
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            overflow="hidden"
+            flex={1}
+            spacing={2}
+            py={0.5}
+          >
+            {taskBoardColumns.map(column => (
+              <TaskBoardColumn
+                key={column.id}
+                column={column}
+                tasks={tasksByStatus[column.status] || []}
+                onTaskSelect={setSelectedTask}
+              />
+            ))}
+          </Stack>
+        </DragDropContext>
+      )}
 
       {selectedTask && (
         <TaskDialog

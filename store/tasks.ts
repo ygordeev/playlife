@@ -12,6 +12,7 @@ import { RootState } from './index'
 
 type TasksInitialState = {
   taskList: Task[],
+  tasksReceived: boolean,
 }
 
 export const tasksThunks = {
@@ -25,6 +26,7 @@ const tasksSlice = createSlice({
   name: 'tasks',
   initialState: {
     taskList: [],
+    tasksReceived: false,
   } as TasksInitialState,
   reducers: {
     createTask(state, action: PayloadAction<NewTask>) {
@@ -56,6 +58,7 @@ const tasksSlice = createSlice({
   extraReducers: builder => {
     builder.addCase(tasksThunks.fetchTasks.fulfilled, (state, action) => {
       state.taskList = action.payload
+      state.tasksReceived = true
     })
   }
 })
@@ -64,7 +67,8 @@ export const tasksSelectors = {
   tasksByStatus: createSelector(
     (state: RootState) => state.tasks.taskList,
     tasks => groupBy(tasks, 'status'),
-  )
+  ),
+  tasksReceived: (state: RootState) => state.tasks.tasksReceived,
 }
 
 export const tasksActions = tasksSlice.actions
