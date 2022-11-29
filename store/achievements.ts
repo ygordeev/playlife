@@ -5,6 +5,7 @@ import { RootState } from './index'
 
 type AchievementsInitialState = {
   achievementList: Achievement[],
+  achievementsReceived: boolean,
 }
 
 export const achievementsThunks = {
@@ -18,6 +19,7 @@ const achievementsSlice = createSlice({
   name: 'achievements',
   initialState: {
     achievementList: [],
+    achievementsReceived: false,
   } as AchievementsInitialState,
   reducers: {
     createAchievement(state, action: PayloadAction<NewAchievement>) {
@@ -37,12 +39,15 @@ const achievementsSlice = createSlice({
   extraReducers: builder => {
     builder.addCase(achievementsThunks.fetchAchievements.fulfilled, (state, action) => {
       state.achievementList = action.payload
+      state.achievementsReceived = true
     })
   }
 })
 
 export const achievementsSelectors = {
   achievements: (state: RootState) => state.achievements.achievementList,
+  achievementsReceived: (state: RootState) => state.achievements.achievementsReceived,
+
 }
 
 export const achievementsActions = achievementsSlice.actions

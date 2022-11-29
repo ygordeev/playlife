@@ -12,14 +12,16 @@ import { useDispatch } from '@/hooks'
 import { Achievement } from '@/types'
 import NewAchievementButton from './NewAchievementButton'
 import AchievementCard from './AchievementCard'
+import AchievementGridSkeleton from './AchievementGridSkeleton'
 
 const AchievementGrid = () => {
+  const dispatch = useDispatch()
+  const achievements = useSelector(achievementsSelectors.achievements)
+  const achievementsReceived = useSelector(achievementsSelectors.achievementsReceived)
+
   const [selectedAchievement, setSelectedAchievement] = useState<Achievement>()
   const [isAchievementDialogOpen, setIsAchievementDialogOpen] = useState(false)
   const [isLoadingAchievements, setIsLoadingAchievements] = useState(false)
-
-  const achievements = useSelector(achievementsSelectors.achievements)
-  const dispatch = useDispatch()
 
   useEffect(() => {
     const fetchAchievements = async () => {
@@ -33,8 +35,8 @@ const AchievementGrid = () => {
         setIsLoadingAchievements(false)
       }
     }
-    fetchAchievements()
-  }, [dispatch])
+    if (!achievementsReceived) fetchAchievements()
+  }, [dispatch, achievementsReceived])
 
   const selectAchievement = (achievement: Achievement) => {
     setIsAchievementDialogOpen(true)
@@ -59,22 +61,22 @@ const AchievementGrid = () => {
 
   return (
     <>
-      {/* To-do: Replace string status with the actual spinner */}
-      <p>Loading: {isLoadingAchievements.toString()}</p>
-
       <Grid container spacing={2}>
-        <Grid item>
-          <NewAchievementButton onClick={() => setIsAchievementDialogOpen(true)} />
-        </Grid>
-
-        {achievements.map(achievement => (
-          <Grid key={achievement.id} item>
-            <AchievementCard
-              achievement={achievement}
-              onClick={() => selectAchievement(achievement)}
-            />
-          </Grid>
-        ))}
+        {isLoadingAchievements ? <AchievementGridSkeleton /> : (
+          <>
+            <Grid item>
+              <NewAchievementButton onClick={() => setIsAchievementDialogOpen(true)} />
+            </Grid>
+            {achievements.map(achievement => (
+              <Grid key={achievement.id} item>
+                <AchievementCard
+                  achievement={achievement}
+                  onClick={() => selectAchievement(achievement)}
+                />
+              </Grid>
+            ))}
+          </>
+        )}
       </Grid>
 
       {isAchievementDialogOpen && (
