@@ -35,4 +35,4 @@ export interface Achievement {
   emoji: string,
 }
 
-export type NewAchievement = Omit<Achievement, 'id'>
+export type NewAchievement = Omit<Achievement, 'id'> & { id?: number }

@@ -34,7 +34,7 @@ const TaskDialog = ({ task = defaultTask, onClose }: TaskDialogProps) => {
     const thunk = task.id ? tasksThunks.updateTask : tasksThunks.createTask
     const successMessage = task.id
       ? 'Task was successfully updated'
-      : 'New task was successfully created'
+      : 'Task was successfully created'
 
     try {
       setIsUpdatingTask(true)

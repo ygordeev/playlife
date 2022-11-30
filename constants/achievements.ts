@@ -1,7 +1,6 @@
-import { Achievement } from '@/types'
+import { NewAchievement } from '@/types'
 
-export const defaultAchievement: Achievement = {
-  id: null,
+export const defaultAchievement: NewAchievement = {
   description: '',
   backgroundColor: 'black',
   borderColor: 'white',

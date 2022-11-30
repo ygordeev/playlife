@@ -33,4 +33,12 @@ export class Database {
     await this.db.table('tasks').put(task)
     return await this.getTasks()
   }
+  createAchievement = async (achievement: Achievement) => {
+    await this.db.table('achievements').add(achievement)
+    return await this.getAchievements()
+  }
+  updateAchievement = async (achievement: Achievement) => {
+    await this.db.table('achievements').put(achievement)
+    return await this.getAchievements()
+  }
 }

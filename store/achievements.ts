@@ -12,7 +12,15 @@ export const achievementsThunks = {
   fetchAchievements: createAsyncThunk(
     'achievements/fetchAchievements',
     async () => await fakeAxios.get(EndpointPaths.Achievements) as Achievement[]
-  )
+  ),
+  createAchievement: createAsyncThunk(
+    'achievements/createAchievement',
+    async (ach: NewAchievement) => await fakeAxios.post(EndpointPaths.Achievement, ach) as Achievement[]
+  ),
+  updateAchievement: createAsyncThunk(
+    'achievements/updateAchievement',
+    async (ach: NewAchievement) => await fakeAxios.put(EndpointPaths.Achievement, ach) as Achievement[]
+  ),
 }
 
 const achievementsSlice = createSlice({
@@ -21,25 +29,17 @@ const achievementsSlice = createSlice({
     achievementList: [],
     achievementsReceived: false,
   } as AchievementsInitialState,
-  reducers: {
-    createAchievement(state, action: PayloadAction<NewAchievement>) {
-      const stateAchievementIds = state.achievementList.map(a => a.id)
-      const id = Math.max(...stateAchievementIds) + 1
-      const achievement = { id, ...action.payload }
-      state.achievementList.push(achievement)
-    },
-    updateAchievement(state, action: PayloadAction<Achievement>) {
-      const achievement = action.payload
-      const achievementIndex = state.achievementList.findIndex(t => t.id === achievement.id)
-
-      if (achievementIndex < 0) throw new Error('Failed to update non-existing achievement')
-      state.achievementList.splice(achievementIndex, 1, achievement)
-    },
-  },
+  reducers: {},
   extraReducers: builder => {
     builder.addCase(achievementsThunks.fetchAchievements.fulfilled, (state, action) => {
       state.achievementList = action.payload
       state.achievementsReceived = true
+    })
+    builder.addCase(achievementsThunks.createAchievement.fulfilled, (state, action) => {
+      state.achievementList = action.payload
+    })
+    builder.addCase(achievementsThunks.updateAchievement.fulfilled, (state, action) => {
+      state.achievementList = action.payload
     })
   }
 })

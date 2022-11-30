@@ -1,17 +1,14 @@
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { toast } from 'react-toastify'
 import Grid from '@mui/material/Grid'
 import { AchievementDialog } from '@/components/dialogs'
-import { achievementsSelectors, achievementsActions } from '@/store/achievements'
-import { useDispatch } from '@/hooks'
+import { achievementsSelectors } from '@/store/achievements'
 import { Achievement } from '@/types'
 import NewAchievementButton from './NewAchievementButton'
 import AchievementCard from './AchievementCard'
 import AchievementGridSkeleton from './AchievementGridSkeleton'
 
 const AchievementGrid = () => {
-  const dispatch = useDispatch()
   const achievements = useSelector(achievementsSelectors.achievements)
   const achievementsReceived = useSelector(achievementsSelectors.achievementsReceived)
 
@@ -26,17 +23,6 @@ const AchievementGrid = () => {
   const closeAchievementDialog = () => {
     setIsAchievementDialogOpen(false)
     setSelectedAchievement(undefined)
-  }
-
-  const updateAchievement = (achievement: Achievement) => {
-    if (achievement.id) {
-      dispatch(achievementsActions.updateAchievement(achievement))
-    } else {
-      dispatch(achievementsActions.createAchievement(achievement))
-    }
-    
-    closeAchievementDialog()
-    toast.success('Achievement was successfully updated')
   }
 
   return (
@@ -63,7 +49,6 @@ const AchievementGrid = () => {
         <AchievementDialog
           achievement={selectedAchievement}
           onClose={closeAchievementDialog}
-          onSubmit={updateAchievement}
         />
       )}
     </>

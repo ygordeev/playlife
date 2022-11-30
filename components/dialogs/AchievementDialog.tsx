@@ -1,6 +1,7 @@
-import { MouseEventHandler } from 'react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import Dialog from '@mui/material/Dialog';
+import { toast } from 'react-toastify'
+import Dialog from '@mui/material/Dialog'
 import DialogTitle from '@mui/material/DialogTitle'
 import DialogContent from '@mui/material/DialogContent'
 import DialogActions from '@mui/material/DialogActions'
@@ -8,29 +9,55 @@ import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
+import LoadingButton from '@mui/lab/LoadingButton'
+import { achievementsThunks } from '@/store/achievements'
 import { TextField, EmojiPicker } from '@/components/inputs'
 import { AchievementIcon } from '@/components/icons'
 import { AchievementColorPicker } from '@/components/controls'
+import { useDispatch } from '@/hooks'
 import { defaultAchievement } from '@/constants'
-import { Achievement } from '@/types'
+import { NewAchievement } from '@/types'
 
 interface AchievementDialogProps {
-  achievement?: Achievement,
-  onClose: MouseEventHandler,
-  onSubmit: (achievement: Achievement) => void,
+  achievement?: NewAchievement,
+  onClose: () => void,
 }
 
-const AchievementDialog = ({ achievement = defaultAchievement, onClose, onSubmit }: AchievementDialogProps) => {
+const AchievementDialog = ({ achievement = defaultAchievement, onClose }: AchievementDialogProps) => {
   const {
     control,
     watch,
     setValue,
     handleSubmit,
     formState: { errors },
-  } = useForm<Achievement>({ defaultValues: achievement })
+  } = useForm<NewAchievement>({ defaultValues: achievement })
 
-  const dialogTitle = achievement ? 'Edit Achievement' : 'Create Achievement'
-  const updateButtonText = achievement ? 'Update Achievement' : 'Create Achievement'
+  const dispatch = useDispatch()
+  const [isUpdatingAchievement, setIsUpdatingAchievement] = useState(false)
+
+  const dialogTitle = achievement.id ? 'Edit Achievement' : 'Create Achievement'
+  const updateButtonText = achievement.id ? 'Update Achievement' : 'Create Achievement'
+
+  const onSubmit = async (achievement: NewAchievement) => {
+    const thunk = achievement.id
+      ? achievementsThunks.updateAchievement
+      : achievementsThunks.createAchievement
+    const successMessage = achievement.id
+      ? 'Achievement was successfully updated'
+      : 'Achievement was successfully created'
+
+    try {
+      setIsUpdatingAchievement(true)
+      await dispatch(thunk(achievement))
+      onClose()
+      toast.success(successMessage)
+    } catch (e: unknown) {
+      const error = e as Error
+      toast.error(error.message)
+    } finally {
+      setIsUpdatingAchievement(false)
+    }
+  }
 
   return (
     <Dialog
@@ -80,9 +107,9 @@ const AchievementDialog = ({ achievement = defaultAchievement, onClose, onSubmit
 
       <DialogActions>
         <Button onClick={onClose}>Close</Button>
-        <Button onClick={handleSubmit(onSubmit)}>
+        <LoadingButton loading={isUpdatingAchievement} onClick={handleSubmit(onSubmit)}>
           {updateButtonText}
-        </Button>
+        </LoadingButton>
       </DialogActions>
     </Dialog>
   )
