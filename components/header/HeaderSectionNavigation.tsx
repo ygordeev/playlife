@@ -24,11 +24,12 @@ const HeaderSectionNavigation = () => {
         <Link
           key={option.label}
           href={option.href}
-          label={option.label}
           color="inherit"
           underline="none"
           sx={getLinkStyle(option.href === asPath)}
-        />
+        >
+          {option.label}
+        </Link>
       ))}
     </Stack>
   )

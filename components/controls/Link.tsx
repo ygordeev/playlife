@@ -1,16 +1,17 @@
+import { ReactNode } from 'react'
 import NextLink from 'next/link'
 import MaterialLink, { LinkProps } from '@mui/material/Link'
 
 type CustomLinkProps = LinkProps & {
-  label: string,
   href: string,
+  children: ReactNode,
 }
 
-const Link = ({ label, href, ...props }: CustomLinkProps) => {
+const Link = ({ href, children, ...props }: CustomLinkProps) => {
   return (
     <NextLink href={href} passHref>
       <MaterialLink {...props}>
-        {label}
+        {children}
       </MaterialLink>
     </NextLink>
   )

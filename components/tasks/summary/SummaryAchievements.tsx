@@ -1,11 +1,11 @@
 import { useSelector } from 'react-redux'
 import Typography from '@mui/material/Typography'
-import Link from '@mui/material/Link';
-import Tooltip from '@mui/material/Tooltip';
-import { achievementsSelectors } from '@/store/achievements';
+import Tooltip from '@mui/material/Tooltip'
+import { achievementsSelectors } from '@/store/achievements'
 import { GradientCard, HorizontalCenteredStack } from '@/components/layout'
+import { Link } from '@/components/controls'
 import { AchievementIcon } from '@/components/icons'
-import SummaryAchievementsSkeleton from './SummaryAchievementsSkeleton';
+import SummaryAchievementsSkeleton from './SummaryAchievementsSkeleton'
 
 const MAX_ACHIEVEMENT_COUNT = 4
 
