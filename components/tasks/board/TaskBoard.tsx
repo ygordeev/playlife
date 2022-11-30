@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { DragDropContext, DragDropContextProps } from 'react-beautiful-dnd'
 import { toast } from 'react-toastify'
@@ -18,22 +18,6 @@ const TaskBoard = (stackProps: StackProps) => {
   const tasksReceived = useSelector(tasksSelectors.tasksReceived)
 
   const [selectedTask, setSelectedTask] = useState<Task | null>(null)
-  const [isLoadingTasks, setIsLoadingTasks] = useState(false)
-
-  useEffect(() => {
-    const fetchTasks = async () => {
-      try {
-        setIsLoadingTasks(true)
-        await dispatch(tasksThunks.fetchTasks())
-      } catch (e: unknown) {
-        const error = e as Error
-        toast.error(error.message)
-      } finally {
-        setIsLoadingTasks(false)
-      }
-    }
-    if (!tasksReceived) fetchTasks()
-  }, [dispatch, tasksReceived])
 
   const onDragEnd: DragDropContextProps['onDragEnd'] = result => {
     try {
@@ -57,7 +41,7 @@ const TaskBoard = (stackProps: StackProps) => {
         Your Tasks for Today
       </Typography>
 
-      {isLoadingTasks ? <TaskBoardSkeleton /> : (
+      {tasksReceived ? (
         <DragDropContext onDragEnd={onDragEnd}>
           <Stack
             direction="row"
@@ -77,7 +61,7 @@ const TaskBoard = (stackProps: StackProps) => {
             ))}
           </Stack>
         </DragDropContext>
-      )}
+      ) : <TaskBoardSkeleton />}
 
       {selectedTask && (
         <TaskDialog

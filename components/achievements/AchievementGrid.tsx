@@ -1,13 +1,9 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import Grid from '@mui/material/Grid'
 import { AchievementDialog } from '@/components/dialogs'
-import {
-  achievementsSelectors,
-  achievementsActions,
-  achievementsThunks,
-} from '@/store/achievements'
+import { achievementsSelectors, achievementsActions } from '@/store/achievements'
 import { useDispatch } from '@/hooks'
 import { Achievement } from '@/types'
 import NewAchievementButton from './NewAchievementButton'
@@ -21,22 +17,6 @@ const AchievementGrid = () => {
 
   const [selectedAchievement, setSelectedAchievement] = useState<Achievement>()
   const [isAchievementDialogOpen, setIsAchievementDialogOpen] = useState(false)
-  const [isLoadingAchievements, setIsLoadingAchievements] = useState(false)
-
-  useEffect(() => {
-    const fetchAchievements = async () => {
-      try {
-        setIsLoadingAchievements(true)
-        await dispatch(achievementsThunks.fetchAchievements())
-      } catch (e: unknown) {
-        const error = e as Error
-        toast.error(error.message)
-      } finally {
-        setIsLoadingAchievements(false)
-      }
-    }
-    if (!achievementsReceived) fetchAchievements()
-  }, [dispatch, achievementsReceived])
 
   const selectAchievement = (achievement: Achievement) => {
     setIsAchievementDialogOpen(true)
@@ -62,7 +42,7 @@ const AchievementGrid = () => {
   return (
     <>
       <Grid container spacing={2}>
-        {isLoadingAchievements ? <AchievementGridSkeleton /> : (
+        {achievementsReceived ? (
           <>
             <Grid item>
               <NewAchievementButton onClick={() => setIsAchievementDialogOpen(true)} />
@@ -76,7 +56,7 @@ const AchievementGrid = () => {
               </Grid>
             ))}
           </>
-        )}
+        ) : <AchievementGridSkeleton />}
       </Grid>
 
       {isAchievementDialogOpen && (

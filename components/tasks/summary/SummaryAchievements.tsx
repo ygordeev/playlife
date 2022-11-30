@@ -1,20 +1,23 @@
+import { useSelector } from 'react-redux'
 import Typography from '@mui/material/Typography'
 import Link from '@mui/material/Link';
 import Tooltip from '@mui/material/Tooltip';
+import { achievementsSelectors } from '@/store/achievements';
 import { GradientCard, HorizontalCenteredStack } from '@/components/layout'
 import { AchievementIcon } from '@/components/icons'
-
-// To-do: The achievement icons should be extracted from the store
-import { achievements } from '@/constants'
+import SummaryAchievementsSkeleton from './SummaryAchievementsSkeleton';
 
 const MAX_ACHIEVEMENT_COUNT = 4
 
 const getAchievementStackStyle = (achievementCount: number) => ({
-  justifyContent: achievementCount < MAX_ACHIEVEMENT_COUNT ? 'flex-start' : 'center',
+  justifyContent: achievementCount < MAX_ACHIEVEMENT_COUNT ? 'flex-start' : 'space-between',
   mt: 1,
 })
 
 const SummaryRecentAchievements = () => {
+  const achievements = useSelector(achievementsSelectors.achievements)
+  const achievementsReceived = useSelector(achievementsSelectors.achievementsReceived)
+  
   return (
     <GradientCard>
       <HorizontalCenteredStack justifyContent="space-between" spacing={1}>
@@ -26,7 +29,7 @@ const SummaryRecentAchievements = () => {
           variant="subtitle2"
           color="grey.500"
         >
-          See All (24)
+          See All ({achievements.length})
         </Link>
       </HorizontalCenteredStack>
 
@@ -34,7 +37,7 @@ const SummaryRecentAchievements = () => {
         spacing={2}
         sx={getAchievementStackStyle(achievements.length)}
       >
-        {achievements.slice(0, 4).map(achievement => (
+        {achievementsReceived ? achievements.slice(0, 4).map(achievement => (
           <Tooltip key={achievement.id} title={achievement.description}>
             <div>
               <AchievementIcon
@@ -44,7 +47,7 @@ const SummaryRecentAchievements = () => {
               />
             </div>
           </Tooltip>
-        ))}
+        )) : <SummaryAchievementsSkeleton />}
       </HorizontalCenteredStack>
     </GradientCard>
   )

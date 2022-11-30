@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
 import { fakeAxios } from '@/database'
-import { NewAchievement, Achievement } from '@/types'
+import { NewAchievement, Achievement, EndpointPaths } from '@/types'
 import { RootState } from './index'
 
 type AchievementsInitialState = {
@@ -11,7 +11,7 @@ type AchievementsInitialState = {
 export const achievementsThunks = {
   fetchAchievements: createAsyncThunk(
     'achievements/fetchAchievements',
-    async () => await fakeAxios.get('/achievements') as Achievement[]
+    async () => await fakeAxios.get(EndpointPaths.Achievements) as Achievement[]
   )
 }
 

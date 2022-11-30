@@ -1,7 +1,7 @@
 import Stack, { StackProps } from '@mui/material/Stack'
 import SummaryNewTasks from './SummaryNextGoal'
 import SummaryCompletedTasks from './SummaryCompletedTasks'
-import SummaryRecentAchievements from './SummaryRecentAchievements'
+import SummaryAchievements from './SummaryAchievements'
 import SummaryWeeklyProgress from './SummaryWeeklyProgress'
 
 const TaskSummary = (props: StackProps) => {
@@ -16,7 +16,7 @@ const TaskSummary = (props: StackProps) => {
       <SummaryNewTasks />
       <SummaryCompletedTasks />
       <SummaryWeeklyProgress />
-      <SummaryRecentAchievements />
+      <SummaryAchievements />
     </Stack>
   )
 }
