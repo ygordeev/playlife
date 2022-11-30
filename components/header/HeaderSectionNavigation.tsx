@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
-import Stack from '@mui/material/Stack';
-import { navigationOptions } from '@/constants';
+import Stack from '@mui/material/Stack'
+import { navigationOptions } from '@/constants'
 import { Link } from '@/components/controls'
 
 const getLinkStyle = (isSelected: boolean) => ({

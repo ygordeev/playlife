@@ -1,7 +1,7 @@
 import Typography from '@mui/material/Typography'
-import BeenhereIcon from '@mui/icons-material/Beenhere';
+import BeenhereIcon from '@mui/icons-material/Beenhere'
 import { GradientCard, IconCard, HorizontalCenteredStack } from '@/components/layout'
-import { AnimatedComparisonCounter } from '@/components/gauges';
+import { AnimatedComparisonCounter } from '@/components/gauges'
 
 // To-do: Progress should be extracted from the store
 const completedTasks = 11

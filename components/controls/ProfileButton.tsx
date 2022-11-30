@@ -1,9 +1,9 @@
 import Stack from '@mui/material/Stack'
-import Avatar from '@mui/material/Avatar';
-import Typography from '@mui/material/Typography';
+import Avatar from '@mui/material/Avatar'
+import Typography from '@mui/material/Typography'
 
 // To-do: We should extract the actual user from the store
-import { user } from '@/constants';
+import { user } from '@/constants'
 
 const profileButtonStyle = {
   cursor: 'pointer',

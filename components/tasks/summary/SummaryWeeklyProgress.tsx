@@ -1,7 +1,7 @@
 import Typography from '@mui/material/Typography'
-import BoltIcon from '@mui/icons-material/Bolt';
+import BoltIcon from '@mui/icons-material/Bolt'
 import { GradientCard, IconCard, HorizontalCenteredStack } from '@/components/layout'
-import { LinearProgress } from '@/components/gauges';
+import { LinearProgress } from '@/components/gauges'
 
 // To-do: Progress should be extracted from the store
 const finishedTasks = 18

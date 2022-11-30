@@ -1,9 +1,9 @@
-import Paper, { PaperProps } from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
-import Stack from '@mui/material/Stack';
+import Paper, { PaperProps } from '@mui/material/Paper'
+import Typography from '@mui/material/Typography'
+import Stack from '@mui/material/Stack'
 import { AchievementIcon } from '@/components/icons'
-import { HorizontalCenteredStack } from '@/components/layout';
-import { formatDate, getLineClampStyle } from '@/utils';
+import { HorizontalCenteredStack } from '@/components/layout'
+import { formatDate, getLineClampStyle } from '@/utils'
 import { Achievement } from '@/types'
 
 type AchievementCardProps = PaperProps & {

@@ -1,5 +1,5 @@
-import CssBaseline from '@mui/material/CssBaseline';
-import MuiGlobalStyles from '@mui/material/GlobalStyles';
+import CssBaseline from '@mui/material/CssBaseline'
+import MuiGlobalStyles from '@mui/material/GlobalStyles'
 
 const globalStyles = {
   '*': {

@@ -1,9 +1,9 @@
-import { useState, useId } from 'react';
-import { ChromePicker, ColorChangeHandler } from 'react-color';
+import { useState, useId } from 'react'
+import { ChromePicker, ColorChangeHandler } from 'react-color'
 import Stack from '@mui/material/Stack'
 import Box, { BoxProps } from '@mui/material/Box'
 import Button from '@mui/material/Button'
-import Popover from '@mui/material/Popover';
+import Popover from '@mui/material/Popover'
 import { convertRgbToHex } from '@/utils'
 import { AchievementColorOptions, AchievementColorType } from '@/types'
 import { achievementColorPickerOptions } from './constants'

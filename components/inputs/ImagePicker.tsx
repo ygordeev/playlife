@@ -3,7 +3,7 @@ import debounce from 'lodash/debounce'
 import { useController, FieldValues } from 'react-hook-form'
 import Typography from '@mui/material/Typography'
 import TextField from '@mui/material/TextField'
-import Stack from '@mui/material/Stack';
+import Stack from '@mui/material/Stack'
 import { fetchUnsplashImages } from '@/api/actions'
 import { ImageContainer, ImageList, Spinner } from '@/components/layout'
 import { debounceInterval } from '@/constants'

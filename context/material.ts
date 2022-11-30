@@ -1,7 +1,7 @@
-import { createTheme } from '@mui/material/styles';
+import { createTheme } from '@mui/material/styles'
 import darkScrollbar from '@mui/material/darkScrollbar'
-import common from '@mui/material/colors/common';
-import type {} from '@mui/x-date-pickers/themeAugmentation';
+import common from '@mui/material/colors/common'
+import type {} from '@mui/x-date-pickers/themeAugmentation'
 
 declare module '@mui/material' {
   interface Color {

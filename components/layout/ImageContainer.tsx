@@ -1,6 +1,6 @@
 import Image from 'next/image'
-import Box, { BoxProps } from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import Box, { BoxProps } from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
 
 type ImageContainerProps = BoxProps & {
   width: number,

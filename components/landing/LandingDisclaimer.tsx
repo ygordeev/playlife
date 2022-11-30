@@ -1,11 +1,11 @@
 import Link from 'next/link'
-import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
-import ReportIcon from '@mui/icons-material/Report';
+import DoubleArrowIcon from '@mui/icons-material/DoubleArrow'
+import ReportIcon from '@mui/icons-material/Report'
 import Paper from '@mui/material/Paper'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import Stack from '@mui/material/Stack'
-import { HorizontalCenteredStack } from '@/components/layout';
+import { HorizontalCenteredStack } from '@/components/layout'
 import { landingDisclaimerSections } from '@/constants'
 import { getTextGradientStyle } from '@/utils'
 

@@ -1,5 +1,5 @@
 import { PropsWithChildren } from 'react'
-import Box from '@mui/material/Box';
+import Box from '@mui/material/Box'
 
 const gradientCardStyle = {
   width: 1,

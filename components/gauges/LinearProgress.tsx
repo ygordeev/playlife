@@ -1,4 +1,4 @@
-import LinearGauge from '@mui/material/LinearProgress';
+import LinearGauge from '@mui/material/LinearProgress'
 import Typography from '@mui/material/Typography'
 import { HorizontalCenteredStack } from '@/components/layout'
 import { useCountUp } from '@/hooks'

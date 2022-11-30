@@ -1,7 +1,7 @@
-import Paper, { PaperProps } from '@mui/material/Paper';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import Paper, { PaperProps } from '@mui/material/Paper'
+import Stack from '@mui/material/Stack'
+import Typography from '@mui/material/Typography'
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
 
 const NewAchievementButtonStyle = {
   width: 327,

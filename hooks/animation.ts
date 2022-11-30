@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { animate } from 'framer-motion';
+import { useEffect, useState } from 'react'
+import { animate } from 'framer-motion'
 
 export const useCountUp = (targetCount: number, duration: number) => {
   const [count, setCount] = useState(0)

@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import type { NextPage } from 'next'
 import { PrimaryLayout } from '@/layouts'
-import { TaskSummary, TaskBoard } from '@/components/tasks';
+import { TaskSummary, TaskBoard } from '@/components/tasks'
 
 const TasksPage: NextPage = () => {
   return (

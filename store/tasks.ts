@@ -1,4 +1,4 @@
-import groupBy from 'lodash/groupBy';
+import groupBy from 'lodash/groupBy'
 import {
   createSlice,
   createSelector,

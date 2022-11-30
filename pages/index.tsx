@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Box from '@mui/material/Box';
-import { LandingDisclaimer } from '@/components/landing';
+import Box from '@mui/material/Box'
+import { LandingDisclaimer } from '@/components/landing'
 
 const landingContainerStyle = {
   backgroundImage: `url(./images/landing-background.jpg)`,

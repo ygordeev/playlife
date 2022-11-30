@@ -1,4 +1,4 @@
-import { SvgIconProps } from '@mui/material/SvgIcon';
+import { SvgIconProps } from '@mui/material/SvgIcon'
 
 interface LandingDisclaimerSectionStyle {
   name: string,

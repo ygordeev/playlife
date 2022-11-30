@@ -1,5 +1,5 @@
 import { PropsWithChildren } from 'react'
-import Stack from '@mui/material/Stack';
+import Stack from '@mui/material/Stack'
 
 const HorizontalCenteredStack: typeof Stack = ({ children, ...props }: PropsWithChildren) => {
   return (

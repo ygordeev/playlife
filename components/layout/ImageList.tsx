@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import Image from 'next/image'
-import MuiImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
-import Typography from '@mui/material/Typography';
+import MuiImageList from '@mui/material/ImageList'
+import ImageListItem from '@mui/material/ImageListItem'
+import Typography from '@mui/material/Typography'
 import { UnsplashImage } from '@/types'
 
 interface ImageListProps {
