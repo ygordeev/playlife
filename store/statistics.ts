@@ -24,10 +24,7 @@ const statisticsSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder.addCase(statisticsThunks.getRecentStatistics.fulfilled, (state, action) => {
-      const records = action.payload
-      if (records.length > state.recentStatistics.length) {
-        state.recentStatistics = records
-      }
+      state.recentStatistics = action.payload
     })
   }
 })

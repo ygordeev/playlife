@@ -2,12 +2,22 @@ import groupBy from 'lodash/groupBy'
 import { createSlice, createSelector, createAsyncThunk } from '@reduxjs/toolkit'
 import { fakeAxios } from '@/database'
 import { taskBoardColumns } from '@/constants'
-import { NewTask, Task, EndpointPaths } from '@/types'
+import { NewTask, Task, EndpointPaths, StatisticsTableTypes } from '@/types'
 import { RootState } from './index'
+import { statisticsThunks } from './statistics'
 
 type TasksState = {
   taskList: Task[],
   tasksReceived: boolean,
+}
+
+const updateTaskAndStatistics = async (task: NewTask, thunkAPI: any) => {
+  const updatedTasks = await fakeAxios.put(EndpointPaths.Task, task) as Task[]
+  thunkAPI.dispatch(statisticsThunks.getRecentStatistics({
+    type: StatisticsTableTypes.CompletedTasks,
+    count: 2,
+  }))
+  return updatedTasks
 }
 
 export const tasksThunks = {
@@ -21,7 +31,7 @@ export const tasksThunks = {
   ),
   updateTask: createAsyncThunk(
     'tasks/updateTask',
-    async (task: NewTask) => await fakeAxios.put(EndpointPaths.Task, task) as Task[]
+    async (task: NewTask, thunkAPI) => await updateTaskAndStatistics(task, thunkAPI)
   ),
   moveTask: createAsyncThunk(
     'tasks/moveTask',
@@ -34,7 +44,7 @@ export const tasksThunks = {
       if (!column) throw new Error('Failed to move a task to non-existing column')
       
       const task = { ...state.tasks.taskList[taskIndex], status: column.status }
-      fakeAxios.put(EndpointPaths.Task, task) // No need to wait for API request
+      updateTaskAndStatistics(task, thunkAPI) // No need to wait for API this time
       return { task, taskIndex }
     }
   )
