@@ -22,6 +22,7 @@ export class Database {
     })
 
     const initializeStatistics = async () => {
+      if (typeof window === 'undefined') return
       const identifier = getStatisticsIdentifier('completedTasks')
       const statisticsTable = await this.db.table('statistics').get(identifier)
       if (!statisticsTable) this.db.table('statistics').add(identifier)
