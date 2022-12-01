@@ -1,16 +1,11 @@
 import groupBy from 'lodash/groupBy'
-import {
-  createSlice,
-  createSelector,
-  createAsyncThunk,
-  PayloadAction
-} from '@reduxjs/toolkit'
+import { createSlice, createSelector, createAsyncThunk } from '@reduxjs/toolkit'
 import { fakeAxios } from '@/database'
 import { taskBoardColumns } from '@/constants'
 import { NewTask, Task, EndpointPaths } from '@/types'
 import { RootState } from './index'
 
-type TasksInitialState = {
+type TasksState = {
   taskList: Task[],
   tasksReceived: boolean,
 }
@@ -50,7 +45,7 @@ const tasksSlice = createSlice({
   initialState: {
     taskList: [],
     tasksReceived: false,
-  } as TasksInitialState,
+  } as TasksState,
   reducers: {},
   extraReducers: builder => {
     builder.addCase(tasksThunks.fetchTasks.fulfilled, (state, action) => {

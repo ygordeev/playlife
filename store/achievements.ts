@@ -1,9 +1,9 @@
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { fakeAxios } from '@/database'
 import { NewAchievement, Achievement, EndpointPaths } from '@/types'
 import { RootState } from './index'
 
-type AchievementsInitialState = {
+type AchievementsState = {
   achievementList: Achievement[],
   achievementsReceived: boolean,
 }
@@ -28,7 +28,7 @@ const achievementsSlice = createSlice({
   initialState: {
     achievementList: [],
     achievementsReceived: false,
-  } as AchievementsInitialState,
+  } as AchievementsState,
   reducers: {},
   extraReducers: builder => {
     builder.addCase(achievementsThunks.fetchAchievements.fulfilled, (state, action) => {

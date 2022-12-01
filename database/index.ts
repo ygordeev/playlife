@@ -32,7 +32,7 @@ const requestHandler = async (method: HttpMethod, path: EndpointPaths, body?: an
 }
 
 export const fakeAxios = {
-  get: async (path: EndpointPaths) => await requestHandler(HttpMethod.GET, path),
-  post: async (path: EndpointPaths, body: any) => await requestHandler(HttpMethod.POST, path, body),
-  put: async (path: EndpointPaths, body: any) => await requestHandler(HttpMethod.PUT, path, body),
+  get: async (path: EndpointPaths, params?: any) => await requestHandler(HttpMethod.GET, path, params),
+  post: async (path: EndpointPaths, body?: any) => await requestHandler(HttpMethod.POST, path, body),
+  put: async (path: EndpointPaths, body?: any) => await requestHandler(HttpMethod.PUT, path, body),
 }

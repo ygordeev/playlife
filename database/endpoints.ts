@@ -11,17 +11,20 @@ export const endpointsByHttpMethod = {
     [EndpointPaths.Achievements]: db.getAchievements,
     [EndpointPaths.Task]: db.updateTask,
     [EndpointPaths.Achievement]: db.createTask,
+    [EndpointPaths.RecentStatistics]: db.getRecentStatistics,
   },
   [HttpMethod.POST]: {
     [EndpointPaths.Tasks]: db.getTasks,
     [EndpointPaths.Achievements]: db.getAchievements,
     [EndpointPaths.Task]: db.createTask,
     [EndpointPaths.Achievement]: db.createAchievement,
+    [EndpointPaths.RecentStatistics]: db.getRecentStatistics,
   },
   [HttpMethod.PUT]: {
     [EndpointPaths.Tasks]: db.getTasks,
     [EndpointPaths.Achievements]: db.getAchievements,
     [EndpointPaths.Task]: db.updateTask,
     [EndpointPaths.Achievement]: db.updateAchievement,
+    [EndpointPaths.RecentStatistics]: db.getRecentStatistics,
   },
 } as const
