@@ -13,7 +13,7 @@ const LinearProgress = ({ currentCount, totalCount }: LinearProgressProps) => {
   const progress = Math.round(count / totalCount * 100)
 
   return (
-    <HorizontalCenteredStack spacing={1} mt={1}>
+    <HorizontalCenteredStack spacing={1}>
       <Typography>{progress}%</Typography>
       <LinearGauge
         value={progress}

@@ -4,7 +4,7 @@ import { endpointsByHttpMethod } from './endpoints'
 import { HttpMethod } from './types'
 
 /**
- * NOTE FOR DEVELOPERS: REASONS FOR USING INDEXED DB
+ * REASONS FOR USING INDEXED DB
  * 
  * Currently Playlife project only has frontend part and no backend. I'm still
  * going to integrate the website with the actual Node.js backend but it 

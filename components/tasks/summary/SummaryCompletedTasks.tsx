@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
+import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import BeenhereIcon from '@mui/icons-material/Beenhere'
 import { statisticsSelectors, statisticsThunks } from '@/store/statistics'
@@ -44,19 +45,21 @@ const SummaryCompletedTasks = () => {
 
   return (
     <GradientCard>
-      <HorizontalCenteredStack spacing={2}>
-        <IconCard>
-          <BeenhereIcon />
-        </IconCard>
+      <Stack spacing={1}>
+        <HorizontalCenteredStack spacing={2}>
+          <IconCard>
+            <BeenhereIcon />
+          </IconCard>
 
-        <Typography>Tasks Completed</Typography>
-      </HorizontalCenteredStack>
+          <Typography>Tasks Completed</Typography>
+        </HorizontalCenteredStack>
 
-      <AnimatedComparisonCounter
-        currentCount={completedTasksToday}
-        previousCount={completedTasksYest}
-        timeFrameText="yesterday"
-      />
+        <AnimatedComparisonCounter
+          currentCount={completedTasksToday}
+          previousCount={completedTasksYest}
+          timeFrameText="yesterday"
+        />
+      </Stack>
     </GradientCard>
   )
 }

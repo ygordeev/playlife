@@ -24,7 +24,7 @@ const AnimatedComparisonCounter = (props: AnimatedComparisonCounterProps) => {
   const progressTextColor = isProgressPositive ? 'success.light' : 'error.light'
 
   return (
-    <HorizontalCenteredStack mt={1}>
+    <HorizontalCenteredStack>
       <Typography variant="h4" mr={2}>
         {count}
       </Typography>
