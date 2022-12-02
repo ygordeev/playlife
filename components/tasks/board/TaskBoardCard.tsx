@@ -11,7 +11,7 @@ import { Task } from '@/types'
 interface TaskBoardCardProps {
   task: Task,
   index: number,
-  onClick: MouseEventHandler,
+  onClick: MouseEventHandler<HTMLElement>,
 }
 
 const cardStyle = {
