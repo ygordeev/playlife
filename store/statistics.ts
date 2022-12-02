@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { fakeAxios } from '@/database'
-import { daysInWeek } from '@/constants'
-import { getTodayISO } from '@/utils'
+import { getTodayISO, getISODate, subtractDays } from '@/utils'
 import {
   StatisticsTableEntry,
   RecentStatisticsRequest,
@@ -14,13 +13,15 @@ type StatisticsState = {
   weeklyCompletedTasks: StatisticsTableEntry[]
 }
 
+const weekAgo = getISODate(subtractDays(7))!
+
 export const statisticsThunks = {
   getWeeklyCompletedTasks: createAsyncThunk(
     'statistics/getWeeklyCompletedTasks',
     async () => {
       const payload: RecentStatisticsRequest = {
         type: StatisticsTableTypes.CompletedTasks,
-        minDate: '2022-11-25',
+        minDate: weekAgo,
         maxDate: getTodayISO(),
       }
       return await fakeAxios.get(EndpointPaths.RecentStatistics, payload) as StatisticsTableEntry[]
