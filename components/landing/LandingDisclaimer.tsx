@@ -5,24 +5,15 @@ import Paper from '@mui/material/Paper'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import Stack from '@mui/material/Stack'
-import { HorizontalCenteredStack } from '@/components/layout'
+import { HorizontalCenteredStack, SiteLogo } from '@/components/layout'
 import { landingDisclaimerSections } from '@/constants'
-import { getTextGradientStyle } from '@/utils'
-
-const headingStyle = {
-  display: 'inline',
-  fontWeight: 'bold',
-  fontSize: '3rem',
-  lineHeight: '3rem',
-  ...getTextGradientStyle('90deg, #3cc758, #ca8919'),
-}
 
 const LandingDisclaimer = () => {
   return (
     <Paper sx={{ maxWidth: 'sm', p: 5 }}>
       <Stack spacing={4}>
         <Stack alignItems="center">
-          <Typography sx={headingStyle}>PLAYLIFE</Typography>
+          <SiteLogo fontSize="3rem" />
           <Typography variant="subtitle2" color="grey.500">
             Pre-Alpha version
           </Typography>

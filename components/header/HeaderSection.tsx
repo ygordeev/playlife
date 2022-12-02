@@ -2,7 +2,7 @@ import { useState } from 'react'
 import Button from '@mui/material/Button'
 import { StackProps } from '@mui/material/Stack'
 import { ProfileButton } from '@/components/controls'
-import { HorizontalCenteredStack } from '@/components/layout'
+import { HorizontalCenteredStack, SiteLogo } from '@/components/layout'
 import { TaskDialog } from '@/components/dialogs'
 import HeaderSectionNavigation from './HeaderSectionNavigation'
 
@@ -17,6 +17,7 @@ const HeaderSection = (props: StackProps) => {
         {...props}
       >
         <HorizontalCenteredStack spacing={6}>
+          <SiteLogo fontSize="1.5rem" />
           <HeaderSectionNavigation />
           <Button
             variant="contained"
