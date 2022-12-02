@@ -21,10 +21,10 @@ import { HttpMethod } from './types'
  */
 
 const requestHandler = async (method: HttpMethod, path: EndpointPaths, body?: any) => {
-  const endpoints = endpointsByHttpMethod[method]
-  if (!endpoints) throw new Error('HTTP Method Not Supported')
+  const handlersByEndpoint = endpointsByHttpMethod[method]
+  if (!handlersByEndpoint) throw new Error('HTTP Method Not Supported')
 
-  const handler = endpoints[path]
+  const handler = handlersByEndpoint[path]
   if (!handler) throw new Error('Endpoint Not Found')
 
   await delayApiRequest()

@@ -4,27 +4,21 @@ import { HttpMethod } from './types'
 
 const db = new Database('playlife')
 
-export const endpointsByHttpMethod = {
-  // To-do: Remove redundant endpoints
+type HandlersByEndpoint = Record<`${EndpointPaths}`, any>
+type EndpointsByMethod = Record<`${HttpMethod}`, Partial<HandlersByEndpoint>>
+
+export const endpointsByHttpMethod: EndpointsByMethod = {
   [HttpMethod.GET]: {
     [EndpointPaths.Tasks]: db.getTasks,
     [EndpointPaths.Achievements]: db.getAchievements,
-    [EndpointPaths.Task]: db.updateTask,
-    [EndpointPaths.Achievement]: db.createTask,
     [EndpointPaths.RecentStatistics]: db.getRecentStatistics,
   },
   [HttpMethod.POST]: {
-    [EndpointPaths.Tasks]: db.getTasks,
-    [EndpointPaths.Achievements]: db.getAchievements,
     [EndpointPaths.Task]: db.createTask,
     [EndpointPaths.Achievement]: db.createAchievement,
-    [EndpointPaths.RecentStatistics]: db.getRecentStatistics,
   },
   [HttpMethod.PUT]: {
-    [EndpointPaths.Tasks]: db.getTasks,
-    [EndpointPaths.Achievements]: db.getAchievements,
     [EndpointPaths.Task]: db.updateTask,
     [EndpointPaths.Achievement]: db.updateAchievement,
-    [EndpointPaths.RecentStatistics]: db.getRecentStatistics,
   },
-} as const
+}
