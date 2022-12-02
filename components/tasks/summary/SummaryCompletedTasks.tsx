@@ -4,6 +4,7 @@ import { toast } from 'react-toastify'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import BeenhereIcon from '@mui/icons-material/Beenhere'
+import { tasksSelectors } from '@/store/tasks'
 import { statisticsSelectors, statisticsThunks } from '@/store/statistics'
 import { GradientCard, IconCard, HorizontalCenteredStack } from '@/components/layout'
 import { AnimatedComparisonCounter } from '@/components/gauges'
@@ -14,6 +15,7 @@ import SummaryCardSkeleton from './SummaryCardSkeleton'
 
 const SummaryCompletedTasks = () => {
   const dispatch = useDispatch()
+  const tasksReceived = useSelector(tasksSelectors.tasksReceived)
   const completedTasks = useSelector(statisticsSelectors.completedTasks)
 
   const [completedTasksYest, setCompletedTasksYest] = useState(0)
@@ -35,13 +37,13 @@ const SummaryCompletedTasks = () => {
   }, [dispatch])
 
   useEffect(() => {
-    if (!completedTasks.length) return
+    if (!tasksReceived) return
     const [recordYest, recordToday] = padArrayStart(completedTasks, 2)
     setCompletedTasksYest(recordYest?.value?.length || 0)
     setCompletedTasksToday(recordToday?.value?.length || 0)
-  }, [completedTasks])
+  }, [completedTasks, tasksReceived])
 
-  if (!completedTasks.length) return <SummaryCardSkeleton />
+  if (!tasksReceived) return <SummaryCardSkeleton />
 
   return (
     <GradientCard>
