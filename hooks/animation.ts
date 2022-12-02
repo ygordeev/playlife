@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 import { animate } from 'framer-motion'
 
-export const useCountUp = (targetCount: number, duration: number) => {
+export const useCountUp = (targetCount: number, duration: number, initialCount: number = 0) => {
   const [count, setCount] = useState(0)
 
   useEffect(() => {
-    const animation = animate(0, targetCount, {
+    const animation = animate(initialCount, targetCount, {
       duration,
       ease: 'linear',
       onUpdate(value) {
@@ -14,7 +14,7 @@ export const useCountUp = (targetCount: number, duration: number) => {
     })
 
     return () => animation.stop()
-  }, [targetCount, duration])
+  }, [targetCount, duration, initialCount])
 
   return count
 }

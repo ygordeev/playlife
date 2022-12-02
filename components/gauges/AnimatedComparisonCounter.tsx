@@ -10,36 +10,38 @@ interface AnimatedComparisonCounterProps {
 }
 
 const AnimatedComparisonCounter = (props: AnimatedComparisonCounterProps) => {
-  const { currentCount, previousCount, timeFrameText } = props;
+  const { currentCount, previousCount, timeFrameText } = props
+  const isProgressEmpty = !currentCount || !previousCount
   
   const count = useCountUp(currentCount, currentCount / 10)
   const progress = useMemo(() => {
-    if (!previousCount) return 0
+    if (isProgressEmpty) return 0
     return Math.round((currentCount / previousCount - 1) * 100)
-  }, [previousCount, currentCount])
+  }, [previousCount, currentCount, isProgressEmpty])
 
-  const getProgressText = () => {
-    if (progress < 0) return `${progress}%`
-    if (progress >= 0) return `+${progress}%`
-    return null
-  }
-  const progressText = getProgressText()
-  const progressTextColor = progress >= 0 ? 'success.light' : 'error.light'
-  const timeFrameTextColor = progressText ? 'grey.500' : 'primary.main'
+  const isProgressPositive = progress >= 0
+  const progressText = isProgressPositive ? `+${progress}%` : `${progress}%`
+  const progressTextColor = isProgressPositive ? 'success.light' : 'error.light'
 
   return (
     <HorizontalCenteredStack mt={1}>
       <Typography variant="h4" mr={2}>
         {count}
       </Typography>
-      {progressText && (
-        <Typography component="span" color={progressTextColor} mr={0.5}>
-          {progressText}
+      {isProgressEmpty ? (
+        <Typography color="primary.main">
+          {!currentCount ? 'No completed tasks today' : 'Great progress. Keep it coming!'}
         </Typography>
+      ) : (
+        <>
+          <Typography component="span" color={progressTextColor} mr={0.5}>
+            {progressText}
+          </Typography>
+          <Typography component="span" color="grey.500">
+            from {timeFrameText}
+          </Typography>
+        </>
       )}
-      <Typography component="span" color={timeFrameTextColor}>
-        {progressText ? `from ${timeFrameText}` : 'Great progress. Keep it coming!'}
-      </Typography>
     </HorizontalCenteredStack>
   )
 }
