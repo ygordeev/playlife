@@ -65,7 +65,7 @@ export class Database {
   getRecentStatistics = async ({ type, count = 1 }: RecentStatisticsRequest) => {
     const recentRecords = await this.db.table('statistics').limit(count)
     const filteredRecords = recentRecords.filter((n: StatisticsTableEntry<number[]>) => n.type === type)
-    return filteredRecords.toArray() as unknown as StatisticsTableEntry<number[]>[]
+    return filteredRecords.toArray()
   }
   updateCompletedTasks = async (task: Task) => {
     const identifier = getStatisticsIdentifier(StatisticsTableTypes.CompletedTasks)

@@ -2,22 +2,13 @@ import groupBy from 'lodash/groupBy'
 import { createSlice, createSelector, createAsyncThunk } from '@reduxjs/toolkit'
 import { fakeAxios } from '@/database'
 import { taskBoardColumns } from '@/constants'
-import { NewTask, Task, EndpointPaths, StatisticsTableTypes } from '@/types'
+import { NewTask, Task, EndpointPaths } from '@/types'
 import { RootState } from './index'
-import { statisticsThunks } from './statistics'
+import { getRecentlyCompletedTasks } from './statistics'
 
 type TasksState = {
   taskList: Task[],
   tasksReceived: boolean,
-}
-
-const updateTaskAndStatistics = async (task: NewTask, thunkAPI: any) => {
-  const updatedTasks = await fakeAxios.put(EndpointPaths.Task, task) as Task[]
-  thunkAPI.dispatch(statisticsThunks.getRecentStatistics({
-    type: StatisticsTableTypes.CompletedTasks,
-    count: 2,
-  }))
-  return updatedTasks
 }
 
 export const tasksThunks = {
@@ -31,7 +22,11 @@ export const tasksThunks = {
   ),
   updateTask: createAsyncThunk(
     'tasks/updateTask',
-    async (task: NewTask, thunkAPI) => await updateTaskAndStatistics(task, thunkAPI)
+    async (task: NewTask, thunkAPI) => {
+      const updatedTasks = await fakeAxios.put(EndpointPaths.Task, task) as Task[]
+      thunkAPI.dispatch(getRecentlyCompletedTasks)
+      return updatedTasks
+    }
   ),
   moveTask: createAsyncThunk(
     'tasks/moveTask',
@@ -43,8 +38,12 @@ export const tasksThunks = {
       if (taskIndex < 0) throw new Error('Failed to move non-existing task')
       if (!column) throw new Error('Failed to move a task to non-existing column')
       
-      const task = { ...state.tasks.taskList[taskIndex], status: column.status }
-      updateTaskAndStatistics(task, thunkAPI) // No need to wait for API this time
+      const task = { ...state.tasks.taskList[taskIndex], status: column.status };
+      (async () => {
+        // No need to wait for API when dragging tasks between columns
+        await fakeAxios.put(EndpointPaths.Task, task)
+        thunkAPI.dispatch(getRecentlyCompletedTasks)
+      })()
       return { task, taskIndex }
     }
   )

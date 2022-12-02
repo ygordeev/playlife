@@ -1,6 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { fakeAxios } from '@/database'
-import { StatisticsTableEntry, RecentStatisticsRequest, EndpointPaths, StatisticsTableTypes } from '@/types'
+import {
+  StatisticsTableEntry,
+  RecentStatisticsRequest,
+  EndpointPaths,
+  StatisticsTableTypes
+} from '@/types'
 import { RootState } from './index'
 
 type StatisticsState = {
@@ -15,6 +20,11 @@ export const statisticsThunks = {
     }
   ),
 }
+
+export const getRecentlyCompletedTasks = statisticsThunks.getRecentStatistics({
+  type: StatisticsTableTypes.CompletedTasks,
+  count: 2,
+})
 
 const statisticsSlice = createSlice({
   name: 'statistics',
