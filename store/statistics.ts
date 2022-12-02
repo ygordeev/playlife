@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { fakeAxios } from '@/database'
+import { daysInWeek } from '@/constants'
+import { getTodayISO } from '@/utils'
 import {
   StatisticsTableEntry,
   RecentStatisticsRequest,
@@ -9,40 +11,38 @@ import {
 import { RootState } from './index'
 
 type StatisticsState = {
-  recentStatistics: StatisticsTableEntry[]
+  weeklyCompletedTasks: StatisticsTableEntry[]
 }
 
 export const statisticsThunks = {
-  getRecentStatistics: createAsyncThunk(
-    'statistics/getRecentStatistics',
-    async (payload: RecentStatisticsRequest) => {
+  getWeeklyCompletedTasks: createAsyncThunk(
+    'statistics/getWeeklyCompletedTasks',
+    async () => {
+      const payload: RecentStatisticsRequest = {
+        type: StatisticsTableTypes.CompletedTasks,
+        minDate: '2022-11-25',
+        maxDate: getTodayISO(),
+      }
       return await fakeAxios.get(EndpointPaths.RecentStatistics, payload) as StatisticsTableEntry[]
     }
   ),
 }
 
-export const getRecentlyCompletedTasks = statisticsThunks.getRecentStatistics({
-  type: StatisticsTableTypes.CompletedTasks,
-  count: 2,
-})
-
 const statisticsSlice = createSlice({
   name: 'statistics',
   initialState: {
-    recentStatistics: [],
+    weeklyCompletedTasks: [],
   } as StatisticsState,
   reducers: {},
   extraReducers: builder => {
-    builder.addCase(statisticsThunks.getRecentStatistics.fulfilled, (state, action) => {
-      state.recentStatistics = action.payload
+    builder.addCase(statisticsThunks.getWeeklyCompletedTasks.fulfilled, (state, action) => {
+      state.weeklyCompletedTasks = action.payload
     })
   }
 })
 
 export const statisticsSelectors = {
-  completedTasks: (state: RootState) => {
-    return state.statistics.recentStatistics.filter(r => r.type === StatisticsTableTypes.CompletedTasks)
-  }
+  weeklyCompletedTasks: (state: RootState) => state.statistics.weeklyCompletedTasks,
 }
 
 export const statisticsActions = statisticsSlice.actions

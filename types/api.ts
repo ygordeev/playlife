@@ -18,5 +18,6 @@ export interface StatisticsTableEntry<T = any> {
 
 export interface RecentStatisticsRequest {
   type: StatisticsTableTypes,
-  count?: number
+  minDate: string,
+  maxDate: string,
 }

@@ -6,12 +6,3 @@ export const convertRgbToHex = (r: number, g: number, b: number) => {
     return acc
   }, '#')
 }
-
-export const padArrayStart = (arr: any[], length?: number, placeholder?: any) => {
-  const arrCopy = [...arr]
-  const currentLength = arrCopy.length
-  if (!length || length <= currentLength) return arrCopy
-  const lengthDifference = length - currentLength
-  arrCopy.splice(0, 0, ...Array(lengthDifference).fill(null).map(() => placeholder))
-  return arrCopy
-}

@@ -19,11 +19,6 @@ export class Database {
     this.db.on('populate', trans => {
       trans.table('tasks').bulkPut(tasks)
       trans.table('achievements').bulkPut(achievements)
-      trans.table('statistics').put({
-        date: '2022-12-01',
-        type: StatisticsTableTypes.CompletedTasks,
-        value: [1, 2, 3, 4, 5]
-      })
     })
 
     const initializeStatistics = async () => {
@@ -62,10 +57,12 @@ export class Database {
     return await this.getAchievements()
   }
   // Statistics
-  getRecentStatistics = async ({ type, count = 1 }: RecentStatisticsRequest) => {
-    const recentRecords = await this.db.table('statistics').limit(count)
-    const filteredRecords = recentRecords.filter((n: StatisticsTableEntry<number[]>) => n.type === type)
-    return filteredRecords.toArray()
+  getRecentStatistics = async ({ type, minDate, maxDate }: RecentStatisticsRequest) => {
+    const filteredRecords = await this.db.table('statistics').filter(r => {
+      return r.type === type && minDate <= r.date && r.date <= maxDate
+    })
+    const recordsArray = await filteredRecords.toArray()
+    return recordsArray.reverse()
   }
   updateCompletedTasks = async (task: Task) => {
     const identifier = getStatisticsIdentifier(StatisticsTableTypes.CompletedTasks)

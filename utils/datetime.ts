@@ -10,4 +10,10 @@ export const getISODate = (date: Date | null) => {
   return date?.toISOString().substring(0, 10)
 }
 
-export const getTodayISO = () => getISODate(new Date())
+export const getTodayISO = () => getISODate(new Date())!
+
+export const subtractDays = (numOfDays: number, date = new Date()) => {
+  const dateCopy = new Date(date.getTime());
+  dateCopy.setDate(dateCopy.getDate() - numOfDays);
+  return dateCopy;
+}

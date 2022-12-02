@@ -4,7 +4,7 @@ import { fakeAxios } from '@/database'
 import { taskBoardColumns } from '@/constants'
 import { NewTask, Task, EndpointPaths } from '@/types'
 import { RootState } from './index'
-import { getRecentlyCompletedTasks } from './statistics'
+import { statisticsThunks } from './statistics'
 
 type TasksState = {
   taskList: Task[],
@@ -24,7 +24,7 @@ export const tasksThunks = {
     'tasks/updateTask',
     async (task: NewTask, thunkAPI) => {
       const updatedTasks = await fakeAxios.put(EndpointPaths.Task, task) as Task[]
-      thunkAPI.dispatch(getRecentlyCompletedTasks)
+      thunkAPI.dispatch(statisticsThunks.getWeeklyCompletedTasks())
       return updatedTasks
     }
   ),
@@ -42,7 +42,7 @@ export const tasksThunks = {
       (async () => {
         // No need to wait for API when dragging tasks between columns
         await fakeAxios.put(EndpointPaths.Task, task)
-        thunkAPI.dispatch(getRecentlyCompletedTasks)
+        thunkAPI.dispatch(statisticsThunks.getWeeklyCompletedTasks())
       })()
       return { task, taskIndex }
     }
@@ -79,6 +79,7 @@ export const tasksSelectors = {
     (state: RootState) => state.tasks.taskList,
     tasks => groupBy(tasks, 'status'),
   ),
+  tasksList: (state: RootState) => state.tasks.taskList,
   tasksReceived: (state: RootState) => state.tasks.tasksReceived,
 }
 
