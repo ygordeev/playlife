@@ -1,9 +1,8 @@
+import { useSelector } from 'react-redux'
 import Stack from '@mui/material/Stack'
 import Avatar from '@mui/material/Avatar'
 import Typography from '@mui/material/Typography'
-
-// To-do: We should extract the actual user from the store
-import { user } from '@/constants'
+import { authSelectors } from '@/store/auth'
 
 const profileButtonStyle = {
   cursor: 'pointer',
@@ -13,6 +12,8 @@ const profileButtonStyle = {
 }
 
 const ProfileButton = () => {
+  const user = useSelector(authSelectors.user)
+
   return (
     <Stack
       direction="row"

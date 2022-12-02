@@ -1,6 +1,7 @@
 import { Complexity, TaskStatus, Task, Achievement } from '@/types'
 
 export const user = {
+  id: 1,
   firstName: 'Yan',
   lastName: 'Gordeev'
 }
