@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import { useSelector } from 'react-redux'
 import { DragDropContext, DragDropContextProps } from 'react-beautiful-dnd'
 import { toast } from 'react-toastify'
@@ -19,7 +19,7 @@ const TaskBoard = (stackProps: StackProps) => {
 
   const [selectedTask, setSelectedTask] = useState<Task | null>(null)
 
-  const onDragEnd: DragDropContextProps['onDragEnd'] = result => {
+  const onDragEnd: DragDropContextProps['onDragEnd'] = useCallback(result => {
     try {
       const destinationId = result.destination?.droppableId
       if (!destinationId) return
@@ -29,7 +29,7 @@ const TaskBoard = (stackProps: StackProps) => {
       const error = e as Error
       toast.error(error.message)
     }
-  }
+  }, [dispatch])
 
   return (
     <Stack

@@ -89,7 +89,7 @@ const AchievementDialog = ({ achievement = defaultAchievement, onClose }: Achiev
               backgroundColor={watch('backgroundColor')}
               borderColor={watch('borderColor')}
               ribbonColor={watch('ribbonColor')}
-              onChange={(colorType, color) => setValue(colorType, color)}
+              onChange={setValue}
             />
           </Stack>
 

@@ -27,7 +27,7 @@ const CustomEmojiPicker = <T extends FieldValues>(props: ControllerFieldProps<T>
   )
 }
 
-const MemoizedEmojiPicker = memo(CustomEmojiPicker, (nextProps, prevProps) => {
+const MemoizedEmojiPicker = memo(CustomEmojiPicker, (prevProps, nextProps) => {
   return nextProps.errorMessage === prevProps.errorMessage
 }) as typeof CustomEmojiPicker
 
