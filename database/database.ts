@@ -19,11 +19,6 @@ export class Database {
     this.db.on('populate', trans => {
       trans.table('tasks').bulkPut(tasks)
       trans.table('achievements').bulkPut(achievements)
-      trans.table('statistics').put({
-        date: '2022-12-02',
-        type: StatisticsTableTypes.CompletedTasks,
-        value: [1, 2]
-      })
     })
 
     const initializeStatistics = async () => {

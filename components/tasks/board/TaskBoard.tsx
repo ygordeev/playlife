@@ -21,10 +21,13 @@ const TaskBoard = (stackProps: StackProps) => {
 
   const onDragEnd: DragDropContextProps['onDragEnd'] = useCallback(result => {
     try {
-      const destinationId = result.destination?.droppableId
-      if (!destinationId) return
-      const payload = { taskId: +result.draggableId, columnId: +destinationId }
-      dispatch(tasksThunks.moveTask(payload))
+      if (!result.destination) return
+      const { droppableId, index } = result.destination
+      dispatch(tasksThunks.moveTask({
+        taskId: +result.draggableId,
+        columnId: +droppableId,
+        targetPosition: index,
+      }))
     } catch (e: unknown) {
       const error = e as Error
       toast.error(error.message)

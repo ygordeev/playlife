@@ -7,6 +7,7 @@ export interface Task {
   description: string,
   complexity: Complexity,
   dueDate: string | null,
+  position: number,
   imageUrl?: string,
 }
 

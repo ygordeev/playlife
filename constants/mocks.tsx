@@ -53,6 +53,7 @@ export const tasks: Task[] = [
     dueDate: '2020-12-12',
     imageUrl: 'https://images.unsplash.com/photo-1528164344705-47542687000d?auto=format&fit=crop&w=512&q=80',
     complexity: Complexity.Easy,
+    position: 1024,
   },
   {
     id: 2,
@@ -61,6 +62,7 @@ export const tasks: Task[] = [
     description: 'The earlier you get up, the more you will be able to do',
     dueDate: '2023-01-12',
     complexity: Complexity.Medium,
+    position: 1024,
   },
   {
     id: 3,
@@ -70,6 +72,7 @@ export const tasks: Task[] = [
     dueDate: '2024-01-25',
     imageUrl: 'https://images.unsplash.com/photo-1612281423255-b152cacea3e1?auto=format&fit=crop&q=80&w=400',
     complexity: Complexity.Easy,
+    position: 2048,
   },
   {
     id: 4,
@@ -78,6 +81,7 @@ export const tasks: Task[] = [
     description: 'This is my primary goal at the moment. Atlanta? SF? Who knows...',
     dueDate: '2021-05-12',
     complexity: Complexity.Hard,
+    position: 1024,
   },
   {
     id: 5,
@@ -87,5 +91,6 @@ export const tasks: Task[] = [
     dueDate: '2024-01-17',
     imageUrl: 'https://images.unsplash.com/photo-1414124488080-0188dcbb8834?auto=format&fit=crop&w=512&q=80',
     complexity: Complexity.Medium,
+    position: 1024,
   },
 ]
