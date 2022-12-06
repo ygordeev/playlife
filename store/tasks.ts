@@ -1,10 +1,7 @@
-import groupBy from 'lodash/groupBy'
-import sortBy from 'lodash/sortBy'
-import { createSlice, createSelector, createAsyncThunk } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { fakeAxios } from '@/database'
-import { taskBoardColumns } from '@/constants'
 import { getNewTaskPosition } from '@/utils'
-import { NewTask, Task, EndpointPaths } from '@/types'
+import { NewTask, Task, TaskStatus, EndpointPaths } from '@/types'
 import { RootState } from './index'
 import { statisticsThunks } from './statistics'
 
@@ -15,8 +12,9 @@ interface TasksState {
 
 interface MoveTaskThunkPayload {
   taskId: number,
-  columnId: number,
   targetPosition: number,
+  status: TaskStatus,
+  siblings: Task[],
 }
 
 export const tasksThunks = {
@@ -38,21 +36,17 @@ export const tasksThunks = {
   ),
   moveTask: createAsyncThunk(
     'tasks/moveTask',
-    async ({ taskId, columnId, targetPosition }: MoveTaskThunkPayload, thunkAPI) => {
+    async ({ taskId, targetPosition, status, siblings }: MoveTaskThunkPayload, thunkAPI) => {
       const state = thunkAPI.getState() as RootState
       const taskIndex = state.tasks.taskList.findIndex(t => t.id === taskId)
-      const column = taskBoardColumns.find(c => c.id === columnId)
       
       if (taskIndex < 0) throw new Error('Failed to move non-existing task')
-      if (!column) throw new Error('Failed to move a task to non-existing column')
 
-      const task = {...state.tasks.taskList[taskIndex]}
-      const isSameStatus = task.status === column.status
-      const newSiblings = tasksSelectors.tasksByStatus(state)[column.status] || []
-      const newPosition = getNewTaskPosition(targetPosition, newSiblings, isSameStatus)
-      
-      task.status = column.status
-      task.position = newPosition;
+      const task = {
+        ...state.tasks.taskList[taskIndex],
+        position: getNewTaskPosition(targetPosition, siblings),
+        status
+      };
       
       (async () => {
         // No need to wait for API when dragging tasks between columns
@@ -90,16 +84,6 @@ const tasksSlice = createSlice({
 })
 
 export const tasksSelectors = {
-  tasksByStatus: createSelector(
-    (state: RootState) => state.tasks.taskList,
-    tasks => {
-      const groupedTasks = groupBy(tasks, 'status')
-      return Object.entries(groupedTasks).reduce((acc, [status, tasks]) => {
-        acc[status] = sortBy(tasks, 'position')
-        return acc
-      }, {} as typeof groupedTasks)
-    },
-  ),
   tasksList: (state: RootState) => state.tasks.taskList,
   tasksReceived: (state: RootState) => state.tasks.tasksReceived,
 }
