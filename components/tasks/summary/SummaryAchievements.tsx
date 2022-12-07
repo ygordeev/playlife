@@ -7,10 +7,10 @@ import { Link } from '@/components/controls'
 import { AchievementIcon } from '@/components/icons'
 import SummaryCardSkeleton from './SummaryCardSkeleton'
 
-const MAX_ACHIEVEMENT_COUNT = 4
+const maxAchievementCount = 4
 
 const getAchievementStackStyle = (achievementCount: number) => ({
-  justifyContent: achievementCount < MAX_ACHIEVEMENT_COUNT ? 'flex-start' : 'space-between',
+  justifyContent: achievementCount < maxAchievementCount ? 'flex-start' : 'space-between',
   mt: 1,
 })
 

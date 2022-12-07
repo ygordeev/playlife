@@ -1,12 +1,11 @@
 import { useState } from 'react'
 import Button from '@mui/material/Button'
-import { StackProps } from '@mui/material/Stack'
 import { ProfileButton } from '@/components/controls'
 import { HorizontalCenteredStack, SiteLogo } from '@/components/layout'
 import { TaskDialog } from '@/components/dialogs'
 import HeaderSectionNavigation from './HeaderSectionNavigation'
 
-const HeaderSection = (props: StackProps) => {
+const HeaderSection = () => {
   const [isNewTaskDialogOpen, setIsNewTaskDialogOpen] = useState(false)
 
   return (
@@ -14,7 +13,6 @@ const HeaderSection = (props: StackProps) => {
       <HorizontalCenteredStack
         component="header"
         justifyContent="space-between"
-        {...props}
       >
         <HorizontalCenteredStack spacing={6}>
           <SiteLogo fontSize="1.5rem" />
