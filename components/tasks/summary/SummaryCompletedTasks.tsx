@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography'
 import BeenhereIcon from '@mui/icons-material/Beenhere'
 import { statisticsSelectors, statisticsThunks } from '@/store/statistics'
 import { GradientCard, IconCard, HorizontalCenteredStack } from '@/components/layout'
-import { AnimatedComparisonCounter } from '@/components/gauges'
+import { ProgressComparison } from '@/components/gauges'
 import { useDispatch } from '@/hooks'
 import SummaryCardSkeleton from './SummaryCardSkeleton'
 
@@ -50,7 +50,7 @@ const SummaryCompletedTasks = () => {
           <Typography>Tasks Completed</Typography>
         </HorizontalCenteredStack>
 
-        <AnimatedComparisonCounter
+        <ProgressComparison
           currentCount={completedTasksToday}
           previousCount={completedTasksYest}
           timeFrameText="yesterday"

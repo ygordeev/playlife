@@ -3,21 +3,22 @@ import Typography from '@mui/material/Typography'
 import { HorizontalCenteredStack } from '@/components/layout'
 import { useCountUp } from '@/hooks'
 
-interface AnimatedComparisonCounterProps {
+interface ProgressComparisonProps {
   currentCount: number,
   previousCount: number,
   timeFrameText: string,
 }
 
-const AnimatedComparisonCounter = (props: AnimatedComparisonCounterProps) => {
+const AnimatedCounter = ({ targetCount }: { targetCount: number }) => {
+  const count = useCountUp(targetCount, targetCount / 10)
+
+  return <Typography variant="h4" mr={2}>{count}</Typography>
+}
+
+const ProgressComparison = (props: ProgressComparisonProps) => {
   const { currentCount, previousCount, timeFrameText } = props
   const isProgressEmpty = !currentCount || !previousCount
-  
-  const count = useCountUp(currentCount, currentCount / 10)
-  const progress = useMemo(() => {
-    if (isProgressEmpty) return 0
-    return Math.round((currentCount / previousCount - 1) * 100)
-  }, [previousCount, currentCount, isProgressEmpty])
+  const progress = isProgressEmpty ? 0 : Math.round((currentCount / previousCount - 1) * 100)
 
   const isProgressPositive = progress >= 0
   const progressText = isProgressPositive ? `+${progress}%` : `${progress}%`
@@ -25,16 +26,19 @@ const AnimatedComparisonCounter = (props: AnimatedComparisonCounterProps) => {
 
   return (
     <HorizontalCenteredStack>
-      <Typography variant="h4" mr={2}>
-        {count}
-      </Typography>
+      <AnimatedCounter targetCount={currentCount} />
+
       {isProgressEmpty ? (
         <Typography color="primary.main">
-          {!currentCount ? 'No completed tasks today' : 'Great progress. Keep it coming!'}
+          {currentCount ? 'Great progress. Keep it coming!' : 'No completed tasks today'}
         </Typography>
       ) : (
         <>
-          <Typography component="span" color={progressTextColor} mr={0.5}>
+          <Typography
+            component="span"
+            color={progressTextColor}
+            mr={0.5}
+          >
             {progressText}
           </Typography>
           <Typography component="span" color="grey.500">
@@ -46,4 +50,4 @@ const AnimatedComparisonCounter = (props: AnimatedComparisonCounterProps) => {
   )
 }
 
-export default AnimatedComparisonCounter
+export default ProgressComparison

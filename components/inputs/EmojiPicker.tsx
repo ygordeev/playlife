@@ -9,7 +9,7 @@ import { useValidationRules } from '@/hooks'
 import { ControllerFieldProps } from '@/types'
 
 const CustomEmojiPicker = <T extends FieldValues>(props: ControllerFieldProps<T> & EmojiPickerProps) => {
-  const { control, name, validators, errorMessage } = props
+  const { control, name, validators, errorMessage } = props  
 
   const { rules } = useValidationRules(validators || [])
   const { field } = useController({ name, control, rules })
@@ -27,8 +27,6 @@ const CustomEmojiPicker = <T extends FieldValues>(props: ControllerFieldProps<T>
   )
 }
 
-const MemoizedEmojiPicker = memo(CustomEmojiPicker, (prevProps, nextProps) => {
-  return nextProps.errorMessage === prevProps.errorMessage
-}) as typeof CustomEmojiPicker
+const MemoizedEmojiPicker = memo(CustomEmojiPicker) as typeof CustomEmojiPicker
 
 export default MemoizedEmojiPicker

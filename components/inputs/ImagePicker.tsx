@@ -1,4 +1,9 @@
-import { useState, useMemo } from 'react'
+import {
+  memo,
+  useState,
+  useMemo,
+  useCallback,
+} from 'react'
 import debounce from 'lodash/debounce'
 import { useController, FieldValues } from 'react-hook-form'
 import Typography from '@mui/material/Typography'
@@ -24,6 +29,7 @@ const ImagePicker = <T extends FieldValues>(props: ControllerFieldProps<T> & Ima
 
   const { rules } = useValidationRules(validators || [] || [])
   const { field } = useController({ name, control, rules })
+  const { onChange } = field
 
   const handleSearchDebounced = useMemo(() => debounce(async (query: string) => {
     if (!query) return
@@ -43,10 +49,10 @@ const ImagePicker = <T extends FieldValues>(props: ControllerFieldProps<T> & Ima
     handleSearchDebounced(query)
   }
 
-  const handleSelectImage = (image: UnsplashImage | null) => {
+  const handleSelectImage = useCallback((image: UnsplashImage | null) => {
     setPreviewImage(image)
-    field.onChange(image?.url)
-  }
+    onChange(image?.url)
+  }, [onChange])
 
   return (
     <Stack component="article" spacing={2}>
@@ -85,4 +91,4 @@ const ImagePicker = <T extends FieldValues>(props: ControllerFieldProps<T> & Ima
   )
 }
 
-export default ImagePicker
+export default memo(ImagePicker) as typeof ImagePicker

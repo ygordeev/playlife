@@ -16,12 +16,14 @@ import { AchievementIcon } from '@/components/icons'
 import { AchievementColorPicker } from '@/components/controls'
 import { useDispatch } from '@/hooks'
 import { defaultAchievement } from '@/constants'
-import { NewAchievement } from '@/types'
+import { NewAchievement, ValidatorType } from '@/types'
 
 interface AchievementDialogProps {
   achievement?: NewAchievement,
   onClose: () => void,
 }
+
+const validatorRequired = ['required'] as ValidatorType[]
 
 const AchievementDialog = ({ achievement = defaultAchievement, onClose }: AchievementDialogProps) => {
   const {
@@ -77,7 +79,7 @@ const AchievementDialog = ({ achievement = defaultAchievement, onClose }: Achiev
           <TextField
             name="description"
             label="Achievement Description"
-            validators={['required']}
+            validators={validatorRequired}
             control={control}
             errorMessage={errors.description?.message}
             fullWidth
@@ -97,7 +99,7 @@ const AchievementDialog = ({ achievement = defaultAchievement, onClose }: Achiev
             <Typography color="grey.500">Icon Emoji</Typography>
             <EmojiPicker
               name="emoji"
-              validators={['required']}
+              validators={validatorRequired}
               control={control}
               errorMessage={errors.emoji?.message}
             />

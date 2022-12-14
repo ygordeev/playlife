@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react'
 import Stack from '@mui/material/Stack'
 
-const HorizontalCenteredStack: typeof Stack = ({ children, ...props }: PropsWithChildren) => {
+const HorizontalCenteredStack = ({ children, ...props }: PropsWithChildren) => {
   return (
     <Stack
       direction="row"
@@ -13,4 +13,4 @@ const HorizontalCenteredStack: typeof Stack = ({ children, ...props }: PropsWith
   )
 }
 
-export default HorizontalCenteredStack
+export default HorizontalCenteredStack as typeof Stack

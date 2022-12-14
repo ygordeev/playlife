@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import Image from 'next/image'
 import MuiImageList from '@mui/material/ImageList'
 import ImageListItem from '@mui/material/ImageListItem'
@@ -19,7 +19,7 @@ const getListItemStyle = (highlighted: boolean) => ({
 })
 
 const ImageList = ({ width, height, images, onImageSelect }: ImageListProps) => {
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null)  
 
   if (images.length === 0) return (
     <Typography color="grey.400" px={1}>
@@ -55,4 +55,4 @@ const ImageList = ({ width, height, images, onImageSelect }: ImageListProps) => 
   )
 }
 
-export default ImageList
+export default memo(ImageList)

@@ -3,7 +3,7 @@ import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
 
-const NewAchievementButtonStyle = {
+const newAchievementButtonStyle = {
   width: 327,
   height: '100%',
   cursor: 'pointer',
@@ -15,8 +15,12 @@ const NewAchievementButtonStyle = {
 
 const NewAchievementButton = (paperProps: PaperProps) => {
   return (
-    <Paper sx={NewAchievementButtonStyle} {...paperProps}>
-      <Stack justifyContent="center" alignItems="center" height="100%">
+    <Paper sx={newAchievementButtonStyle} {...paperProps}>
+      <Stack
+        justifyContent="center"
+        alignItems="center"
+        height="100%"
+      >
         <AddCircleOutlineIcon color="primary" sx={{ fontSize: '3rem' }} />
 
         <Typography color="primary.main">

@@ -2,12 +2,7 @@ import { useController, FieldValues } from 'react-hook-form'
 import TextField, { TextFieldProps } from '@mui/material/TextField'
 import MenuItem from '@mui/material/MenuItem'
 import { useValidationRules } from '@/hooks'
-import { ControllerFieldProps } from '@/types'
-
-interface DropdownOption {
-  value: string,
-  label: string,
-}
+import { ControllerFieldProps, DropdownOption } from '@/types'
 
 type DropdownProps = TextFieldProps & {
   options: DropdownOption[],

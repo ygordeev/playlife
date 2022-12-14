@@ -15,11 +15,7 @@ const iconCardStyle = {
 }
 
 const IconCard = ({ children }: { children: ReactNode }) => {
-  return (
-    <Box sx={iconCardStyle}>
-      {children}
-    </Box>
-  )
+  return <Box sx={iconCardStyle}>{children}</Box>
 }
 
 export default IconCard

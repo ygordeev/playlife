@@ -19,7 +19,12 @@ const LandingDisclaimer = () => {
           </Typography>
         </Stack>
 
-        <Typography borderLeft={2} borderColor="primary.main" mb={2} pl={1}>
+        <Typography
+          borderLeft={2}
+          borderColor="primary.main"
+          mb={2}
+          pl={1}
+        >
           Playlife is a task management system designed to gamify your daily routine.
           Want to study Japanese? Want to learn how to cook? Want to plan your relocation?
           Then Playlife is just what you need!

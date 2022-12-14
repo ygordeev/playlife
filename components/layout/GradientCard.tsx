@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react'
+import { ReactNode } from 'react'
 import Box from '@mui/material/Box'
 
 const gradientCardStyle = {
@@ -12,15 +12,8 @@ const gradientCardStyle = {
   py: 1,
 }
 
-const GradientCard = ({ children, ...props }: PropsWithChildren) => {
-  return (
-    <Box
-      sx={gradientCardStyle}
-      {...props}
-    >
-      {children}
-    </Box>
-  )
+const GradientCard = ({ children }: { children: ReactNode }) => {
+  return <Box sx={gradientCardStyle}>{children}</Box>
 }
 
 export default GradientCard

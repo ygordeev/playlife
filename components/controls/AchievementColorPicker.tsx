@@ -1,4 +1,4 @@
-import { useState, useCallback, useId } from 'react'
+import { memo, useState, useId } from 'react'
 import { ChromePicker, ColorChangeHandler } from 'react-color'
 import Stack from '@mui/material/Stack'
 import Box, { BoxProps } from '@mui/material/Box'
@@ -23,7 +23,7 @@ const ColorPickerIcon = ({ color, ...boxProps }: { color: string } & BoxProps) =
   />
 )
 
-const AchievementColorPicker = (props: AchievementColorPickerProps) => {
+const AchievementColorPicker = (props: AchievementColorPickerProps) => {  
   const [popoverAnchor, setPopoverAnchor] = useState<HTMLButtonElement | null>(null)
   const [selectedColorType, setSelectedColorType] = useState<AchievementColorType>()
   const generatedPopoverId = useId()
@@ -85,4 +85,4 @@ const AchievementColorPicker = (props: AchievementColorPickerProps) => {
   )
 }
 
-export default AchievementColorPicker
+export default memo(AchievementColorPicker)

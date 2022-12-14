@@ -1,15 +1,18 @@
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import { capitalize } from '@/utils'
+import { Complexity } from '@/types'
+
+type ComplexityType = `${Complexity}`
 
 interface ComplexityIndicatorProps {
-  complexity: 'hard' | 'medium' | 'easy'
+  complexity: ComplexityType
 }
 
-const complexityColors = {
-  hard: 'error.light',
-  medium: 'warning.light',
+const complexityColors: Record<ComplexityType, string> = {
   easy: 'success.light',
+  medium: 'warning.light',
+  hard: 'error.light',
 }
 
 const ComplexityIndicator = ({ complexity }: ComplexityIndicatorProps) => {

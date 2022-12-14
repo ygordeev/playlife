@@ -14,9 +14,7 @@ const getHeadingStyle = (fontSize: FontSizeType) => ({
 const SiteLogo = ({ fontSize }: { fontSize: FontSizeType }) => {
   // This component is temporary. In the future either PNG or SVG will be used
 
-  return (
-    <Typography sx={getHeadingStyle(fontSize)}>PLAYLIFE</Typography>
-  )
+  return <Typography sx={getHeadingStyle(fontSize)}>PLAYLIFE</Typography>
 }
 
 export default SiteLogo

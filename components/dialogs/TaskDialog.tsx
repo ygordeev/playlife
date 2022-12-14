@@ -12,12 +12,14 @@ import { tasksThunks } from '@/store/tasks'
 import { TextField, Dropdown, DatePicker, ImagePicker } from '@/components/inputs'
 import { taskComplexityOptions, taskStatusOptions, defaultTask } from '@/constants'
 import { useDispatch } from '@/hooks'
-import { NewTask } from '@/types'
+import { NewTask, ValidatorType } from '@/types'
 
 interface TaskDialogProps {
   task?: NewTask,
   onClose: () => void,
 }
+
+const validatorRequired = ['required'] as ValidatorType[]
 
 const TaskDialog = ({ task = defaultTask, onClose }: TaskDialogProps) => {
   const dispatch = useDispatch()
@@ -63,7 +65,7 @@ const TaskDialog = ({ task = defaultTask, onClose }: TaskDialogProps) => {
           <TextField
             name="name"
             label="Task Name"
-            validators={['required']}
+            validators={validatorRequired}
             control={control}
             errorMessage={errors.name?.message}
             fullWidth
@@ -72,7 +74,7 @@ const TaskDialog = ({ task = defaultTask, onClose }: TaskDialogProps) => {
           <TextField
             name="description"
             label="Task Description"
-            validators={['required']}
+            validators={validatorRequired}
             control={control}
             errorMessage={errors.description?.message}
             multiline
@@ -82,7 +84,7 @@ const TaskDialog = ({ task = defaultTask, onClose }: TaskDialogProps) => {
           <Dropdown
             name="status"
             label="Task Status"
-            validators={['required']}
+            validators={validatorRequired}
             control={control}
             errorMessage={errors.status?.message}
             options={taskStatusOptions}
@@ -91,7 +93,7 @@ const TaskDialog = ({ task = defaultTask, onClose }: TaskDialogProps) => {
           <Dropdown
             name="complexity"
             label="Task Complexity"
-            validators={['required']}
+            validators={validatorRequired}
             control={control}
             errorMessage={errors.complexity?.message}
             options={taskComplexityOptions}
