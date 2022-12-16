@@ -5,18 +5,19 @@ import { achievementsSelectors } from '@/store/achievements'
 import { GradientCard, HorizontalCenteredStack } from '@/components/layout'
 import { Link } from '@/components/controls'
 import { AchievementIcon } from '@/components/icons'
+import { maxSummaryAchievementCount } from '@/constants'
 import SummaryCardSkeleton from './SummaryCardSkeleton'
 
-const maxAchievementCount = 4
-
 const getAchievementStackStyle = (achievementCount: number) => ({
-  justifyContent: achievementCount < maxAchievementCount ? 'flex-start' : 'space-between',
+  justifyContent: achievementCount < maxSummaryAchievementCount ? 'flex-start' : 'space-between',
   mt: 1,
 })
 
 const SummaryRecentAchievements = () => {
   const achievements = useSelector(achievementsSelectors.achievements)
   const achievementsReceived = useSelector(achievementsSelectors.achievementsReceived)
+
+  const achievementSlice = achievements.slice(0, 4)
 
   if (!achievementsReceived) return <SummaryCardSkeleton />
   
@@ -39,7 +40,7 @@ const SummaryRecentAchievements = () => {
         spacing={2}
         sx={getAchievementStackStyle(achievements.length)}
       >
-        {achievements.slice(0, 4).map(achievement => (
+        {achievementSlice.map(achievement => (
           <Tooltip key={achievement.id} title={achievement.description}>
             <div>
               <AchievementIcon

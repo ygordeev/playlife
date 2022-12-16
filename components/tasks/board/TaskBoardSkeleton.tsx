@@ -6,6 +6,8 @@ const skeletonStyle = {
   flexGrow: 1,
 }
 
+const skeletonArray = Array(4).fill(null)
+
 const TaskBoardSkeleton = () => {
   return (
     <Stack
@@ -13,10 +15,9 @@ const TaskBoardSkeleton = () => {
       spacing={2}
       flex={1}
     >
-      <Skeleton sx={skeletonStyle} />
-      <Skeleton sx={skeletonStyle} />
-      <Skeleton sx={skeletonStyle} />
-      <Skeleton sx={skeletonStyle} />
+      {skeletonArray.map((n, idx) => (
+        <Skeleton key={idx} sx={skeletonStyle} />
+      ))}
     </Stack>
   )
 }

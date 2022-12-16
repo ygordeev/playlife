@@ -14,10 +14,8 @@ const SummaryWeeklyProgress = () => {
   const completedTasks = useSelector(statisticsSelectors.weeklyCompletedTasks)
 
   const finishedTasks = useMemo(() => {
-    const taskArray = completedTasks.reduce<number[]>((acc, task) => {
-      return task?.value ? [...acc, ...task.value] : acc
-    }, [])
-    return [...new Set(taskArray)]
+    const taskIds = completedTasks.map(t => t.value).filter(Boolean)
+    return [...new Set(taskIds)]
   }, [completedTasks])
 
   if (!completedTasks.length) return <SummaryCardSkeleton />

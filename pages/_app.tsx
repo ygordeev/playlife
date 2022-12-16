@@ -4,12 +4,12 @@ import { Provider as StoreProvider } from 'react-redux'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-import store from '@/store'
 import { ThemeProvider } from '@mui/material/styles'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
-import { GlobalStyles } from '@/styles'
+import store from '@/store'
 import { customMuiTheme } from '@/context'
+import { GlobalStyles } from '@/styles'
 
 export default function App({ Component, pageProps }: AppProps) {
   return (

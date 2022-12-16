@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { Droppable, DroppableProvided, DroppableStateSnapshot } from 'react-beautiful-dnd'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
@@ -80,4 +81,10 @@ const DashboardTasksColumn = ({ column, tasks, onTaskSelect }: TasksColumnProps)
   )
 }
 
-export default DashboardTasksColumn
+export default memo(DashboardTasksColumn, (prevProps, nextProps) => {
+  // There is no point in re-rendering all 4 columns if only 2 of them have changed
+  const tasksEqual = JSON.stringify(prevProps.tasks) === JSON.stringify(nextProps.tasks)
+  const onTaskSelectEqual = prevProps.onTaskSelect === nextProps.onTaskSelect
+  
+  return tasksEqual && onTaskSelectEqual
+})

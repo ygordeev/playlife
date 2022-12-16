@@ -1,5 +1,7 @@
 import { NewAchievement } from '@/types'
 
+export const maxSummaryAchievementCount = 4
+
 export const defaultAchievement: NewAchievement = {
   description: '',
   backgroundColor: 'black',
