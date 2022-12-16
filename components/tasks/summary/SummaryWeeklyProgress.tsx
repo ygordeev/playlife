@@ -14,7 +14,7 @@ const SummaryWeeklyProgress = () => {
   const completedTasks = useSelector(statisticsSelectors.weeklyCompletedTasks)
 
   const finishedTasks = useMemo(() => {
-    const taskIds = completedTasks.map(t => t.value).filter(Boolean)
+    const taskIds = completedTasks.map(t => t.value).flat()
     return [...new Set(taskIds)]
   }, [completedTasks])
 
