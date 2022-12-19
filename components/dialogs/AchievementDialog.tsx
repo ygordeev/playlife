@@ -35,6 +35,7 @@ const AchievementDialog = ({ achievement = defaultAchievement, onClose }: Achiev
 
   const dispatch = useDispatch()
   const [isUpdatingAchievement, setIsUpdatingAchievement] = useState(false)
+  const [isDeletingAchievement, setIsDeletingAchievement] = useState(false)
 
   const dialogTitle = achievement.id ? 'Edit Achievement' : 'Create Achievement'
   const updateButtonText = achievement.id ? 'Update Achievement' : 'Create Achievement'
@@ -63,7 +64,7 @@ const AchievementDialog = ({ achievement = defaultAchievement, onClose }: Achiev
   const onDelete = async () => {
     if (!achievement.id) return
     try {
-      setIsUpdatingAchievement(true)
+      setIsDeletingAchievement(true)
       await dispatch(achievementsThunks.deleteAchievement(achievement.id))
       onClose()
       toast.success('Achievement was successfully deleted')
@@ -71,7 +72,7 @@ const AchievementDialog = ({ achievement = defaultAchievement, onClose }: Achiev
       const error = e as Error
       toast.error(error.message)
     } finally {
-      setIsUpdatingAchievement(false)
+      setIsDeletingAchievement(false)
     }
   }
 
@@ -84,11 +85,11 @@ const AchievementDialog = ({ achievement = defaultAchievement, onClose }: Achiev
     >
       <DialogHeader
         title={dialogTitle}
+        isDeleting={isDeletingAchievement}
         onDelete={achievement.id ? onDelete : undefined}
         onClose={onClose}
       />
       <DialogContent>
-
         <Stack spacing={3} mt={3}>
           <Box display="flex" justifyContent="center">
             <AchievementIcon size={150} {...watch()} />

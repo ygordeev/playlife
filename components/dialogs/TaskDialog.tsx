@@ -27,6 +27,7 @@ const TaskDialog = ({ task = defaultTask, onClose }: TaskDialogProps) => {
   })
 
   const [isUpdatingTask, setIsUpdatingTask] = useState(false)
+  const [isDeletingTask, setIsDeletingTask] = useState(false)
 
   const dialogTitle = task.id ? 'Edit task' : 'Create Task'
   const updateButtonText = task.id ? 'Update Task' : 'Create Task'
@@ -53,7 +54,7 @@ const TaskDialog = ({ task = defaultTask, onClose }: TaskDialogProps) => {
   const onDelete = async () => {
     if (!task.id) return
     try {
-      setIsUpdatingTask(true)
+      setIsDeletingTask(true)
       await dispatch(tasksThunks.deleteTask(task.id))
       onClose()
       toast.success('Task was successfully deleted')
@@ -61,7 +62,7 @@ const TaskDialog = ({ task = defaultTask, onClose }: TaskDialogProps) => {
       const error = e as Error
       toast.error(error.message)
     } finally {
-      setIsUpdatingTask(false)
+      setIsDeletingTask(false)
     }
   }
 
@@ -74,11 +75,11 @@ const TaskDialog = ({ task = defaultTask, onClose }: TaskDialogProps) => {
     >
       <DialogHeader
         title={dialogTitle}
+        isDeleting={isDeletingTask}
         onDelete={task.id ? onDelete : undefined}
         onClose={onClose}
       />
       <DialogContent>
-
         <Stack spacing={3} mt={3}>
           <TextField
             name="name"

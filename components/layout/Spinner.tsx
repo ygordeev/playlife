@@ -1,10 +1,10 @@
 import Box from '@mui/material/Box'
-import CircularProgress from '@mui/material/CircularProgress'
+import CircularProgress, { CircularProgressProps } from '@mui/material/CircularProgress'
 
-const Spinner = () => {
+const Spinner = ({ size }: { size: CircularProgressProps['size'] }) => {
   return (
     <Box display="flex" justifyContent="center">
-      <CircularProgress />
+      <CircularProgress size={size} />
     </Box>
   )
 }
