@@ -34,6 +34,10 @@ export const tasksThunks = {
       return updatedTasks
     }
   ),
+  deleteTask: createAsyncThunk(
+    'tasks/deleteTask',
+    async (taskId: number) => await fakeAxios.delete(EndpointPaths.Task, taskId)
+  ),
   moveTask: createAsyncThunk(
     'tasks/moveTask',
     async ({ taskId, targetPosition, status, siblings }: MoveTaskThunkPayload, thunkAPI) => {
@@ -55,7 +59,7 @@ export const tasksThunks = {
       })()
       return { task, taskIndex }
     }
-  )
+  ),
 }
 
 const tasksSlice = createSlice({
@@ -75,7 +79,10 @@ const tasksSlice = createSlice({
     })
     builder.addCase(tasksThunks.updateTask.fulfilled, (state, action) => {
       state.taskList = action.payload
-    })
+    }),
+    builder.addCase(tasksThunks.deleteTask.fulfilled, (state, action) => {
+      state.taskList = action.payload
+    }),
     builder.addCase(tasksThunks.moveTask.fulfilled, (state, action) => {
       const { task, taskIndex } = action.payload
       state.taskList[taskIndex] = task

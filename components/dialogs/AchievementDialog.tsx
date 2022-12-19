@@ -2,10 +2,8 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import Dialog from '@mui/material/Dialog'
-import DialogTitle from '@mui/material/DialogTitle'
 import DialogContent from '@mui/material/DialogContent'
 import DialogActions from '@mui/material/DialogActions'
-import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
@@ -14,6 +12,7 @@ import { achievementsThunks } from '@/store/achievements'
 import { TextField, EmojiPicker } from '@/components/inputs'
 import { AchievementIcon } from '@/components/icons'
 import { AchievementColorPicker } from '@/components/controls'
+import { DialogHeader } from '@/components/layout'
 import { useDispatch } from '@/hooks'
 import { defaultAchievement } from '@/constants'
 import { NewAchievement, ValidatorType } from '@/types'
@@ -61,6 +60,21 @@ const AchievementDialog = ({ achievement = defaultAchievement, onClose }: Achiev
     }
   }
 
+  const onDelete = async () => {
+    if (!achievement.id) return
+    try {
+      setIsUpdatingAchievement(true)
+      await dispatch(achievementsThunks.deleteAchievement(achievement.id))
+      onClose()
+      toast.success('Achievement was successfully deleted')
+    } catch (e: unknown) {
+      const error = e as Error
+      toast.error(error.message)
+    } finally {
+      setIsUpdatingAchievement(false)
+    }
+  }
+
   return (
     <Dialog
       open={true}
@@ -68,7 +82,11 @@ const AchievementDialog = ({ achievement = defaultAchievement, onClose }: Achiev
       maxWidth="sm"
       fullWidth
     >
-      <DialogTitle color="primary.main">{dialogTitle}</DialogTitle>
+      <DialogHeader
+        title={dialogTitle}
+        onDelete={achievement.id ? onDelete : undefined}
+        onClose={onClose}
+      />
       <DialogContent>
 
         <Stack spacing={3} mt={3}>
@@ -108,7 +126,6 @@ const AchievementDialog = ({ achievement = defaultAchievement, onClose }: Achiev
       </DialogContent>
 
       <DialogActions>
-        <Button onClick={onClose}>Close</Button>
         <LoadingButton loading={isUpdatingAchievement} onClick={handleSubmit(onSubmit)}>
           {updateButtonText}
         </LoadingButton>

@@ -2,14 +2,13 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import Dialog from '@mui/material/Dialog'
-import DialogTitle from '@mui/material/DialogTitle'
 import DialogContent from '@mui/material/DialogContent'
 import DialogActions from '@mui/material/DialogActions'
-import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
 import LoadingButton from '@mui/lab/LoadingButton'
 import { tasksThunks } from '@/store/tasks'
 import { TextField, Dropdown, DatePicker, ImagePicker } from '@/components/inputs'
+import { DialogHeader } from '@/components/layout'
 import { taskComplexityOptions, taskStatusOptions, defaultTask } from '@/constants'
 import { useDispatch } from '@/hooks'
 import { NewTask, ValidatorType } from '@/types'
@@ -51,6 +50,21 @@ const TaskDialog = ({ task = defaultTask, onClose }: TaskDialogProps) => {
     }
   }
 
+  const onDelete = async () => {
+    if (!task.id) return
+    try {
+      setIsUpdatingTask(true)
+      await dispatch(tasksThunks.deleteTask(task.id))
+      onClose()
+      toast.success('Task was successfully deleted')
+    } catch (e: unknown) {
+      const error = e as Error
+      toast.error(error.message)
+    } finally {
+      setIsUpdatingTask(false)
+    }
+  }
+
   return (
     <Dialog
       open={true}
@@ -58,7 +72,11 @@ const TaskDialog = ({ task = defaultTask, onClose }: TaskDialogProps) => {
       maxWidth="sm"
       fullWidth
     >
-      <DialogTitle color="primary.main">{dialogTitle}</DialogTitle>
+      <DialogHeader
+        title={dialogTitle}
+        onDelete={task.id ? onDelete : undefined}
+        onClose={onClose}
+      />
       <DialogContent>
 
         <Stack spacing={3} mt={3}>
@@ -116,7 +134,6 @@ const TaskDialog = ({ task = defaultTask, onClose }: TaskDialogProps) => {
       </DialogContent>
 
       <DialogActions>
-        <Button onClick={onClose}>Close</Button>
         <LoadingButton loading={isUpdatingTask} onClick={handleSubmit(onSubmit)}>
           {updateButtonText}
         </LoadingButton>

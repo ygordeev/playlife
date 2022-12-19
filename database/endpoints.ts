@@ -21,4 +21,8 @@ export const endpointsByHttpMethod: EndpointsByMethod = {
     [EndpointPaths.Task]: db.updateTask,
     [EndpointPaths.Achievement]: db.updateAchievement,
   },
+  [HttpMethod.DELETE]: {
+    [EndpointPaths.Task]: db.deleteTask,
+    [EndpointPaths.Achievement]: db.deleteAchievement,
+  }
 }

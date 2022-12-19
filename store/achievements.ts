@@ -21,6 +21,10 @@ export const achievementsThunks = {
     'achievements/updateAchievement',
     async (ach: NewAchievement) => await fakeAxios.put(EndpointPaths.Achievement, ach) as Achievement[]
   ),
+  deleteAchievement: createAsyncThunk(
+    'tasks/deleteAchievement',
+    async (achievementId: number) => await fakeAxios.delete(EndpointPaths.Achievement, achievementId)
+  ),
 }
 
 const achievementsSlice = createSlice({
@@ -39,6 +43,9 @@ const achievementsSlice = createSlice({
       state.achievementList = action.payload
     })
     builder.addCase(achievementsThunks.updateAchievement.fulfilled, (state, action) => {
+      state.achievementList = action.payload
+    })
+    builder.addCase(achievementsThunks.deleteAchievement.fulfilled, (state, action) => {
       state.achievementList = action.payload
     })
   }

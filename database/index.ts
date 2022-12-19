@@ -35,4 +35,5 @@ export const fakeAxios = {
   get: async (path: EndpointPaths, params?: any) => await requestHandler(HttpMethod.GET, path, params),
   post: async (path: EndpointPaths, body?: any) => await requestHandler(HttpMethod.POST, path, body),
   put: async (path: EndpointPaths, body?: any) => await requestHandler(HttpMethod.PUT, path, body),
+  delete: async (path: EndpointPaths, body?: any) => await requestHandler(HttpMethod.DELETE, path, body),
 }

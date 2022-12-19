@@ -44,6 +44,10 @@ export class Database {
     await this.db.table('tasks').put(task)
     return await this.getTasks()
   }
+  deleteTask = async (taskId: number) => {
+    await this.db.table('tasks').delete(taskId)
+    return await this.getTasks()
+  }
   // Achievements
   getAchievements = async () => {
     return await this.db.table('achievements').toArray() as Achievement[]
@@ -54,6 +58,10 @@ export class Database {
   }
   updateAchievement = async (achievement: Achievement) => {
     await this.db.table('achievements').put(achievement)
+    return await this.getAchievements()
+  }
+  deleteAchievement = async (achievementId: number) => {
+    await this.db.table('achievements').delete(achievementId)
     return await this.getAchievements()
   }
   // Statistics
